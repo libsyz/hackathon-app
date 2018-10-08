@@ -11,11 +11,14 @@
 
 </div>
 
-
-
 <ion-footer text-center no-border>
-    <button ion-button large margin round icon-only>
-        <ion-icon name='add'></ion-icon>
+    <button color='secondary' 
+            ion-button large margin round icon-only
+            (click)='buildingAmazing()'>
+        <ion-icon color='light' name='add'></ion-icon>
     </button>
-  <button ion-button large full> SEE THE GALLERY </button>
+  <button color='secondary' 
+          ion-button large full no-margin
+          (click)='buildingAmazing()'> 
+    <p>see the gallery</p> </button>
 </ion-footer>
