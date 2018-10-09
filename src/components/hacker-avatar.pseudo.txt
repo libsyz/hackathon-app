@@ -1,0 +1,34 @@
+## Hacker Avatar Component PseudoCode ##
+
+1. When clicked, it should display the Hacker Avatar modal
+
+2. Once the the modal disappears, the Hacker Avatar Component
+   gets the data sent from modal
+
+3. If modal does indeed contain data, then the hacker avatar 
+   uses it to display the hacker that was chosen at the modal
+
+   On the contrary, if there is no data, the avatar should 
+   remain the same
+
+
+## Hacker Avatar Modal PseudoCode
+
+1. When invoked, the Hacker Avatar page fetches all the users
+   that are subscribed to the hackathon app
+
+2. Then, it displays them to the user 
+
+3. When the user taps on a user, the modal disappears. The modal
+   sends the data back to the Hacker Avatar Component.
+
+(Back End)
+
+3a. Once tapped, the data is sent to the back end.
+    
+    The back end tries to find the user in the collection of users
+    contained in the hackathon object
+
+    If it is found, should return an error 
+
+    If it is not found, should add it

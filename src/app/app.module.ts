@@ -6,8 +6,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 
+// Pages
+
 import { HomePage } from '../pages/home/home';
 import { ChooseHackersPage } from './../pages/choose-hackers/choose-hackers';
+
+// Components
+
+import { HackerAvatarComponent } from './../components/hacker-avatar/hacker-avatar';
+
 
 
 
@@ -15,7 +22,8 @@ import { ChooseHackersPage } from './../pages/choose-hackers/choose-hackers';
   declarations: [
     MyApp,
     HomePage,
-    ChooseHackersPage
+    ChooseHackersPage,
+    HackerAvatarComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +33,8 @@ import { ChooseHackersPage } from './../pages/choose-hackers/choose-hackers';
   entryComponents: [
     MyApp,
     HomePage,
-    ChooseHackersPage
+    ChooseHackersPage,
+    HackerAvatarComponent
   ],
   providers: [
     StatusBar,
