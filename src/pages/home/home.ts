@@ -1,6 +1,9 @@
+import { ChooseHackersPage } from './../choose-hackers/choose-hackers';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController, NavParams } from 'ionic-angular';
+
+
 
 
 @Component({
@@ -12,6 +15,11 @@ export class HomePage {
   constructor(public navCtrl: NavController,
               public alertCtrl: AlertController) {
 
+  }
+
+  newHack() {
+    // This should also call the server and generate a new Hack for the current user
+    this.navCtrl.push(ChooseHackersPage);
   }
 
   buildingAmazing() {
