@@ -1,14 +1,24 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
-</ion-content>
+
+<div class="app-title">
+  <h1>the <br>  
+      hackathon  <br>
+      app
+  </h1>
+  
+</div>
+<div text-center class="app-control">
+
+</div>
+
+<ion-footer text-center no-border>
+    <button color='secondary' 
+            ion-button large margin round icon-only
+            (click)='buildingAmazing()'>
+        <ion-icon color='light' name='add'></ion-icon>
+    </button>
+  <button color='secondary' 
+          ion-button large full no-margin
+          (click)='buildingAmazing()'> 
+    <p>see the gallery</p> </button>
+</ion-footer>
