@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -14,7 +15,11 @@ import { ChooseHackersPage } from './../pages/choose-hackers/choose-hackers';
 // Components
 
 import { HackerAvatarComponent } from './../components/hacker-avatar/hacker-avatar';
+import { HackersListPage } from '../pages/hackers-list/hackers-list';
 
+// Services
+
+import { hackersList } from './../services/hackers-list.service';
 
 
 
@@ -23,7 +28,8 @@ import { HackerAvatarComponent } from './../components/hacker-avatar/hacker-avat
     MyApp,
     HomePage,
     ChooseHackersPage,
-    HackerAvatarComponent
+    HackerAvatarComponent,
+    HackersListPage
   ],
   imports: [
     BrowserModule,
@@ -34,11 +40,13 @@ import { HackerAvatarComponent } from './../components/hacker-avatar/hacker-avat
     MyApp,
     HomePage,
     ChooseHackersPage,
-    HackerAvatarComponent
+    HackerAvatarComponent,
+    HackersListPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    hackersList,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

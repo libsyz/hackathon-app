@@ -29,5 +29,4 @@ export class ChooseHackersPage {
   getOut(index){
     console.log('tapped!', index);
   }
-
 }
