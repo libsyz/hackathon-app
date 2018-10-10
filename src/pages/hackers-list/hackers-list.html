@@ -18,6 +18,7 @@
 <ion-content padding>
     <ion-list>
       <ion-item  (click)="getOut()" *ngFor="let item of hackers">
+        <div class="circle"></div>
         <p> {{ item.name }}</p>
       </ion-item>
     </ion-list>

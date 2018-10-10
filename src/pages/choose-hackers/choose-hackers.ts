@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, GESTURE_TOGGLE } from 'ionic-angular';
 
 /**
  * Generated class for the ChooseHackersPage page.
@@ -16,7 +16,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ChooseHackersPage {
   hackers: number[];
 
-
+  hackersChosen: number = 0;
+  gotEnoughHackers: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -25,8 +26,5 @@ export class ChooseHackersPage {
     console.log('ionViewDidLoad ChooseHackersPage');
     this.hackers = [1, 2, 3, 4, 5];
   }
-
-  getOut(index){
-    console.log('tapped!', index);
-  }
+  
 }

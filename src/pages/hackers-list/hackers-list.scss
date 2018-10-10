@@ -1,3 +1,15 @@
 page-hackers-list {
+    ion-label {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .circle {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        background-color: color($colors, light);
+        margin-right: 10px;
+    }
 
 }
