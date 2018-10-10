@@ -6,13 +6,28 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>hackers-list</ion-title>
+  <ion-navbar color='primary'>
+    <ion-title> Select a Hacker </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
+
+
 <ion-content padding>
+    <ion-list>
+      <ion-item  (click)="getOut()" *ngFor="let item of hackers">
+        <p> {{ item.name }}</p>
+      </ion-item>
+    </ion-list>
+
 
 </ion-content>
+
+
+<ion-footer>
+    <button ion-button color='secondary'
+    large full no-margin
+    (click)="getOut()"> clear hacker </button>
+  </ion-footer>

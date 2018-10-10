@@ -1,6 +1,6 @@
 import { HackersListPage } from './../../pages/hackers-list/hackers-list';
 import { Component } from '@angular/core';
-import { ModalController, NavController } from 'ionic-angular';
+import { ModalController, NavController, NavParams } from 'ionic-angular';
 
 
 /**
@@ -18,15 +18,16 @@ export class HackerAvatarComponent {
   text: string;
 
   constructor(public modalCtrl: ModalController,
-              public navCtrl: NavController) {
-    console.log('Hello HackerAvatarComponent Component');
+              public navCtrl: NavController,
+              public navParams: NavParams) {
+    console.log(this.navParams.data);
     this.text = 'Hello World';
   }
 
   showHackersModal() {
     const myModal = this.modalCtrl.create(HackersListPage, {data: "someIndex"})
     myModal.present();
-    myModal.dismiss({data:"Sending over some good stuff!"});
+    // How do I send data from the modal to the avatar?
   }
 
 

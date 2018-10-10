@@ -1,6 +1,6 @@
 import { hackersList } from './../../services/hackers-list.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the HackersListPage page.
@@ -17,12 +17,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class HackersListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private hackersListSrvc: hackersList) {
+              private hackersListSrvc: hackersList,
+              public viewCtrl: ViewController) {
   }
+
+ hackers: any;
 
   ionViewDidLoad() {
     console.log(this.navParams.data);
     console.table(this.hackersListSrvc.getUsers())
+    this.hackers = this.hackersListSrvc.getUsers();
+  }
+
+  getOut() {
+    this.viewCtrl.dismiss();
   }
 
 }

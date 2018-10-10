@@ -1,3 +1,7 @@
+import { Injectable } from '@angular/core';
+
+
+@Injectable()
 export class hackersList {
     // shit I don't know JS
 
@@ -24,8 +28,6 @@ export class hackersList {
         }
     
     ]
-
-
     constructor(){
 
     }
