@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, GESTURE_TOGGLE } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Alert } from 'ionic-angular';
 
 /**
  * Generated class for the ChooseHackersPage page.
@@ -16,10 +16,11 @@ import { IonicPage, NavController, NavParams, GESTURE_TOGGLE } from 'ionic-angul
 export class ChooseHackersPage {
   hackers: number[];
 
-  hackersChosen: number = 1;
+  hackersChosen: number = 1; // Default, the organizer already counts for 1
   gotEnoughHackers: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -29,20 +30,24 @@ export class ChooseHackersPage {
   updateHackersChosen(boolean) {
     if (boolean == true) {
       this.hackersChosen++;
-      console.log({hackersChosen: this.hackersChosen});
     }
     else if (boolean == false && this.hackersChosen == 0){
-      console.log({hackersChosen: this.hackersChosen});
     }
     else {
       this.hackersChosen--;
-      console.log({hackersChosen: this.hackersChosen});
     }
-    this.enoughHackers();
+    this.checkForEnoughHackers();
   }
 
-  enoughHackers(){
+  checkForEnoughHackers(){
     this.hackersChosen > 2 ? this.gotEnoughHackers = true : this.gotEnoughHackers = false;
   }
   
+  holdOn(){
+    const myAlert = this.alertCtrl.create();
+    myAlert.setTitle("Hold on!");
+    myAlert.setSubTitle("We are building something amazing!");
+    myAlert.addButton("Got It!");
+    myAlert.present();
+  }
 }
