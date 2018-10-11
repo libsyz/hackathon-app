@@ -1,0 +1,33 @@
+<!--
+  Generated template for the ChooseHackersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color='primary'>
+    <ion-title text-center> Create Your Team </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content text-center padding>
+<h2 padding> Pick 2 to 5 Teammates </h2>
+
+<div class="hackers-container">
+  <div class="hacker-wrapper" *ngFor='let hacker of hackers; index as i'>
+    <hacker-avatar (wasSelected)="updateHackersChosen($event)">
+    </hacker-avatar>
+  </div>
+</div>
+</ion-content>
+
+<ion-footer>
+<button ion-button color='primary'
+        large full no-margin
+        [disabled]='!gotEnoughHackers'
+        (click)="holdOn()"> NEXT 
+</button>
+</ion-footer>
