@@ -8,23 +8,23 @@ export class hackersList {
     users: {}[] = [
         {
             name: "Nick Fury",
-            imageUrl: "/someImage"
+            imageUrl: "nick_fury.jpg"
         },
         {
-            name: "Eddie Brock",
-            imageUrl: "/someImage" 
+            name: "Peter Parker",
+            imageUrl: "peter_parker.jpg" 
         },
         {
-            name: "Roland Gilligan",
-            imageUrl: "/someImage" 
+            name: "Bruce Wayne",
+            imageUrl: "bruce_wayne.jpg" 
         },
         {
-            name: "Julia Cors",
-            imageUrl: "/someImage" 
+            name: "Bender Rodriguez",
+            imageUrl: "bender_rodriguez.jpeg" 
         },
         {
-            name: "Lee Nguyen",
-            imageUrl: "/someImage" 
+            name: "Rick Sanchez",
+            imageUrl: "rick_sanchez.png" 
         }
     
     ]

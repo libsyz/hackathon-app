@@ -1,5 +1,5 @@
 import { HackersListPage } from './../../pages/hackers-list/hackers-list';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ModalController, NavController, NavParams } from 'ionic-angular';
 
 
@@ -13,8 +13,14 @@ import { ModalController, NavController, NavParams } from 'ionic-angular';
   selector: 'hacker-avatar',
   templateUrl: 'hacker-avatar.html'
 })
-export class HackerAvatarComponent {
 
+
+export class HackerAvatarComponent {
+  @Input() whatevs: string;
+  @Output() wasSelected = new EventEmitter();
+
+  hackerSelected: boolean = false;
+  hackerImageReference: string;
   text: string;
 
   constructor(public modalCtrl: ModalController,
@@ -25,10 +31,25 @@ export class HackerAvatarComponent {
   }
 
   showHackersModal() {
-    const myModal = this.modalCtrl.create(HackersListPage, {data: "someIndex"})
+    const myModal = this.modalCtrl.create(HackersListPage, {data: "someIndex"});
+    myModal.onDidDismiss((data)=> {
+      this.updateHackerStatus(data);
+    })
     myModal.present();
-    // How do I send data from the modal to the avatar?
   }
 
+  updateHackerStatus(data) {
+    // If the data contains a hacker, we should render the image
+    if (data.data != "clear") {
+      this.hackerSelected = true;
+      this.hackerImageReference = data.data.imageUrl;
+      this.wasSelected.emit(this.hackerSelected);
+    }
+    else {
+      this.hackerSelected = false;
+      this.hackerImageReference = '';
+      this.wasSelected.emit(this.hackerSelected);
+    }
 
+  }
 }

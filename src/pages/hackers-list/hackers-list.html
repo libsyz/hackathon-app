@@ -17,8 +17,10 @@
 
 <ion-content padding>
     <ion-list>
-      <ion-item  (click)="getOut()" *ngFor="let item of hackers">
-        <div class="circle"></div>
+      <ion-item (click)="selectHacker(item)" *ngFor="let item of hackers">
+        <div class="circle">
+          <img src="./../../assets/imgs/{{item.imageUrl}}" alt="">
+        </div>
         <p> {{ item.name }}</p>
       </ion-item>
     </ion-list>
@@ -30,5 +32,5 @@
 <ion-footer>
     <button ion-button color='secondary'
     large full no-margin
-    (click)="getOut()"> clear hacker </button>
+    (click)="dropPage()"> clear hacker </button>
   </ion-footer>

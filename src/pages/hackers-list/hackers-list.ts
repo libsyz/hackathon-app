@@ -29,8 +29,12 @@ export class HackersListPage {
     this.hackers = this.hackersListSrvc.getUsers();
   }
 
-  getOut() {
-    this.viewCtrl.dismiss();
+  dropPage() {
+    this.viewCtrl.dismiss({data: "clear"});
+  }
+
+selectHacker(hacker) {
+    this.viewCtrl.dismiss({data: hacker});
   }
 
 }

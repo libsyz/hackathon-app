@@ -9,6 +9,12 @@ hacker-avatar {
         justify-content: center;
         align-items: flex-end;
 
+        img {
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+        }
+
         p {
             color: white;
             width: 80%;
