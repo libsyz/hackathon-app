@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -20,6 +21,7 @@ import { HackersListPage } from '../pages/hackers-list/hackers-list';
 // Services
 
 import { hackersList } from './../services/hackers-list.service';
+import { HackathonService } from '../providers/hackathon-service/hackathon-service';
 
 
 
@@ -47,7 +49,9 @@ import { hackersList } from './../services/hackers-list.service';
     StatusBar,
     SplashScreen,
     hackersList,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    HackathonService,
+    HttpClient,
   ]
 })
 export class AppModule {}

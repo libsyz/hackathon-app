@@ -17,8 +17,8 @@
 <h2 padding> Pick 2 to 5 Teammates </h2>
 
 <div class="hackers-container">
-  <div class="hacker-wrapper" *ngFor='let hacker of hackers; index as i'>
-    <hacker-avatar (wasSelected)="updateHackersChosen($event)">
+  <div class="hacker-wrapper" *ngFor='let hackerSlot of hackerSlots;index as index'>
+    <hacker-avatar [slot]='hackerSlot' (wasSelected)="updateHackersChosen($event)">
     </hacker-avatar>
   </div>
 </div>

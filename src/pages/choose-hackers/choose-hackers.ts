@@ -14,7 +14,7 @@ import { IonicPage, NavController, NavParams, AlertController, Alert } from 'ion
   templateUrl: 'choose-hackers.html',
 })
 export class ChooseHackersPage {
-  hackers: number[];
+  hackerSlots: number[];
 
   hackersChosen: number = 1; // Default, the organizer already counts for 1
   gotEnoughHackers: boolean = false;
@@ -24,7 +24,7 @@ export class ChooseHackersPage {
   }
 
   ionViewDidLoad() {
-    this.hackers = [1, 2, 3, 4, 5];
+    this.hackerSlots = [0, 1, 2, 3, 4];
   }
 
   updateHackersChosen(boolean) {
