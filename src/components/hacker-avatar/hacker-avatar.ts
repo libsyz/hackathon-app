@@ -16,22 +16,25 @@ import { ModalController, NavController, NavParams } from 'ionic-angular';
 
 
 export class HackerAvatarComponent {
-  @Input() whatevs: string;
+  @Input() slot: any;
   @Output() wasSelected = new EventEmitter();
 
   hackerSelected: boolean = false;
   hackerImageReference: string;
   text: string;
+  currentHackId: number;
 
   constructor(public modalCtrl: ModalController,
               public navCtrl: NavController,
               public navParams: NavParams) {
-    console.log(this.navParams.data);
+    this.currentHackId = this.navParams.get("hackathonId");
     this.text = 'Hello World';
   }
 
+
   showHackersModal() {
-    const myModal = this.modalCtrl.create(HackersListPage, {data: "someIndex"});
+    console.log(this.slot);
+    const myModal = this.modalCtrl.create(HackersListPage, {hackathonId: this.currentHackId, slot: this.slot});
     myModal.onDidDismiss((data)=> {
       this.updateHackerStatus(data);
     })

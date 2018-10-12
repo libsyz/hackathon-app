@@ -17,7 +17,7 @@
 
 <ion-content padding>
     <ion-list>
-      <ion-item (click)="selectHacker(item)" *ngFor="let item of hackers">
+      <ion-item (click)="selectHacker(item, slot)" *ngFor="let item of hackers">
         <div class="circle">
           <img src="./../../assets/imgs/{{item.imageUrl}}" alt="">
         </div>
