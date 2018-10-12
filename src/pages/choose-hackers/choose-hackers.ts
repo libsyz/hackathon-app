@@ -1,3 +1,4 @@
+import { TimerPage } from './../timer/timer';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, Alert } from 'ionic-angular';
 
@@ -15,7 +16,6 @@ import { IonicPage, NavController, NavParams, AlertController, Alert } from 'ion
 })
 export class ChooseHackersPage {
   hackerSlots: number[];
-
   hackersChosen: number = 1; // Default, the organizer already counts for 1
   gotEnoughHackers: boolean = false;
 
@@ -43,11 +43,7 @@ export class ChooseHackersPage {
     this.hackersChosen > 2 ? this.gotEnoughHackers = true : this.gotEnoughHackers = false;
   }
   
-  holdOn(){
-    const myAlert = this.alertCtrl.create();
-    myAlert.setTitle("Hold on!");
-    myAlert.setSubTitle("We are building something amazing!");
-    myAlert.addButton("Got It!");
-    myAlert.present();
+  goToTimer(){
+    const myAlert = this.navCtrl.push(TimerPage, {params: this.navParams});
   }
 }

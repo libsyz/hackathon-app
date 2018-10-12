@@ -1,0 +1,30 @@
+<!--
+  Generated template for the TimerPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title> Phase 1 - Problem Statement </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+ <countdown></countdown>
+
+
+<ion-footer no-outline>
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col>
+          <button (click)="callForHelp()" ion-button large full no-margin> HELP! </button>
+      </ion-col>
+      <ion-col>
+          <button (click)="buildingAmazing()" color="tertiary" ion-button large full no-margin> TOOLS </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

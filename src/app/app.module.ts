@@ -1,3 +1,4 @@
+
 import { HttpClient } from '@angular/common/http';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,11 +13,15 @@ import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
 import { ChooseHackersPage } from './../pages/choose-hackers/choose-hackers';
+import { TimerPage } from './../pages/timer/timer';
 
 // Components
 
 import { HackerAvatarComponent } from './../components/hacker-avatar/hacker-avatar';
 import { HackersListPage } from '../pages/hackers-list/hackers-list';
+import { CountdownComponent } from './../components/countdown/countdown';
+
+
 
 // Services
 
@@ -31,7 +36,9 @@ import { HackathonService } from '../providers/hackathon-service/hackathon-servi
     HomePage,
     ChooseHackersPage,
     HackerAvatarComponent,
-    HackersListPage
+    HackersListPage,
+    TimerPage,
+    CountdownComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +50,9 @@ import { HackathonService } from '../providers/hackathon-service/hackathon-servi
     HomePage,
     ChooseHackersPage,
     HackerAvatarComponent,
-    HackersListPage
+    HackersListPage,
+    TimerPage,
+    CountdownComponent
   ],
   providers: [
     StatusBar,
