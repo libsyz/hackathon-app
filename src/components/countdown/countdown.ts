@@ -1,3 +1,4 @@
+import { DefineProblemPage } from './../../pages/define-problem/define-problem';
 import { HomePage } from './../../pages/home/home';
 import { Alert, AlertController, NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
@@ -79,7 +80,8 @@ export class CountdownComponent {
       buttons: ["Got it!"]
     })
     nextPhaseAlert.onDidDismiss(()=>{
-      this.navCtrl.setRoot(HomePage);
+
+      this.navCtrl.setRoot(DefineProblemPage);
     })
     nextPhaseAlert.present();
   }

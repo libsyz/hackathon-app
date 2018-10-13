@@ -1,4 +1,5 @@
 
+
 import { HttpClient } from '@angular/common/http';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,6 +16,7 @@ import { HomePage } from '../pages/home/home';
 import { ChooseHackersPage } from './../pages/choose-hackers/choose-hackers';
 import { TimerPage } from './../pages/timer/timer';
 import { ToolsProblemStatementPage } from './../pages/tools-problem-statement/tools-problem-statement';
+import { DefineProblemPage } from './../pages/define-problem/define-problem';
 
 
 // Components
@@ -41,7 +43,8 @@ import { HackathonService } from '../providers/hackathon-service/hackathon-servi
     HackersListPage,
     TimerPage,
     CountdownComponent,
-    ToolsProblemStatementPage
+    ToolsProblemStatementPage,
+    DefineProblemPage
   ],
   imports: [
     BrowserModule,
@@ -56,8 +59,9 @@ import { HackathonService } from '../providers/hackathon-service/hackathon-servi
     HackersListPage,
     TimerPage,
     CountdownComponent,
-    ToolsProblemStatementPage
-  ],
+    ToolsProblemStatementPage,
+    DefineProblemPage
+],
   providers: [
     StatusBar,
     SplashScreen,
