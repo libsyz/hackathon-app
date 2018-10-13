@@ -1,0 +1,32 @@
+countdown {
+    .countdown-wrapper {
+        font-size: 56;
+        height: 100%;
+        width: 100%;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .countdown-inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 300px;
+        width: 300px;
+        border: solid 2px color($colors, primary);
+        border-radius: 50%;
+    }
+
+    .countdown-timer {
+        font-size: 67px;
+        color: color($colors, primary);
+    }
+    .countdown-info {
+        font-size: 45px;
+        color: color($colors, primary);
+    }
+}
