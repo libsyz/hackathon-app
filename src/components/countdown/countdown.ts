@@ -1,3 +1,5 @@
+import { HomePage } from './../../pages/home/home';
+import { Alert, AlertController, NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
 
 /**
@@ -12,16 +14,15 @@ import { Component } from '@angular/core';
 })
 export class CountdownComponent {
   countDownActive: boolean = false;
-  text: string;
   time: number;
-  minutes: any = 15;
-  seconds: any = "00";
+  minutes: any = "00";
+  seconds: any = "10";
   info: string = "START";
-  fifteenMinutes: number = 900;
+  fifteenMinutes: number = 10;
 
-  constructor() {
+  constructor(private alertCtrl: AlertController,
+              private navCtrl: NavController) {
     console.log('Hello CountdownComponent Component');
-    this.text = 'Hello World';
   }
 
   startCountDown(){
@@ -36,12 +37,13 @@ export class CountdownComponent {
   }
 
   updateTimer() {
-    setInterval(()=> {
+    let timerInterval = setInterval(()=> {
       this.time = this.time - 1000;
-      this.minutes = this.getMinutes(this.time)
-      this.seconds = this.getSeconds(this.time) 
+      this.minutes = this.getMinutes(this.time);
+      this.seconds = this.getSeconds(this.time);
+      this.getText(this.time, timerInterval);
     }, 1000)
-    
+
   }
 
   getMinutes(time) {
@@ -58,5 +60,27 @@ export class CountdownComponent {
       seconds = `0${seconds}`;
     }
     return seconds;
+  }
+
+  getText(time, interval) {
+    if (time == 0) {
+      clearInterval(interval); 
+      this.goToNextPhase();
+    }  
+    if (time / 1000 / 60 < 120) {
+      this.info = "HURRY UP!";
+    }
+  }
+
+  goToNextPhase(){
+    const nextPhaseAlert = this.alertCtrl.create({
+      title: "Excellent!",
+      subTitle: "Let's go to the next phase!",
+      buttons: ["Got it!"]
+    })
+    nextPhaseAlert.onDidDismiss(()=>{
+      this.navCtrl.setRoot(HomePage);
+    })
+    nextPhaseAlert.present();
   }
 }

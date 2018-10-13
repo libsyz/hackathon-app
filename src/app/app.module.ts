@@ -14,6 +14,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ChooseHackersPage } from './../pages/choose-hackers/choose-hackers';
 import { TimerPage } from './../pages/timer/timer';
+import { ToolsProblemStatementPage } from './../pages/tools-problem-statement/tools-problem-statement';
+
 
 // Components
 
@@ -38,7 +40,8 @@ import { HackathonService } from '../providers/hackathon-service/hackathon-servi
     HackerAvatarComponent,
     HackersListPage,
     TimerPage,
-    CountdownComponent
+    CountdownComponent,
+    ToolsProblemStatementPage
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import { HackathonService } from '../providers/hackathon-service/hackathon-servi
     HackerAvatarComponent,
     HackersListPage,
     TimerPage,
-    CountdownComponent
+    CountdownComponent,
+    ToolsProblemStatementPage
   ],
   providers: [
     StatusBar,

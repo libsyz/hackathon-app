@@ -1,3 +1,4 @@
+import { ToolsProblemStatementPage } from './../tools-problem-statement/tools-problem-statement';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, Alert, AlertController } from 'ionic-angular';
 import { CountdownComponent } from '../../components/countdown/countdown';
@@ -38,11 +39,13 @@ export class TimerPage {
   }
 
   buildingAmazing() {
-    const buildingAlert  = this.alertCtrl.create({
-      title: "Coming soon!",
-      subTitle: 'We are building something amazing',
-      buttons: ['Got it!']
-    });
-    buildingAlert.present();
+    // const buildingAlert  = this.alertCtrl.create({
+    //   title: "Coming soon!",
+    //   subTitle: 'We are building something amazing',
+    //   buttons: ['Got it!']
+    // });
+    // buildingAlert.present();
+
+    this.navCtrl.push(ToolsProblemStatementPage);
   }
 }
