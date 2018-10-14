@@ -19,6 +19,7 @@ export class ChooseHackersPage {
   hackerSlots: number[];
   // Default, the organizer already counts for 1
   gotEnoughHackers: boolean = false;
+  hackId: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController,
@@ -27,6 +28,7 @@ export class ChooseHackersPage {
 
   ionViewDidLoad() {
     this.hackerSlots = [0, 1, 2, 3, 4];
+    this.hackId = this.navParams.get("hackathonId")
   }
 
   updateHackersChosen(boolean) {
@@ -40,6 +42,6 @@ export class ChooseHackersPage {
   }
   
   goToTimer(){
-  this.navCtrl.push(TimerPage, {params: this.navParams});
+  this.navCtrl.push(TimerPage, {hackathonId: this.hackId});
   }
 }

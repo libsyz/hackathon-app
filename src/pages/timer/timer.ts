@@ -1,4 +1,6 @@
-import { ToolsProblemStatementPage } from './../tools-problem-statement/tools-problem-statement';
+import { Hackathon } from './../../models/hackathon.model';
+import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
+// import { ToolsProblemStatementPage } from './../tools-problem-statement/tools-problem-statement';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, Alert, AlertController } from 'ionic-angular';
 import { CountdownComponent } from '../../components/countdown/countdown';
@@ -20,12 +22,12 @@ export class TimerPage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
+              public hackSrvc: HackathonService,
               public toastCtrl: ToastController,
               public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TimerPage');
   }
 
   callForHelp() {
@@ -38,7 +40,10 @@ export class TimerPage {
     myToast.present();
   }
 
-  buildingAmazing() {
+  getTools() {
+    console.log(this.navParams);
+    let currentHackId = this.navParams.get("hackathonId");
+    this.navCtrl.push(this.hackSrvc.getTools(currentHackId));
     // const buildingAlert  = this.alertCtrl.create({
     //   title: "Coming soon!",
     //   subTitle: 'We are building something amazing',
@@ -46,6 +51,6 @@ export class TimerPage {
     // });
     // buildingAlert.present();
 
-    this.navCtrl.push(ToolsProblemStatementPage);
+    // this.navCtrl.push(ToolsProblemStatementPage);
   }
 }

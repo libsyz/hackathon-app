@@ -1,3 +1,4 @@
+import { WellHackedPage } from './../well-hacked/well-hacked';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
@@ -52,6 +53,7 @@ export class DefineProblemPage {
       this.showToast("Your problem should not exceed 120 characters long")
     }
     else {
+      this.navCtrl.push(WellHackedPage);
       console.log("Ok, let's navigate to the next page");
       // navigate to well hacked page
     }

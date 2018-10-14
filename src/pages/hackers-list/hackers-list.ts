@@ -65,7 +65,7 @@ selectHacker(hacker, slot) {
   let operationPossible = this.hackSrvc.addHacker(this.currentHackId, hacker, slot);
   console.log(operationPossible);
   if (operationPossible == "granted") {
-    this.viewCtrl.dismiss({data: hacker});
+    this.viewCtrl.dismiss({data: hacker, hackathonId: this.currentHackId});
   }
   else {
     let myAlert = this.alertCtrl.create({
