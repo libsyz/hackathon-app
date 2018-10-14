@@ -17,9 +17,9 @@ export class CountdownComponent {
   countDownActive: boolean = false;
   time: number;
   minutes: any = "00";
-  seconds: any = "10";
+  seconds: any = "01";
   info: string = "START";
-  fifteenMinutes: number = 10;
+  fifteenMinutes: number = 1;
 
   constructor(private alertCtrl: AlertController,
               private navCtrl: NavController) {

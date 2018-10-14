@@ -16,14 +16,22 @@
   <h1> Time is Out!</h1>
   <h3> Enter Your Problem Statement</h3>
   <ion-item>
-      <ion-textarea type="tel"></ion-textarea>
+      <ion-textarea [(ngModel)]="problemInput"
+                    (keydown)="updateProblem()" 
+                    type="text">
+      </ion-textarea>
     </ion-item>
+  <p [style.color]="charsColor"
+      class="character-count">
+      {{chars}}/{{maxChars}}
+  </p>
 </ion-content>
 
 
 <ion-footer>
   <button color="primary"
+          (click)="onContinue()"
           ion-button full large no-margin>
-          NEXT 
+          SAVE 
   </button>
 </ion-footer>

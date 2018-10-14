@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the DefineProblemPage page.
@@ -15,11 +15,74 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DefineProblemPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  maxChars: number = 120;
+  chars: number = 0;
+  problemInput: string = "";
+  problemIsLongEnough: boolean = false;
+  problemIsTooLong: boolean = false;
+  problemMinLength: number = 20;
+  problemMaxLength: number = 120;
+  charsColor: string = "black";
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public toastCtrl: ToastController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DefineProblemPage');
+  // There should be an element that displays the total amount of
+  // characters in the problem, and also sets a max
+
+  ionViewDidLoad(){
+    this.problemInput = "";
   }
+
+  updateProblem(){
+    let problemChars = this.problemInput.split('');
+    this.chars = problemChars.length;
+    this.checkForProblemMinLength()
+    this.checkForProblemMaxLength();
+  }
+
+  onContinue() {
+    console.log(this.problemIsLongEnough);
+    if (this.problemIsLongEnough == false) {
+    this.showToast("Your problem should be at least 20 characters long")
+    }
+    else if (this.problemIsLongEnough && this.problemIsTooLong) {
+      this.showToast("Your problem should not exceed 120 characters long")
+    }
+    else {
+      console.log("Ok, let's navigate to the next page");
+      // navigate to well hacked page
+    }
+  }
+
+  checkForProblemMinLength() {
+    this.chars > this.problemMinLength ? this.problemIsLongEnough = true : this.problemIsLongEnough = false;
+    console.log(this.chars, this.problemIsLongEnough);
+  }
+  checkForProblemMaxLength() {
+    if (this.chars > this.problemMaxLength) {
+      this.charsColor = "red";
+      this.problemIsTooLong = true;
+    }
+    else {
+    this.charsColor = "black";
+    this.problemIsTooLong = false;
+    }
+  }
+
+  showToast(message) {
+    const myToast = this.toastCtrl.create(
+      {
+        message: message,
+        duration: 2000,
+        position: 'bottom',
+        showCloseButton: true
+    })
+    myToast.present();
+  }
+
+
 
 }
