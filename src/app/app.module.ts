@@ -33,6 +33,7 @@ import { CountdownComponent } from './../components/countdown/countdown';
 
 import { hackersList } from './../services/hackers-list.service';
 import { HackathonService } from '../providers/hackathon-service/hackathon-service';
+import { HelperMethodsProvider } from '../providers/helper-methods/helper-methods';
 
 
 
@@ -77,6 +78,7 @@ import { HackathonService } from '../providers/hackathon-service/hackathon-servi
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HackathonService,
     HttpClient,
+    HelperMethodsProvider,
   ]
 })
 export class AppModule {}

@@ -104,4 +104,12 @@ export class HackathonService {
     return pageToGo;
   }
 
+  saveProblemStatement(inputText: string, hackId) {
+    const foundHack = this.allHackathons[hackId -1];
+    foundHack.phases['phase1']['problemStatement'] = inputText;
+    foundHack.phases['phase1']['completed'] = true;
+    console.log(`${inputText} has been saved!`);
+    console.log(foundHack);
+  }
+
 }

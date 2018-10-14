@@ -1,6 +1,8 @@
+import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { WellHackedPage } from './../well-hacked/well-hacked';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Hackathon } from '../../models/hackathon.model';
 
 /**
  * Generated class for the DefineProblemPage page.
@@ -27,7 +29,8 @@ export class DefineProblemPage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              public toastCtrl: ToastController) {
+              public toastCtrl: ToastController,
+              public hackSrvc: HackathonService) {
   }
 
   // There should be an element that displays the total amount of
@@ -53,9 +56,8 @@ export class DefineProblemPage {
       this.showToast("Your problem should not exceed 120 characters long")
     }
     else {
+      this.hackSrvc.saveProblemStatement(this.problemInput, 1);
       this.navCtrl.push(WellHackedPage);
-      console.log("Ok, let's navigate to the next page");
-      // navigate to well hacked page
     }
   }
 

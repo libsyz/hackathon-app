@@ -19,10 +19,15 @@ it will always send the user to the timer on phase one
 
 
 ## Conclusion 
-## 1. We are not getting anywhere without managing params over here
 ## 2. All redirection logic should be part of a service or some kind
 ## of navigation guard, it should not be in the page
 ## 3. It might be worth exploring how to minimize Db calls
 ## when going from one place to the other, having an object in memory
 ## would be optimal 
+
+## Questions ##
+## How to implement authorization guards on Ionic? Should 
+## I just create a service that dispatches the pages ?
+
+
 

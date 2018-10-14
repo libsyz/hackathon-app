@@ -22,4 +22,6 @@ export class WellHackedPage {
     console.log('ionViewDidLoad WellHackedPage');
   }
 
+  
+
 }
