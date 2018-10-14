@@ -1,3 +1,4 @@
+import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { TimerPage } from './../timer/timer';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, Alert } from 'ionic-angular';
@@ -16,11 +17,12 @@ import { IonicPage, NavController, NavParams, AlertController, Alert } from 'ion
 })
 export class ChooseHackersPage {
   hackerSlots: number[];
-  hackersChosen: number = 1; // Default, the organizer already counts for 1
+  // Default, the organizer already counts for 1
   gotEnoughHackers: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public hackSrvc: HackathonService) {
   }
 
   ionViewDidLoad() {
@@ -28,22 +30,16 @@ export class ChooseHackersPage {
   }
 
   updateHackersChosen(boolean) {
-    if (boolean == true) {
-      this.hackersChosen++;
-    }
-    else if (boolean == false && this.hackersChosen == 0){
-    }
-    else {
-      this.hackersChosen--;
-    }
-    this.checkForEnoughHackers();
+    let numberOfHackers = this.hackSrvc.getNumberOfHackers(this.navParams.data);
+    this.checkForEnoughHackers(numberOfHackers);
   }
 
-  checkForEnoughHackers(){
-    this.hackersChosen > 2 ? this.gotEnoughHackers = true : this.gotEnoughHackers = false;
+
+  checkForEnoughHackers(numberOfHackers){
+    numberOfHackers > 1 ? this.gotEnoughHackers = true : this.gotEnoughHackers = false;
   }
   
   goToTimer(){
-    const myAlert = this.navCtrl.push(TimerPage, {params: this.navParams});
+  this.navCtrl.push(TimerPage, {params: this.navParams});
   }
 }

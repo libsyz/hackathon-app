@@ -83,4 +83,16 @@ export class HackathonService {
     let foundHack = this.allHackathons[hackId - 1];
     foundHack.users[slot] = "";
   }
+
+  getNumberOfHackers(hackId) {
+    const foundHack = this.allHackathons[hackId.hackathonId - 1];
+    let numberOfHackers = 0;
+    console.log(hackId);
+    console.log(this.allHackathons);
+    foundHack.users.forEach((user)=> {
+      user == "" ? numberOfHackers : numberOfHackers++;
+    })
+    return numberOfHackers;
+  }
+
 }
