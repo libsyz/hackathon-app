@@ -18,6 +18,7 @@ import { TimerPage } from './../pages/timer/timer';
 import { ToolsProblemStatementPage } from './../pages/tools-problem-statement/tools-problem-statement';
 import { DefineProblemPage } from './../pages/define-problem/define-problem';
 import { WellHackedPage } from './../pages/well-hacked/well-hacked';
+import { GalleryPage } from './../pages/gallery/gallery';
 
 
 // Components
@@ -47,7 +48,8 @@ import { HackathonService } from '../providers/hackathon-service/hackathon-servi
     CountdownComponent,
     ToolsProblemStatementPage,
     DefineProblemPage,
-    WellHackedPage
+    WellHackedPage,
+    GalleryPage
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { HackathonService } from '../providers/hackathon-service/hackathon-servi
     CountdownComponent,
     ToolsProblemStatementPage,
     DefineProblemPage,
-    WellHackedPage
+    WellHackedPage,
+    GalleryPage
 ],
   providers: [
     StatusBar,

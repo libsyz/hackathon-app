@@ -1,3 +1,4 @@
+import { GalleryPage } from './../gallery/gallery';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { ChooseHackersPage } from './../choose-hackers/choose-hackers';
 import { Component } from '@angular/core';
@@ -26,13 +27,8 @@ export class HomePage {
     this.navCtrl.push(ChooseHackersPage, {hackathonId: newHack.id});
   }
 
-  buildingAmazing() {
-    const buildingAlert  = this.alertCtrl.create({
-      title: "Coming soon!",
-      subTitle: 'We are building something amazing',
-      buttons: ['Got it!']
-    });
-    buildingAlert.present();
+  goToGallery() {
+    this.navCtrl.push(GalleryPage);
   }
 
 }
