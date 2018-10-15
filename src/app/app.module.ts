@@ -1,11 +1,12 @@
 
-import { HttpClient } from '@angular/common/http';
 
+import { HttpClient } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { FormsModule } from '@angular/forms';
 
 import { MyApp } from './app.component';
 
@@ -15,6 +16,9 @@ import { HomePage } from '../pages/home/home';
 import { ChooseHackersPage } from './../pages/choose-hackers/choose-hackers';
 import { TimerPage } from './../pages/timer/timer';
 import { ToolsProblemStatementPage } from './../pages/tools-problem-statement/tools-problem-statement';
+import { DefineProblemPage } from './../pages/define-problem/define-problem';
+import { WellHackedPage } from './../pages/well-hacked/well-hacked';
+import { GalleryPage } from './../pages/gallery/gallery';
 
 
 // Components
@@ -29,6 +33,8 @@ import { CountdownComponent } from './../components/countdown/countdown';
 
 import { hackersList } from './../services/hackers-list.service';
 import { HackathonService } from '../providers/hackathon-service/hackathon-service';
+import { HelperMethodsProvider } from '../providers/helper-methods/helper-methods';
+
 
 
 
@@ -41,10 +47,14 @@ import { HackathonService } from '../providers/hackathon-service/hackathon-servi
     HackersListPage,
     TimerPage,
     CountdownComponent,
-    ToolsProblemStatementPage
+    ToolsProblemStatementPage,
+    DefineProblemPage,
+    WellHackedPage,
+    GalleryPage
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -56,8 +66,11 @@ import { HackathonService } from '../providers/hackathon-service/hackathon-servi
     HackersListPage,
     TimerPage,
     CountdownComponent,
-    ToolsProblemStatementPage
-  ],
+    ToolsProblemStatementPage,
+    DefineProblemPage,
+    WellHackedPage,
+    GalleryPage
+],
   providers: [
     StatusBar,
     SplashScreen,
@@ -65,6 +78,7 @@ import { HackathonService } from '../providers/hackathon-service/hackathon-servi
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HackathonService,
     HttpClient,
+    HelperMethodsProvider,
   ]
 })
 export class AppModule {}

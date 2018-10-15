@@ -1,3 +1,4 @@
+import { DefineProblemPage } from './../../pages/define-problem/define-problem';
 import { HomePage } from './../../pages/home/home';
 import { Alert, AlertController, NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
@@ -16,9 +17,9 @@ export class CountdownComponent {
   countDownActive: boolean = false;
   time: number;
   minutes: any = "00";
-  seconds: any = "10";
+  seconds: any = "01";
   info: string = "START";
-  fifteenMinutes: number = 10;
+  fifteenMinutes: number = 1;
 
   constructor(private alertCtrl: AlertController,
               private navCtrl: NavController) {
@@ -79,7 +80,8 @@ export class CountdownComponent {
       buttons: ["Got it!"]
     })
     nextPhaseAlert.onDidDismiss(()=>{
-      this.navCtrl.setRoot(HomePage);
+
+      this.navCtrl.setRoot(DefineProblemPage);
     })
     nextPhaseAlert.present();
   }

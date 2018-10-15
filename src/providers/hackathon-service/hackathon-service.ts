@@ -1,3 +1,4 @@
+import { ToolsProblemStatementPage } from './../../pages/tools-problem-statement/tools-problem-statement';
 import { Hackathon } from './../../models/hackathon.model';
 // import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -83,4 +84,32 @@ export class HackathonService {
     let foundHack = this.allHackathons[hackId - 1];
     foundHack.users[slot] = "";
   }
+
+  getNumberOfHackers(hackId) {
+    const foundHack = this.allHackathons[hackId.hackathonId - 1];
+    let numberOfHackers = 0;
+    console.log(hackId);
+    console.log(this.allHackathons);
+    foundHack.users.forEach((user)=> {
+      user == "" ? numberOfHackers : numberOfHackers++;
+    })
+    return numberOfHackers;
+  }
+
+  getTools(hackId){
+    const foundHack = this.allHackathons[hackId - 1];
+    let phase1Completed = foundHack.phases['phase1']['completed']
+    let pageToGo: any;
+    phase1Completed ?  console.log("This was completed!") : pageToGo = ToolsProblemStatementPage
+    return pageToGo;
+  }
+
+  saveProblemStatement(inputText: string, hackId) {
+    const foundHack = this.allHackathons[hackId -1];
+    foundHack.phases['phase1']['problemStatement'] = inputText;
+    foundHack.phases['phase1']['completed'] = true;
+    console.log(`${inputText} has been saved!`);
+    console.log(foundHack);
+  }
+
 }

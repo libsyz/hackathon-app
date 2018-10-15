@@ -1,0 +1,33 @@
+
+## splash Page ## 
+
+should only kickstart the creation of a hackathon
+it will always send the user to the timer on phase one
+
+## The timer-page needs to know which part of the hackathon we are at so
+## >it can update dynamic text on the page
+## >it can fetch the right tools
+## >it can direct the user to the right page once the time is over
+## > Either page upload / or problem solving / or testing
+
+## the well-hacked page also needs to know which part of the hackathon 
+## we are at, so 
+
+## >it can display data dynamically 
+## >it can direct the user to the right page (either a new 
+## hackathon page or the review page)
+
+
+## Conclusion 
+## 2. All redirection logic should be part of a service or some kind
+## of navigation guard, it should not be in the page
+## 3. It might be worth exploring how to minimize Db calls
+## when going from one place to the other, having an object in memory
+## would be optimal 
+
+## Questions ##
+## How to implement authorization guards on Ionic? Should 
+## I just create a service that dispatches the pages ?
+
+
+
