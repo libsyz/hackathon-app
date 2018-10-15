@@ -15,11 +15,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ToolsProblemStatementPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ToolsProblemStatementPage');
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams) {
   }
 
 }

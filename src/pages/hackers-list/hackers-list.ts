@@ -19,7 +19,6 @@ import { IonicPage, NavController, NavParams, ViewController, AlertController } 
 })
 export class HackersListPage {
 
-
  hackers: any;
  currentHackId:  number;
  slot: number;
@@ -34,48 +33,36 @@ export class HackersListPage {
 
 
   ionViewDidLoad() {
-    console.log(this.navParams.data);
-    console.table(this.hackersListSrvc.getUsers());
     this.currentHackId = this.navParams.get("hackathonId");
     this.slot = this.navParams.get("slot");
     this.hackers = this.hackersListSrvc.getUsers();
   }
 
   dropPage() {
-    // Drop page needs to know if the slot was filled or not
-
-    // If the slot was filled, it should tell choose-hackers to 
-    // take off a number
-
-    // If the slot was not filled yet and the user clears, then 
-    // the counter should remain as it was.
     this.hackSrvc.clearHacker(this.currentHackId, this.slot);
     this.viewCtrl.dismiss({data: "clear"});
   }
 
-selectHacker(hacker, slot) {
+  selectHacker(hacker, slot) {
+    let operationPossible = this.hackSrvc.addHacker(this.currentHackId, hacker, slot);
 
-  // Now this method -
-  // If you are putting a hacker into an empty spot, it should
-  // tell choose-hackers to increase the counter
-  
-  // If you are replacing a filled spot with another hacker, 
-  // it should tell choose-hackers to remain the same 
-  console.log(this.navParams.data);
-  let operationPossible = this.hackSrvc.addHacker(this.currentHackId, hacker, slot);
-  console.log(operationPossible);
-  if (operationPossible == "granted") {
-    this.viewCtrl.dismiss({data: hacker, hackathonId: this.currentHackId});
+    if (operationPossible == "granted") {
+      this.viewCtrl.dismiss({data: hacker, 
+                           hackathonId: this.currentHackId});
+    }
+    else {
+      this.hackerAlreadySelectedAlert();
+    }
+
   }
-  else {
+
+  hackerAlreadySelectedAlert() {
     let myAlert = this.alertCtrl.create({
       title: 'Whoops!',
       subTitle: 'hacker already selected',
       buttons: ['got it']}
     )
     myAlert.present();
-  }
-
   }
 
 }

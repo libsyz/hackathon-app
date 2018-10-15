@@ -15,11 +15,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class WellHackedPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WellHackedPage');
   }
 
   

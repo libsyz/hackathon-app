@@ -5,32 +5,28 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar color='primary'>
     <ion-title> Select a Hacker </ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
-
 
 <ion-content padding>
     <ion-list>
-      <ion-item (click)="selectHacker(item, slot)" *ngFor="let item of hackers">
+      <ion-item (click)="selectHacker(item, slot)" 
+                *ngFor="let item of hackers">
         <div class="circle">
-          <img src="./../../assets/imgs/{{item.imageUrl}}" alt="">
+          <img class="avatar-image" 
+               src="./../../assets/imgs/{{item.imageUrl}}" alt="">
         </div>
         <p> {{ item.name }}</p>
       </ion-item>
     </ion-list>
-
-
 </ion-content>
-
 
 <ion-footer>
     <button ion-button color='secondary'
-    large full no-margin
-    (click)="dropPage()"> clear hacker </button>
+            (click)="dropPage()"
+            large full no-margin>
+            clear hacker 
+    </button>
   </ion-footer>

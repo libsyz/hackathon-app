@@ -7,12 +7,10 @@ import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 
 @Injectable()
 export class HackathonService {
-  allHackathons: Hackathon[];
-  securityBool = "granted";
+  allHackathons: Hackathon[] = [];
+  canAddHackerCheck = "granted";
 
   constructor() {
-    console.log('Hello HackathonServiceProvider');
-    this.allHackathons = [];
   }
 
   getHackathons(){
@@ -61,26 +59,18 @@ export class HackathonService {
 
   addHacker(id: number, hacker: any, slot: number) {
     const foundHack = this.allHackathons[id - 1];
-    
-    this.checkContraints(foundHack, hacker, slot);
-
-    console.log(this.allHackathons);
-    console.log(this.securityBool);
-    this.securityBool == "granted" ? foundHack.users[slot] = hacker : "";
-    return this.securityBool;
+    this.checkIfHackerWasSelected(foundHack, hacker, slot);
+    if (this.canAddHackerCheck == "granted") foundHack.users[slot] = hacker;
+    return this.canAddHackerCheck;
   }
 
-  checkContraints(foundHack, hacker, slot) {
-    this.securityBool = "granted";
+  checkIfHackerWasSelected(foundHack, hacker, slot) {
     foundHack.users.forEach((user)=> {
-      if (user.name == hacker.name) {
-        this.securityBool = "denied";
-      }
+      if (user.name == hacker.name) this.canAddHackerCheck = "denied";
     })
   }
 
   clearHacker(hackId, slot) {
-    console.log(hackId, slot);
     let foundHack = this.allHackathons[hackId - 1];
     foundHack.users[slot] = "";
   }
@@ -88,16 +78,16 @@ export class HackathonService {
   getNumberOfHackers(hackId) {
     const foundHack = this.allHackathons[hackId.hackathonId - 1];
     let numberOfHackers = 0;
-    console.log(hackId);
-    console.log(this.allHackathons);
-    foundHack.users.forEach((user)=> {
-      user == "" ? numberOfHackers : numberOfHackers++;
+    foundHack.users.forEach((user)=> { 
+      if (user != "") numberOfHackers++;
     })
     return numberOfHackers;
   }
 
   getTools(hackId){
     const foundHack = this.allHackathons[hackId - 1];
+    // All this logic needs to be extracted into a tools Service
+    
     let phase1Completed = foundHack.phases['phase1']['completed']
     let pageToGo: any;
     phase1Completed ?  console.log("This was completed!") : pageToGo = ToolsProblemStatementPage
