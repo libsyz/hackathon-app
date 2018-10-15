@@ -50,10 +50,10 @@ export class DefineProblemPage {
   onContinue() {
     console.log(this.problemIsLongEnough);
     if (this.problemIsLongEnough == false) {
-    this.showToast("Your problem should be at least 20 characters long")
+    this.showToast("Your problem should be at least 20 characters long");
     }
     else if (this.problemIsLongEnough && this.problemIsTooLong) {
-      this.showToast("Your problem should not exceed 120 characters long")
+      this.showToast("Your problem should not exceed 120 characters long");
     }
     else {
       this.hackSrvc.saveProblemStatement(this.problemInput, 1);
