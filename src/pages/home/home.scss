@@ -11,15 +11,14 @@ page-home {
         text-transform: uppercase;
     }
 
-    
-    h1 {
+    .app-title-header {
         font-size: 40px;
         line-height: 55px;
         text-align: center;
         color: color($colors, secondary);
     }
 
-    p {
+    .button-text {
         color: color($colors, light);
     }
 

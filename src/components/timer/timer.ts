@@ -15,7 +15,6 @@ export class TimerComponent {
   text: string;
 
   constructor() {
-    console.log('Hello TimerComponent Component');
     this.text = 'Hello World';
   }
 

@@ -17,7 +17,7 @@ import { Hackathon } from '../../models/hackathon.model';
   templateUrl: 'define-problem.html',
 })
 export class DefineProblemPage {
-
+  hackId: number;
   maxChars: number = 120;
   chars: number = 0;
   problemInput: string = "";
@@ -38,17 +38,17 @@ export class DefineProblemPage {
 
   ionViewDidLoad(){
     this.problemInput = "";
-  }
+    this.hackId = this.navParams.get("hackathonId");
+    }
 
   updateProblem(){
     let problemChars = this.problemInput.split('');
     this.chars = problemChars.length;
-    this.checkForProblemMinLength()
+    this.checkForProblemMinLength();
     this.checkForProblemMaxLength();
   }
 
   onContinue() {
-    console.log(this.problemIsLongEnough);
     if (this.problemIsLongEnough == false) {
     this.showToast("Your problem should be at least 20 characters long");
     }
@@ -56,7 +56,7 @@ export class DefineProblemPage {
       this.showToast("Your problem should not exceed 120 characters long");
     }
     else {
-      this.hackSrvc.saveProblemStatement(this.problemInput, 1);
+      this.hackSrvc.saveProblemStatement(this.problemInput, this.hackId);
       this.navCtrl.push(WellHackedPage);
     }
   }

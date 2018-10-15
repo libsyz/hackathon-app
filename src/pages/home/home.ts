@@ -21,8 +21,6 @@ export class HomePage {
   }
 
   newHack() {
-    // When auth is implemented, the organizer can also be added to the 
-    // current hack
     const newHack = this.hackSrvc.createHackathon();
     this.navCtrl.push(ChooseHackersPage, {hackathonId: newHack.id});
   }
