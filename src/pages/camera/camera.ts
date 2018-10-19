@@ -16,13 +16,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class CameraPage {
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('video') video: ElementRef;
+  @ViewChild('image') image: ElementRef;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   videoSource: any;
   pictureTaken: boolean = false;
-  photoData: any;
+  imageData: any;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CameraPage');
@@ -43,14 +44,16 @@ export class CameraPage {
     let myVideo = this.video.nativeElement as HTMLVideoElement;
     let context = targetCanvas.getContext("2d");
     console.dir(myVideo);
-
-    context.drawImage(myVideo, 0, 0, 200, 200,
-                               0, 0, 200, 300);
-    console.dir(targetCanvas);
+    context.drawImage(myVideo, 0, 0, myVideo.videoWidth, myVideo.videoHeight,
+                               0, 0, 200, 200);
     // store the image info in a string - no need to show it now
-    this.photoData = targetCanvas.toDataURL('image/png');
+    this.imageData = targetCanvas.toDataURL('image/png');
+    console.log(this.imageData);
+
+    this.image.nativeElement.src = this.imageData;
+    this.image.nativeElement.hidden = false;
+    targetCanvas.hidden = true;
     myVideo.hidden = true;
-    
     this.pictureTaken = true;
     // show the canvas
 
