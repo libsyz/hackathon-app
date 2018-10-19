@@ -19,6 +19,7 @@ import { ToolsProblemStatementPage } from './../pages/tools-problem-statement/to
 import { DefineProblemPage } from './../pages/define-problem/define-problem';
 import { WellHackedPage } from './../pages/well-hacked/well-hacked';
 import { GalleryPage } from './../pages/gallery/gallery';
+import { CameraPage } from './../pages/camera/camera';
 
 
 // Components
@@ -50,7 +51,8 @@ import { HelperMethodsProvider } from '../providers/helper-methods/helper-method
     ToolsProblemStatementPage,
     DefineProblemPage,
     WellHackedPage,
-    GalleryPage
+    GalleryPage,
+    CameraPage
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,8 @@ import { HelperMethodsProvider } from '../providers/helper-methods/helper-method
     ToolsProblemStatementPage,
     DefineProblemPage,
     WellHackedPage,
-    GalleryPage
+    GalleryPage,
+    CameraPage
 ],
   providers: [
     StatusBar,
