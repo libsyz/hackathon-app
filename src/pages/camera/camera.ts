@@ -22,6 +22,7 @@ export class CameraPage {
 
   videoSource: any;
   pictureTaken: boolean = false;
+  photoData: any;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CameraPage');
@@ -38,16 +39,8 @@ export class CameraPage {
     let targetCanvas = this.canvas.nativeElement as HTMLCanvasElement;
     let myVideo = this.video.nativeElement as HTMLVideoElement;
     let context = targetCanvas.getContext("2d");
-    targetCanvas.style.height = '100%';
-    targetCanvas.style.width = '100%';
-    context.drawImage(myVideo, 0, 0, 640, 480);
-    this.hideVideo()
-    this.pictureTaken = true;
+    context.drawImage(myVideo, 0, 0, this.video.nativeElement.width, this.video.nativeElement.height);
+    this.photoData = targetCanvas.toDataURL('image/png');
   }
 
-  hideVideo(){
-    const videoHidden = this.video.nativeElement as HTMLVideoElement;
-    videoHidden.height = 0;
-    videoHidden.width = 0;
-  }
 }

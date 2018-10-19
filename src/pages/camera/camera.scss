@@ -3,4 +3,14 @@ page-camera {
      height: 0px;
      width: 0px;
  }
+
+ video {
+     max-height: 100%;
+     min-width: 100%;
+ }
+
+ img {
+    height: 100%;
+    width: 100%;
+ }
 }
