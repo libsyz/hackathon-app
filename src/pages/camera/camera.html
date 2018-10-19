@@ -4,16 +4,20 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-
-<canvas #canvas
-        *ngIf="!pictureTaken"> 
-      </canvas>
-<video #video
-       *ngIf="!pictureTaken"
-       [srcObject]="videoSource" autoplay></video>
-
-<img *ngIf="pictureTaken"
-[src]="photoData" alt="">
+<ion-content>
+<ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <canvas #canvas> </canvas>
+      </ion-col>
+    </ion-row>
+  <ion-row>
+    <ion-col col-12>
+        <video #video [srcObject]="videoSource" autoplay></video>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+</ion-content>
 
 <ion-footer>
   <button *ngIf="!pictureTaken"
@@ -23,6 +27,7 @@
           TAKE PICTURE
   </button>
   <button *ngIf="pictureTaken"
+          (click)="savePicture()"
           ion-button block
           large no-margin>
           SAVE
