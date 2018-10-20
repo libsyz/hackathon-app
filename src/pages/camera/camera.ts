@@ -13,6 +13,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-camera',
   templateUrl: 'camera.html',
 })
+
 export class CameraPage {
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('video') video: ElementRef;
@@ -26,45 +27,37 @@ export class CameraPage {
   imageData: any;
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CameraPage');
     this.enableCamera();
     }
 
-
   enableCamera(){
-  navigator.mediaDevices.getUserMedia({video: true}).
-  then((stream) => {this.videoSource = stream});
+    navigator.mediaDevices.getUserMedia({video: true}).
+    then((stream) => {this.videoSource = stream});
   }
 
   takePicture() {
-    // this.canvas.nativeElement.hidden = false;
-    // take the picture 
     let targetCanvas = this.canvas.nativeElement as HTMLCanvasElement;
     let myVideo = this.video.nativeElement as HTMLVideoElement;
-    targetCanvas.height = myVideo.videoHeight;
-    targetCanvas.width = myVideo.videoWidth;
+
+    [targetCanvas.height, targetCanvas.width] = [myVideo.videoHeight, myVideo.videoWidth];
+  
     let context = targetCanvas.getContext("2d");
-    console.dir(myVideo);
-    
     context.drawImage(myVideo, 0, 0);
-    // store the image info in a string - no need to show it now
+
     this.imageData = targetCanvas.toDataURL('image/png');
-    console.log(this.imageData);
-
     this.image.nativeElement.src = this.imageData;
-    this.image.nativeElement.hidden = false;
-    // targetCanvas.hidden = true;
-    myVideo.hidden = true;
-    this.pictureTaken = true;
-    // show the canvas
 
-    // 
-   
-    
+    this.changeVisibilityConditions()
   }
 
   savePicture() {
     console.log(this.imageData);
     // stores the pic into the right hackathon, right phase
+  }
+
+  changeVisibilityConditions() {
+    this.image.nativeElement.hidden = false;
+    this.video.nativeElement.hidden = true;
+    this.pictureTaken = true;
   }
 }

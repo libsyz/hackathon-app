@@ -15,13 +15,16 @@
           (click)="takePicture()"
           ion-button block
           large no-margin>
-          TAKE PICTURE
+          TAKE PIC
+          <ion-icon name="camera" margin-left></ion-icon>
   </button>
   <button *ngIf="pictureTaken"
           (click)="savePicture()"
           ion-button block
           large no-margin>
-          SAVE
+          SAVE   
+          <ion-icon name="download" margin-left></ion-icon>
+
   </button>
 
 </ion-footer>
