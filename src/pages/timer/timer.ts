@@ -37,7 +37,7 @@ export class TimerPage {
 
   ionViewDidLoad() {
     this.hackId = this.navParams.get("hackathonId");
-    this.currentPhase = this.navParams.get("currentPhase");
+    this.currentPhase = this.hackSrvc.getCurrentPhase(this.hackId);
     this.currentHackathon = this.hackSrvc.findHackathon(this.hackId);
     this.getText();
   }
@@ -53,17 +53,8 @@ export class TimerPage {
   }
 
   getTools() {
-    console.log(this.navParams);
-    let currentHackId = this.navParams.get("hackathonId");
-    this.navCtrl.push(this.toolsSrvc.getTools(this.currentPhase));
-    // const buildingAlert  = this.alertCtrl.create({
-    //   title: "Coming soon!",
-    //   subTitle: 'We are building something amazing',
-    //   buttons: ['Got it!']
-    // });
-    // buildingAlert.present();
-
-    // this.navCtrl.push(ToolsProblemStatementPage);
+    let pageToDeliver = this.toolsSrvc.getTools(this.currentPhase);
+    this.navCtrl.push(pageToDeliver);
   }
 
   getText() {

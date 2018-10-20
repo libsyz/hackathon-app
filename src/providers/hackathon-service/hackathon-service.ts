@@ -84,11 +84,28 @@ export class HackathonService {
     return numberOfHackers;
   }
 
-
-
   saveProblemStatement(inputText: string, hackId) {
     const foundHack = this.allHackathons[hackId -1];
     foundHack.phases[0]['problemStatement'] = inputText;
+    this.markPhaseAsCompleted(hackId, 1);
   }
+
+  getCurrentPhase(hackId) {
+    const foundHack = this.allHackathons[hackId -1];
+    const currentPhase = foundHack.phases.find((phase) => {
+      return phase['completed'] == false;
+    })
+    return currentPhase['phaseNumber'];
+  }
+
+  markPhaseAsCompleted(hackId, phaseNumber) {
+    const foundHack = this.allHackathons[hackId -1];
+    const phaseToMark = foundHack.phases.find((phase) => {
+      return phase['phaseNumber'] = phaseNumber;
+    })
+    phaseToMark['completed'] = true;
+  }
+
+
 
 }

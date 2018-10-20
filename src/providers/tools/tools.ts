@@ -16,18 +16,16 @@ export class ToolsProvider {
   }
 
   getTools(currentPhase){
-   switch (currentPhase) {
-     case 1:
-       return ToolsProblemStatementPage;
-     case 2: 
-       return ToolsEmpathisePage;
-     case 3:
-       console.log("work in progress! - Phase 3");
-     case 4:
-       console.log("work in progress! - Phase 4");
-     default:
-       return ToolsProblemStatementPage;
-   }
+    if (currentPhase === 1) {
+      return ToolsProblemStatementPage;
+    }
+    else if (currentPhase === 2) {
+      return ToolsEmpathisePage;
+    }
+    else {
+      console.log("sorry! this toolkit is not ready yet");
+    }
+
   }
 
 }

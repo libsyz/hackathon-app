@@ -81,7 +81,6 @@
         buttons: ["Got it!"]
       })
       nextPhaseAlert.onDidDismiss(()=>{
-
         this.navCtrl.setRoot(DefineProblemPage, 
                             {hackathonId: this.navParams.get("hackathonId")});
       })
