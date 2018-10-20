@@ -41,10 +41,11 @@ export class CameraPage {
     // take the picture 
     let targetCanvas = this.canvas.nativeElement as HTMLCanvasElement;
     let myVideo = this.video.nativeElement as HTMLVideoElement;
-    let context = targetCanvas.getContext("2d");
-    console.dir(myVideo);
     targetCanvas.height = myVideo.videoHeight;
     targetCanvas.width = myVideo.videoWidth;
+    let context = targetCanvas.getContext("2d");
+    console.dir(myVideo);
+    
     context.drawImage(myVideo, 0, 0);
     // store the image info in a string - no need to show it now
     this.imageData = targetCanvas.toDataURL('image/png');
