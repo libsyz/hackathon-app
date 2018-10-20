@@ -1,3 +1,4 @@
+import { ToolsEmpathisePage } from './../pages/tools-empathise/tools-empathise';
 
 
 import { HttpClient } from '@angular/common/http';
@@ -35,6 +36,7 @@ import { CountdownComponent } from './../components/countdown/countdown';
 import { hackersList } from './../services/hackers-list.service';
 import { HackathonService } from '../providers/hackathon-service/hackathon-service';
 import { HelperMethodsProvider } from '../providers/helper-methods/helper-methods';
+import { ToolsProvider } from '../providers/tools/tools';
 
 
 
@@ -52,7 +54,8 @@ import { HelperMethodsProvider } from '../providers/helper-methods/helper-method
     DefineProblemPage,
     WellHackedPage,
     GalleryPage,
-    CameraPage
+    CameraPage,
+    ToolsEmpathisePage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,8 @@ import { HelperMethodsProvider } from '../providers/helper-methods/helper-method
     DefineProblemPage,
     WellHackedPage,
     GalleryPage,
-    CameraPage
+    CameraPage,
+    ToolsEmpathisePage
 ],
   providers: [
     StatusBar,
@@ -82,6 +86,7 @@ import { HelperMethodsProvider } from '../providers/helper-methods/helper-method
     HackathonService,
     HttpClient,
     HelperMethodsProvider,
+    ToolsProvider,
   ]
 })
 export class AppModule {}

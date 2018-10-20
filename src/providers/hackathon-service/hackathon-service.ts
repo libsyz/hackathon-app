@@ -84,15 +84,7 @@ export class HackathonService {
     return numberOfHackers;
   }
 
-  getTools(hackId){
-    const foundHack = this.allHackathons[hackId - 1];
-    // All this logic needs to be extracted into a tools Service
-    
-    let phase1Completed = foundHack.phases['phase1']['completed']
-    let pageToGo: any;
-    phase1Completed ?  console.log("This was completed!") : pageToGo = ToolsProblemStatementPage
-    return pageToGo;
-  }
+
 
   saveProblemStatement(inputText: string, hackId) {
     const foundHack = this.allHackathons[hackId -1];
