@@ -28,7 +28,6 @@ export class CameraPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CameraPage');
     this.enableCamera();
-    this.canvas.nativeElement.hidden = true;
     }
 
 
@@ -38,21 +37,22 @@ export class CameraPage {
   }
 
   takePicture() {
-    this.canvas.nativeElement.hidden = false;
+    // this.canvas.nativeElement.hidden = false;
     // take the picture 
     let targetCanvas = this.canvas.nativeElement as HTMLCanvasElement;
     let myVideo = this.video.nativeElement as HTMLVideoElement;
     let context = targetCanvas.getContext("2d");
     console.dir(myVideo);
-    context.drawImage(myVideo, 0, 0, myVideo.videoWidth, myVideo.videoHeight,
-                               0, 0, 200, 200);
+    targetCanvas.height = myVideo.videoHeight;
+    targetCanvas.width = myVideo.videoWidth;
+    context.drawImage(myVideo, 0, 0);
     // store the image info in a string - no need to show it now
     this.imageData = targetCanvas.toDataURL('image/png');
     console.log(this.imageData);
 
     this.image.nativeElement.src = this.imageData;
     this.image.nativeElement.hidden = false;
-    targetCanvas.hidden = true;
+    // targetCanvas.hidden = true;
     myVideo.hidden = true;
     this.pictureTaken = true;
     // show the canvas
@@ -63,7 +63,7 @@ export class CameraPage {
   }
 
   savePicture() {
-    console.log(this.photoData);
+    console.log(this.imageData);
     // stores the pic into the right hackathon, right phase
   }
 }
