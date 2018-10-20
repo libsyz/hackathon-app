@@ -1,0 +1,30 @@
+<!--
+  Generated template for the CameraPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content>
+    <img #image [src]="imageData" [hidden]=true alt="">
+    <video #video [srcObject]="videoSource" autoplay></video>
+    <canvas #canvas [hidden]=true> </canvas>
+</ion-content>
+
+<ion-footer>
+  <button *ngIf="!pictureTaken"
+          (click)="takePicture()"
+          ion-button block
+          large no-margin>
+          TAKE PIC
+          <ion-icon name="camera" margin-left></ion-icon>
+  </button>
+  <button *ngIf="pictureTaken"
+          (click)="savePicture()"
+          ion-button block
+          large no-margin>
+          SAVE   
+          <ion-icon name="download" margin-left></ion-icon>
+
+  </button>
+
+</ion-footer>
