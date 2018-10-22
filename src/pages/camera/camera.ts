@@ -1,3 +1,5 @@
+import { WellHackedPage } from './../well-hacked/well-hacked';
+import { PageNavigationProvider } from './../../providers/page-navigation/page-navigation';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
@@ -23,6 +25,7 @@ export class CameraPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public hackSrvc: HackathonService,
+              public pageNavSrvc: PageNavigationProvider,
               public alertCtrl: AlertController) {
   }
 
@@ -62,7 +65,9 @@ export class CameraPage {
   savePicture() {
     console.log(this.imageData);
     try {
-      this.hackSrvc.savePicture(this.hackId, this.currentPhase, this.imageData);
+      this.hackSrvc.savePictureInPhase(this.hackId, this.currentPhase, this.imageData);
+      this.hackSrvc.markPhaseAsCompleted(this.hackId, this.currentPhase);
+      this.goToWellHackedPage();
     }
     catch (e) {
       console.log(e);
@@ -85,6 +90,11 @@ export class CameraPage {
     this.image.nativeElement.hidden = !this.image.nativeElement.hidden;
     this.video.nativeElement.hidden = !this.video.nativeElement.hidden;
     this.pictureTaken = !this.pictureTaken;
+  }
+
+  goToWellHackedPage(){
+    this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
+                                       currentPhase: this.currentPhase})
   }
 
 

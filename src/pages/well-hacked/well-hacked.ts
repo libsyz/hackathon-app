@@ -33,9 +33,10 @@ export class WellHackedPage {
     this.hackId = this.navParams.get("hackathonId");
     this.currentPhase = this.navParams.get("currentPhase");
     this.currentHackathon = this.hackSrvc.findHackathon(this.hackId);
+    debugger;
     this.getPageText();
-  }
 
+  }
   getPageText(){
     this.currentHackathon.phases.forEach(phase => {
       if (phase['phaseNumber'] === this.currentPhase ) {
@@ -46,7 +47,8 @@ export class WellHackedPage {
   }
 
   nextPhase(){
-    this.navCtrl.push(TimerPage, {hackathonId: this.hackId, currentPhase: this.currentPhase + 1 } );
+    this.navCtrl.push(TimerPage, {hackathonId: this.hackId, 
+                                  currentPhase: this.currentPhase + 1 } );
   }
 
 }
