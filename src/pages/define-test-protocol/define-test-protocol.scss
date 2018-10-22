@@ -1,3 +1,19 @@
 page-define-test-protocol {
+    h1 {
+        text-transform: uppercase;
+        color: color($colors, primary);
+    }
+
+    .timeframe-input {
+        input[disabled] {
+            opacity: 1;
+        }
+    }
+   
+    .hidden {
+        display: none;
+    }
+
+  
 
 }

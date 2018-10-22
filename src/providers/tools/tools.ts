@@ -1,6 +1,9 @@
+import { ToolsTestPage } from './../../pages/tools-test/tools-test';
 import { ToolsProblemStatementPage } from './../../pages/tools-problem-statement/tools-problem-statement';
 import { Injectable } from '@angular/core';
 import { ToolsEmpathisePage } from '../../pages/tools-empathise/tools-empathise';
+import { ToolsIdeatePage } from '../../pages/tools-ideate/tools-ideate';
+import { ToolsPrototypePage } from '../../pages/tools-prototype/tools-prototype';
 
 /*
   Generated class for the ToolsProvider provider.
@@ -10,6 +13,7 @@ import { ToolsEmpathisePage } from '../../pages/tools-empathise/tools-empathise'
 */
 @Injectable()
 export class ToolsProvider {
+
 
   constructor() {
     console.log('Hello ToolsProvider Provider');
@@ -22,8 +26,14 @@ export class ToolsProvider {
     else if (currentPhase === 2) {
       return ToolsEmpathisePage;
     }
-    else {
-      console.log("sorry! this toolkit is not ready yet");
+    else if (currentPhase === 3){
+      return ToolsIdeatePage;
+    }
+    else if (currentPhase === 4){
+      return ToolsPrototypePage;
+        }
+    else if (currentPhase === 5){
+      return ToolsTestPage;
     }
 
   }

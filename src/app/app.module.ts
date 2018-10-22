@@ -1,4 +1,3 @@
-import { DefineTestProtocolPage } from './../pages/define-test-protocol/define-test-protocol';
 
 
 import { HttpClient } from '@angular/common/http';
@@ -8,7 +7,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { FormsModule } from '@angular/forms';
-
 import { MyApp } from './app.component';
 
 // Pages
@@ -16,13 +14,18 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ChooseHackersPage } from './../pages/choose-hackers/choose-hackers';
 import { TimerPage } from './../pages/timer/timer';
-import { ToolsProblemStatementPage } from './../pages/tools-problem-statement/tools-problem-statement';
 import { DefineProblemPage } from './../pages/define-problem/define-problem';
+import { DefineTestProtocolPage } from './../pages/define-test-protocol/define-test-protocol';
+import { CameraPage } from './../pages/camera/camera';
 import { WellHackedPage } from './../pages/well-hacked/well-hacked';
 import { GalleryPage } from './../pages/gallery/gallery';
-import { CameraPage } from './../pages/camera/camera';
+import { ToolsProblemStatementPage } from './../pages/tools-problem-statement/tools-problem-statement';
 import { UploadPicturePage } from './../pages/upload-picture/upload-picture';
 import { ToolsEmpathisePage } from './../pages/tools-empathise/tools-empathise';
+import { ToolsIdeatePage } from '../pages/tools-ideate/tools-ideate';
+import { ToolsPrototypePage } from './../pages/tools-prototype/tools-prototype';
+import { ReviewHackPage } from './../pages/review-hack/review-hack';
+import { ToolsTestPage } from './../pages/tools-test/tools-test';
 
 
 // Components
@@ -43,7 +46,6 @@ import { PageNavigationProvider } from '../providers/page-navigation/page-naviga
 
 
 
-
 @NgModule({
   declarations: [
     MyApp,
@@ -60,7 +62,11 @@ import { PageNavigationProvider } from '../providers/page-navigation/page-naviga
     CameraPage,
     ToolsEmpathisePage,
     UploadPicturePage,
-    DefineTestProtocolPage
+    DefineTestProtocolPage,
+    ToolsIdeatePage,
+    ToolsPrototypePage,
+    ToolsTestPage,
+    ReviewHackPage
   ],
   imports: [
     BrowserModule,
@@ -83,7 +89,11 @@ import { PageNavigationProvider } from '../providers/page-navigation/page-naviga
     CameraPage,
     ToolsEmpathisePage,
     UploadPicturePage,
-    DefineTestProtocolPage
+    DefineTestProtocolPage,
+    ToolsIdeatePage,
+    ToolsPrototypePage,
+    ToolsTestPage,
+    ReviewHackPage
 ],
   providers: [
     StatusBar,

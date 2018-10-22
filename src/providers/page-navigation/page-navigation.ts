@@ -26,7 +26,9 @@ export class PageNavigationProvider {
       case 3: 
         return UploadPicturePage;
       case 4: 
-        return DefineTestProtocolPage
+        return UploadPicturePage;
+      case 5: 
+      return DefineTestProtocolPage;
       default:
       console.log("Not quite there yet - ");
       break

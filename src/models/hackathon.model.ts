@@ -28,6 +28,14 @@ export class Hackathon {
         },
         {
             phaseNumber: 4,
+            phaseHeader: "Prototype",
+            wellHackedText: "Prototype", 
+            pictures: [],
+            timePeriod: "",
+            completed: false
+        },
+        {
+            phaseNumber: 5,
             phaseHeader: "Test",
             wellHackedText: "Test Protocol", 
             actions: [],
