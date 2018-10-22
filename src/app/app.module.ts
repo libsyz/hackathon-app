@@ -1,3 +1,4 @@
+import { DefineTestProtocolPage } from './../pages/define-test-protocol/define-test-protocol';
 
 
 import { HttpClient } from '@angular/common/http';
@@ -58,7 +59,8 @@ import { PageNavigationProvider } from '../providers/page-navigation/page-naviga
     GalleryPage,
     CameraPage,
     ToolsEmpathisePage,
-    UploadPicturePage
+    UploadPicturePage,
+    DefineTestProtocolPage
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,8 @@ import { PageNavigationProvider } from '../providers/page-navigation/page-naviga
     GalleryPage,
     CameraPage,
     ToolsEmpathisePage,
-    UploadPicturePage
+    UploadPicturePage,
+    DefineTestProtocolPage
 ],
   providers: [
     StatusBar,

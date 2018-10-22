@@ -1,3 +1,4 @@
+import { DefineTestProtocolPage } from './../../pages/define-test-protocol/define-test-protocol';
 import { UploadPicturePage } from './../../pages/upload-picture/upload-picture';
 import { DefineProblemPage } from './../../pages/define-problem/define-problem';
 import { Injectable } from '@angular/core';
@@ -25,7 +26,7 @@ export class PageNavigationProvider {
       case 3: 
         return UploadPicturePage;
       case 4: 
-        return DefineTestProtocolPage;
+        return DefineTestProtocolPage
       default:
       console.log("Not quite there yet - ");
       break
