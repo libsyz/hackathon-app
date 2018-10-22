@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar color="primary" hideBackButton="true">
-    <ion-title> Phase 1 - Problem Statement </ion-title>
+    <ion-title> Phase {{currentPhase}} - {{ phaseHeader }} </ion-title>
   </ion-navbar>
   <div class="disclaimer">
     <h3 class="page-timer-text">Define the problem with <br>"How can we...?" sentences </h3>
@@ -10,7 +10,7 @@
 </ion-header>
 
 
- <countdown></countdown>
+ <countdown [currentPhase]='currentPhase'></countdown>
 
 
 <ion-footer no-outline>
@@ -21,7 +21,7 @@
                           ion-button 
                           large full 
                           no-margin>
-                           HELP! 
+                          HELP! 
           </button>
       </ion-col>
       <ion-col>

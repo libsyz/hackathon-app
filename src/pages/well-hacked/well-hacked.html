@@ -9,7 +9,7 @@
   <ion-navbar hideBackButton="true" 
               color="primary"
               text-center>
-    <ion-title>Phase 1 - Problem Statement</ion-title>
+    <ion-title> {{ headerText }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,7 +17,7 @@
 
 <ion-content padding text-center>
   <h1 class="header-text">Well Hacked!</h1>
-  <h3>Your problem statement has been submitted</h3>
+  <h3>Your {{ contentText }} has been submitted</h3>
 
 <ion-icon class="checkmark-green" name="md-checkmark-circle"
 ></ion-icon>
@@ -25,5 +25,10 @@
 </ion-content>
 
 <ion-footer no-outline>
-  <button ion-button full large block no-margin> NEXT</button>
+  <button ion-button 
+          (click)="nextPhase()"
+          full large block 
+          no-margin>
+          NEXT
+  </button>
 </ion-footer>

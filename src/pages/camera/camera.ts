@@ -1,5 +1,8 @@
+import { WellHackedPage } from './../well-hacked/well-hacked';
+import { PageNavigationProvider } from './../../providers/page-navigation/page-navigation';
+import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the CameraPage page.
@@ -19,15 +22,24 @@ export class CameraPage {
   @ViewChild('video') video: ElementRef;
   @ViewChild('image') image: ElementRef;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public hackSrvc: HackathonService,
+              public pageNavSrvc: PageNavigationProvider,
+              public alertCtrl: AlertController) {
   }
 
   videoSource: any;
   pictureTaken: boolean = false;
   imageData: any;
+  hackId: number;
+  currentPhase: number;
 
   ionViewDidLoad() {
+    console.log(this.navParams);
     this.enableCamera();
+    this.hackId = this.navParams.get("hackathonId");
+    this.currentPhase = this.hackSrvc.getCurrentPhase(this.hackId);
     }
 
   enableCamera(){
@@ -52,12 +64,38 @@ export class CameraPage {
 
   savePicture() {
     console.log(this.imageData);
-    // stores the pic into the right hackathon, right phase
+    try {
+      this.hackSrvc.savePictureInPhase(this.hackId, this.currentPhase, this.imageData);
+      this.hackSrvc.markPhaseAsCompleted(this.hackId, this.currentPhase);
+      this.goToWellHackedPage();
+    }
+    catch (e) {
+      console.log(e);
+      let alert = this.alertCtrl.create({
+        title: "Sorry!",
+        subTitle: "Something went wrong",
+        buttons: ["sucks!"]
+      })
+      alert.present();
+    }
+  }
+
+  discardPicture() {
+    this.changeVisibilityConditions();
+    this.imageData = '';
+    this.image.nativeElement.src = '';
   }
 
   changeVisibilityConditions() {
-    this.image.nativeElement.hidden = false;
-    this.video.nativeElement.hidden = true;
-    this.pictureTaken = true;
+    this.image.nativeElement.hidden = !this.image.nativeElement.hidden;
+    this.video.nativeElement.hidden = !this.video.nativeElement.hidden;
+    this.pictureTaken = !this.pictureTaken;
   }
+
+  goToWellHackedPage(){
+    this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
+                                       currentPhase: this.currentPhase})
+  }
+
+
 }

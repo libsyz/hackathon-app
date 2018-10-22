@@ -1,7 +1,8 @@
+import { ToolsProvider } from './../../providers/tools/tools';
 import { Hackathon } from './../../models/hackathon.model';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 // import { ToolsProblemStatementPage } from './../tools-problem-statement/tools-problem-statement';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, Alert, AlertController } from 'ionic-angular';
 import { CountdownComponent } from '../../components/countdown/countdown';
 
@@ -23,11 +24,23 @@ export class TimerPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public hackSrvc: HackathonService,
+              public toolsSrvc: ToolsProvider,
               public toastCtrl: ToastController,
               public alertCtrl: AlertController) {
   }
 
+
+  currentHackathon: Hackathon;
+  hackId: number;
+  currentPhase: number;
+  phaseHeader: string;
+
+
   ionViewDidLoad() {
+    this.hackId = this.navParams.get("hackathonId");
+    this.currentPhase = this.hackSrvc.getCurrentPhase(this.hackId);
+    this.currentHackathon = this.hackSrvc.findHackathon(this.hackId);
+    this.getText();
   }
 
   callForHelp() {
@@ -41,16 +54,15 @@ export class TimerPage {
   }
 
   getTools() {
-    console.log(this.navParams);
-    let currentHackId = this.navParams.get("hackathonId");
-    this.navCtrl.push(this.hackSrvc.getTools(currentHackId));
-    // const buildingAlert  = this.alertCtrl.create({
-    //   title: "Coming soon!",
-    //   subTitle: 'We are building something amazing',
-    //   buttons: ['Got it!']
-    // });
-    // buildingAlert.present();
+    let pageToDeliver = this.toolsSrvc.getTools(this.currentPhase);
+    this.navCtrl.push(pageToDeliver);
+  }
 
-    // this.navCtrl.push(ToolsProblemStatementPage);
+  getText() {
+    this.currentHackathon.phases.forEach((phase)=> {
+      if( phase['phaseNumber'] == this.currentPhase) {
+        this.phaseHeader = phase['phaseHeader'];
+      }
+    })
   }
 }

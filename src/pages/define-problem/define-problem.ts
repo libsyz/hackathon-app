@@ -57,7 +57,7 @@ export class DefineProblemPage {
     }
     else {
       this.hackSrvc.saveProblemStatement(this.problemInput, this.hackId);
-      this.navCtrl.push(WellHackedPage);
+      this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId, currentPhase: 1});
     }
   }
 

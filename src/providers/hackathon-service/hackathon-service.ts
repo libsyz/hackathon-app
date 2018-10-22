@@ -50,21 +50,20 @@ export class HackathonService {
   findHackathon(id) {
      let foundHack: Hackathon;
      this.allHackathons.forEach((hack)=> {
-      if(hack.id == id) {
-        foundHack = hack;
-      }
-    })
-    return foundHack;
+      if(hack.id == id) foundHack = hack;
+      })
+     return foundHack;
+
   }
 
   addHacker(id: number, hacker: any, slot: number) {
     const foundHack = this.allHackathons[id - 1];
-    this.checkIfHackerWasSelected(foundHack, hacker, slot);
+    this.checkIfHackerWasSelected(foundHack, hacker);
     if (this.canAddHackerCheck == "granted") foundHack.users[slot] = hacker;
     return this.canAddHackerCheck;
   }
 
-  checkIfHackerWasSelected(foundHack, hacker, slot) {
+  checkIfHackerWasSelected(foundHack, hacker) {
     foundHack.users.forEach((user)=> {
       if (user.name == hacker.name) this.canAddHackerCheck = "denied";
     })
@@ -73,6 +72,7 @@ export class HackathonService {
   clearHacker(hackId, slot) {
     let foundHack = this.allHackathons[hackId - 1];
     foundHack.users[slot] = "";
+    this.canAddHackerCheck = "granted";
   }
 
   getNumberOfHackers(hackId) {
@@ -84,22 +84,36 @@ export class HackathonService {
     return numberOfHackers;
   }
 
-  getTools(hackId){
-    const foundHack = this.allHackathons[hackId - 1];
-    // All this logic needs to be extracted into a tools Service
-    
-    let phase1Completed = foundHack.phases['phase1']['completed']
-    let pageToGo: any;
-    phase1Completed ?  console.log("This was completed!") : pageToGo = ToolsProblemStatementPage
-    return pageToGo;
-  }
-
   saveProblemStatement(inputText: string, hackId) {
     const foundHack = this.allHackathons[hackId -1];
-    foundHack.phases['phase1']['problemStatement'] = inputText;
-    foundHack.phases['phase1']['completed'] = true;
-    console.log(`${inputText} has been saved!`);
-    console.log(foundHack);
+    foundHack.phases[0]['problemStatement'] = inputText;
+    this.markPhaseAsCompleted(hackId, 1);
+  }
+
+  getCurrentPhase(hackId) {
+    const foundHack = this.allHackathons[hackId -1];
+    const currentPhase = foundHack.phases.find((phase) => {
+      return phase['completed'] == false;
+    })
+    return currentPhase['phaseNumber'];
+    
+  }
+
+  markPhaseAsCompleted(hackId, phaseNumber) {
+    const foundHack = this.allHackathons[hackId -1];
+    const phaseToMark = foundHack.phases.find((phase) => {
+      return phase['phaseNumber'] == phaseNumber;
+    })
+    phaseToMark['completed'] = true;
+  }
+
+  savePictureInPhase(hackId, currentPhase, image) {
+    debugger
+    const foundHack = this.allHackathons[hackId - 1];
+    const foundPhase = foundHack.phases.find((phase)=> {
+      return phase['phaseNumber'] == currentPhase;
+    })
+    foundPhase['pictures'].push(image);
   }
 
 }

@@ -1,3 +1,4 @@
+import { DefineTestProtocolPage } from './../pages/define-test-protocol/define-test-protocol';
 
 
 import { HttpClient } from '@angular/common/http';
@@ -20,6 +21,8 @@ import { DefineProblemPage } from './../pages/define-problem/define-problem';
 import { WellHackedPage } from './../pages/well-hacked/well-hacked';
 import { GalleryPage } from './../pages/gallery/gallery';
 import { CameraPage } from './../pages/camera/camera';
+import { UploadPicturePage } from './../pages/upload-picture/upload-picture';
+import { ToolsEmpathisePage } from './../pages/tools-empathise/tools-empathise';
 
 
 // Components
@@ -35,6 +38,8 @@ import { CountdownComponent } from './../components/countdown/countdown';
 import { hackersList } from './../services/hackers-list.service';
 import { HackathonService } from '../providers/hackathon-service/hackathon-service';
 import { HelperMethodsProvider } from '../providers/helper-methods/helper-methods';
+import { ToolsProvider } from '../providers/tools/tools';
+import { PageNavigationProvider } from '../providers/page-navigation/page-navigation';
 
 
 
@@ -52,7 +57,10 @@ import { HelperMethodsProvider } from '../providers/helper-methods/helper-method
     DefineProblemPage,
     WellHackedPage,
     GalleryPage,
-    CameraPage
+    CameraPage,
+    ToolsEmpathisePage,
+    UploadPicturePage,
+    DefineTestProtocolPage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +80,10 @@ import { HelperMethodsProvider } from '../providers/helper-methods/helper-method
     DefineProblemPage,
     WellHackedPage,
     GalleryPage,
-    CameraPage
+    CameraPage,
+    ToolsEmpathisePage,
+    UploadPicturePage,
+    DefineTestProtocolPage
 ],
   providers: [
     StatusBar,
@@ -82,6 +93,8 @@ import { HelperMethodsProvider } from '../providers/helper-methods/helper-method
     HackathonService,
     HttpClient,
     HelperMethodsProvider,
+    ToolsProvider,
+    PageNavigationProvider,
   ]
 })
 export class AppModule {}
