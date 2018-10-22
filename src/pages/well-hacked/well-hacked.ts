@@ -1,3 +1,4 @@
+import { ReviewHackPage } from './../review-hack/review-hack';
 import { Hackathon } from './../../models/hackathon.model';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { Component } from '@angular/core';
@@ -33,7 +34,6 @@ export class WellHackedPage {
     this.hackId = this.navParams.get("hackathonId");
     this.currentPhase = this.navParams.get("currentPhase");
     this.currentHackathon = this.hackSrvc.findHackathon(this.hackId);
-    debugger;
     this.getPageText();
 
   }
@@ -47,8 +47,15 @@ export class WellHackedPage {
   }
 
   nextPhase(){
-    this.navCtrl.push(TimerPage, {hackathonId: this.hackId, 
-                                  currentPhase: this.currentPhase + 1 } );
+    debugger
+    if (this.currentPhase == 5) {
+      this.navCtrl.push(ReviewHackPage, {hackathonId: this.hackId});
+    }
+    else {
+      this.navCtrl.push(TimerPage, {hackathonId: this.hackId, 
+        currentPhase: this.currentPhase + 1 } );
+    }
+ 
   }
 
 }

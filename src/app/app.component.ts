@@ -1,3 +1,4 @@
+import { ReviewHackPage } from './../pages/review-hack/review-hack';
 import { HomePage } from './../pages/home/home';
 import { DefineTestProtocolPage } from './../pages/define-test-protocol/define-test-protocol';
 import { Component } from '@angular/core';
@@ -9,7 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = ReviewHackPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

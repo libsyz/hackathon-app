@@ -108,7 +108,7 @@ export class HackathonService {
   }
 
   savePictureInPhase(hackId, currentPhase, image) {
-    debugger
+  
     const foundHack = this.allHackathons[hackId - 1];
     const foundPhase = foundHack.phases.find((phase)=> {
       return phase['phaseNumber'] == currentPhase;

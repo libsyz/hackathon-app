@@ -13,27 +13,31 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content (tap)='checkForValidForm()'padding>
   <h1 text-center> Time is Out!</h1>
   <h3 text-center> Enter Your Test Protocol</h3>
-  <form class="hideOverflow" #formTemplate (ngSubmit)="logForm()">
+  <form #formTemplate (ngSubmit)="logForm()">
     <ion-item>
-      <ion-input placeholder="Action 1"type="text"></ion-input>
+      <ion-input [(ngModel)]="actionArray[0]"  [ngModelOptions]="{standalone:true}"
+                 placeholder="Action 1"type="text"></ion-input>
     </ion-item>
     <ion-item class="hidden">
-      <ion-input placeholder="Action 2" type="text"></ion-input>
+      <ion-input [(ngModel)]="actionArray[1]"  [ngModelOptions]="{standalone:true}" 
+                placeholder="Action 2" type="text"></ion-input>
     </ion-item>
     <ion-item class="hidden">
-      <ion-input placeholder="Action 3"type="text"></ion-input>
+      <ion-input [(ngModel)]="actionArray[2]"  [ngModelOptions]="{standalone:true}" 
+                placeholder="Action 3"type="text"></ion-input>
     </ion-item>
     <ion-item class="hidden">
-      <ion-input placeholder="Action 4"type="text"></ion-input>
+      <ion-input  [(ngModel)]="actionArray[3]"  [ngModelOptions]="{standalone:true}"
+                  placeholder="Action 4"type="text"></ion-input>
     </ion-item>
   </form>
-  <ion-buttons right>
+  <ion-buttons #button right>
     <button ion-button
     
-    (click)='logForm()'
+    (click)='addFormInput()'
     color="secondary"
     right small margin round icon-only>
     <ion-icon name="add"></ion-icon>
@@ -45,7 +49,7 @@
 <ion-item (click)="addTimeframe()">
   <ion-input class="timeframe-input" [placeholder]="timeframe" 
   color='primary' disabled=true type="text"
-  readonly="true">
+  readonly="true" (focusout)="checkForValidForm()">
 </ion-input>
 </ion-item>
 
@@ -55,7 +59,8 @@
   <button ion-button
   block large
   no-margin
-  disabled='true'>
+  (click)="goToNext()"
+  [disabled]='nextStepDisabled'>
   NEXT
 </button>
 </ion-footer>

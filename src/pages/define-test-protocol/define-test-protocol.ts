@@ -1,3 +1,4 @@
+import { WellHackedPage } from './../well-hacked/well-hacked';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, Item, AlertController, Form } from 'ionic-angular';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
@@ -16,12 +17,16 @@ import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 })
 export class DefineTestProtocolPage {
   @ViewChild('formTemplate')actionInputs: ElementRef;
+  @ViewChild('button')actionsButton: ElementRef;
 
-
-  actionArray = [] = [""]
+  someAttribute: string = "";
+  hackId: number;
+  actionArray = [] = ["","","",""]
   timeframe: string = "";
   showForms: boolean = false;
-  actionLimit: number = 5;
+  visibleInputs: number = 1;
+  maxVisibleInputs: number = 4;
+  nextStepDisabled: boolean = true;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -29,26 +34,53 @@ export class DefineTestProtocolPage {
   }
 
   ionViewDidLoad() {
+    console.log(this.navParams);
+    this.hackId = this.navParams.get("hackathonId");
     console.log('ionViewDidLoad DefineTestProtocolPage');
   }
 
-  logForm(){
+  addFormInput(){
     let myForm = this.actionInputs.nativeElement as HTMLElement;
-    console.log(myForm.children);
     let myFormArray = Array.from(myForm.children)
-    console.log(myFormArray);
-    const hiddenElement = myFormArray.find((element)=> {
-       return element.classList.contains('hidden') == true;
-    })
-    hiddenElement.classList.remove('hidden');
+    this.showNextInput(myFormArray);
+    this.updateActionsButton();
   }
 
-
-  fillAction(actionArrayIndex) {
-    this.actionArray[actionArrayIndex] = event.srcElement.value;
-    event.srcElement.textContent = this.actionArray[actionArrayIndex];
-    console.log(this.actionArray);
+  showNextInput(myFormArray) {
+    const hiddenInput = myFormArray.find((element)=> {
+      return element.classList.contains('hidden') == true;
+   })
+   hiddenInput.classList.remove('hidden');
+   this.visibleInputs++
   }
+
+  updateActionsButton() {
+    let button = this.actionsButton.nativeElement as HTMLButtonElement;
+    if (this.visibleInputs == this.maxVisibleInputs) {
+      button.style.visibility = 'hidden';
+    }
+  }
+
+  checkForValidForm(){
+    const filledInputs = this.actionArray.filter((input)=> 
+     input != "");
+     if ( filledInputs.length == this.visibleInputs && this.timeframe != "") {
+       this.nextStepDisabled = false;
+     }
+     else {
+        this.nextStepDisabled = true;
+      }
+  }
+
+  goToNext(){
+    this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
+                                        currentPhase: 5});
+  }
+  // fillAction(actionArrayIndex) {
+  //   this.actionArray[actionArrayIndex] = event.srcElement.value;
+  //   event.srcElement.textContent = this.actionArray[actionArrayIndex];
+  //   console.log(this.actionArray);
+  // }
 
   addTimeframe(){
     let timeframeAlert = this.alertCtrl.create();
@@ -85,8 +117,12 @@ export class DefineTestProtocolPage {
       text: "Okay",
       handler: data =>  {
         this.timeframe = data;
+        this.checkForValidForm;
       }
     })
+    timeframeAlert.onDidDismiss(() => {
+      this.checkForValidForm()
+    });
     timeframeAlert.present();
   }
 }

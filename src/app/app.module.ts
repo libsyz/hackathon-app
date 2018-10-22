@@ -1,4 +1,3 @@
-import { ToolsTestPage } from './../pages/tools-test/tools-test';
 
 
 import { HttpClient } from '@angular/common/http';
@@ -25,6 +24,9 @@ import { UploadPicturePage } from './../pages/upload-picture/upload-picture';
 import { ToolsEmpathisePage } from './../pages/tools-empathise/tools-empathise';
 import { ToolsIdeatePage } from '../pages/tools-ideate/tools-ideate';
 import { ToolsPrototypePage } from './../pages/tools-prototype/tools-prototype';
+import { ReviewHackPage } from './../pages/review-hack/review-hack';
+import { ToolsTestPage } from './../pages/tools-test/tools-test';
+
 
 // Components
 
@@ -41,7 +43,6 @@ import { HackathonService } from '../providers/hackathon-service/hackathon-servi
 import { HelperMethodsProvider } from '../providers/helper-methods/helper-methods';
 import { ToolsProvider } from '../providers/tools/tools';
 import { PageNavigationProvider } from '../providers/page-navigation/page-navigation';
-
 
 
 
@@ -64,7 +65,8 @@ import { PageNavigationProvider } from '../providers/page-navigation/page-naviga
     DefineTestProtocolPage,
     ToolsIdeatePage,
     ToolsPrototypePage,
-    ToolsTestPage
+    ToolsTestPage,
+    ReviewHackPage
   ],
   imports: [
     BrowserModule,
@@ -90,7 +92,8 @@ import { PageNavigationProvider } from '../providers/page-navigation/page-naviga
     DefineTestProtocolPage,
     ToolsIdeatePage,
     ToolsPrototypePage,
-    ToolsTestPage
+    ToolsTestPage,
+    ReviewHackPage
 ],
   providers: [
     StatusBar,
