@@ -2,7 +2,7 @@ import { ToolsProvider } from './../../providers/tools/tools';
 import { Hackathon } from './../../models/hackathon.model';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 // import { ToolsProblemStatementPage } from './../tools-problem-statement/tools-problem-statement';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, Alert, AlertController } from 'ionic-angular';
 import { CountdownComponent } from '../../components/countdown/countdown';
 
@@ -28,6 +28,7 @@ export class TimerPage {
               public toastCtrl: ToastController,
               public alertCtrl: AlertController) {
   }
+
 
   currentHackathon: Hackathon;
   hackId: number;

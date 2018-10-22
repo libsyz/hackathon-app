@@ -50,21 +50,19 @@ export class HackathonService {
   findHackathon(id) {
      let foundHack: Hackathon;
      this.allHackathons.forEach((hack)=> {
-      if(hack.id == id) {
-        foundHack = hack;
-      }
-    })
-    return foundHack;
+      if(hack.id == id) foundHack = hack;
+      })
+     return foundHack;
   }
 
   addHacker(id: number, hacker: any, slot: number) {
     const foundHack = this.allHackathons[id - 1];
-    this.checkIfHackerWasSelected(foundHack, hacker, slot);
+    this.checkIfHackerWasSelected(foundHack, hacker);
     if (this.canAddHackerCheck == "granted") foundHack.users[slot] = hacker;
     return this.canAddHackerCheck;
   }
 
-  checkIfHackerWasSelected(foundHack, hacker, slot) {
+  checkIfHackerWasSelected(foundHack, hacker) {
     foundHack.users.forEach((user)=> {
       if (user.name == hacker.name) this.canAddHackerCheck = "denied";
     })
@@ -73,6 +71,7 @@ export class HackathonService {
   clearHacker(hackId, slot) {
     let foundHack = this.allHackathons[hackId - 1];
     foundHack.users[slot] = "";
+    this.canAddHackerCheck = "granted";
   }
 
   getNumberOfHackers(hackId) {

@@ -1,7 +1,8 @@
+import { PageNavigationProvider } from './../../providers/page-navigation/page-navigation';
   import { DefineProblemPage } from './../../pages/define-problem/define-problem';
   import { HomePage } from './../../pages/home/home';
   import { Alert, AlertController, NavController, NavParams } from 'ionic-angular';
-  import { Component } from '@angular/core';
+  import { Component, Input } from '@angular/core';
 
   /**
    * Generated class for the CountdownComponent component.
@@ -14,6 +15,8 @@
     templateUrl: 'countdown.html'
   })
   export class CountdownComponent {
+    @Input() currentPhase: number;
+
     countDownActive: boolean = false;
     time: number;
     minutes: any = "00";
@@ -23,8 +26,9 @@
 
     constructor(private alertCtrl: AlertController,
                 private navCtrl: NavController,
-                private navParams: NavParams)  {
-      console.log(this.navParams);
+                private navParams: NavParams,
+                private pageNavSrvc: PageNavigationProvider)  {
+                console.log(this.navParams);
     }
 
     startCountDown(){
@@ -81,7 +85,8 @@
         buttons: ["Got it!"]
       })
       nextPhaseAlert.onDidDismiss(()=>{
-        this.navCtrl.setRoot(DefineProblemPage, 
+        const pageToGo = this.pageNavSrvc.getPage(this.currentPhase);
+        this.navCtrl.setRoot(pageToGo, 
                             {hackathonId: this.navParams.get("hackathonId")});
       })
       nextPhaseAlert.present();

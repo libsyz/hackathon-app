@@ -1,4 +1,3 @@
-import { ToolsEmpathisePage } from './../pages/tools-empathise/tools-empathise';
 
 
 import { HttpClient } from '@angular/common/http';
@@ -21,6 +20,8 @@ import { DefineProblemPage } from './../pages/define-problem/define-problem';
 import { WellHackedPage } from './../pages/well-hacked/well-hacked';
 import { GalleryPage } from './../pages/gallery/gallery';
 import { CameraPage } from './../pages/camera/camera';
+import { UploadPicturePage } from './../pages/upload-picture/upload-picture';
+import { ToolsEmpathisePage } from './../pages/tools-empathise/tools-empathise';
 
 
 // Components
@@ -37,6 +38,7 @@ import { hackersList } from './../services/hackers-list.service';
 import { HackathonService } from '../providers/hackathon-service/hackathon-service';
 import { HelperMethodsProvider } from '../providers/helper-methods/helper-methods';
 import { ToolsProvider } from '../providers/tools/tools';
+import { PageNavigationProvider } from '../providers/page-navigation/page-navigation';
 
 
 
@@ -55,7 +57,8 @@ import { ToolsProvider } from '../providers/tools/tools';
     WellHackedPage,
     GalleryPage,
     CameraPage,
-    ToolsEmpathisePage
+    ToolsEmpathisePage,
+    UploadPicturePage
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ import { ToolsProvider } from '../providers/tools/tools';
     WellHackedPage,
     GalleryPage,
     CameraPage,
-    ToolsEmpathisePage
+    ToolsEmpathisePage,
+    UploadPicturePage
 ],
   providers: [
     StatusBar,
@@ -87,6 +91,7 @@ import { ToolsProvider } from '../providers/tools/tools';
     HttpClient,
     HelperMethodsProvider,
     ToolsProvider,
+    PageNavigationProvider,
   ]
 })
 export class AppModule {}
