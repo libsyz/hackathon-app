@@ -16,16 +16,18 @@
 <ion-content padding>
     <h1 text-center> Time is Out!</h1>
     <h3 text-center> Enter Your Test Protocol</h3>
-
-  <ion-item>
-        <ion-input placeholder="Action 1" type="text">
-        </ion-input>
-  </ion-item>
+  <div class="item-container" #itemContainer>
+    <ion-item>
+          <ion-input placeholder="Action 1" type="text">
+          </ion-input>
+    </ion-item>
+  </div>
   <ion-buttons right>
     <button ion-button
-    color="secondary"
-    right small margin round icon-only>
-      <ion-icon name="add"></ion-icon>
+            (click)='addField()'
+            color="secondary"
+            right small margin round icon-only>
+            <ion-icon name="add"></ion-icon>
     </button>
   </ion-buttons>
 

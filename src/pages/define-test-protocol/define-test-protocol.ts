@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, Item } from 'ionic-angular';
 
 /**
  * Generated class for the DefineTestProtocolPage page.
@@ -14,6 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'define-test-protocol.html',
 })
 export class DefineTestProtocolPage {
+  @ViewChild('itemContainer')itemContainer: ElementRef;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -22,4 +23,11 @@ export class DefineTestProtocolPage {
     console.log('ionViewDidLoad DefineTestProtocolPage');
   }
 
+  addField() {
+    const myField = `<input placeholder="Action 1" type="text">
+                      </input>`
+    const inputFields = this.itemContainer.nativeElement as HTMLDivElement;
+    inputFields.innerHTML = inputFields.innerHTML + myField;
+
+  }
 }
