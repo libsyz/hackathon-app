@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Item, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Item, AlertController, Form } from 'ionic-angular';
+import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 
 /**
  * Generated class for the DefineTestProtocolPage page.
@@ -14,9 +15,13 @@ import { IonicPage, NavController, NavParams, Item, AlertController } from 'ioni
   templateUrl: 'define-test-protocol.html',
 })
 export class DefineTestProtocolPage {
-  @ViewChild('itemContainer')itemContainer: ElementRef;
+  @ViewChild('formTemplate')actionInputs: ElementRef;
 
+
+  actionArray = [] = [""]
   timeframe: string = "";
+  showForms: boolean = false;
+  actionLimit: number = 5;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -27,12 +32,22 @@ export class DefineTestProtocolPage {
     console.log('ionViewDidLoad DefineTestProtocolPage');
   }
 
-  addField() {
-    const myField = `<input placeholder="Action 1" type="text">
-                      </input>`
-    const inputFields = this.itemContainer.nativeElement as HTMLDivElement;
-    inputFields.innerHTML = inputFields.innerHTML + myField;
+  logForm(){
+    let myForm = this.actionInputs.nativeElement as HTMLElement;
+    console.log(myForm.children);
+    let myFormArray = Array.from(myForm.children)
+    console.log(myFormArray);
+    const hiddenElement = myFormArray.find((element)=> {
+       return element.classList.contains('hidden') == true;
+    })
+    hiddenElement.classList.remove('hidden');
+  }
 
+
+  fillAction(actionArrayIndex) {
+    this.actionArray[actionArrayIndex] = event.srcElement.value;
+    event.srcElement.textContent = this.actionArray[actionArrayIndex];
+    console.log(this.actionArray);
   }
 
   addTimeframe(){
