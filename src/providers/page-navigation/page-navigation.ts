@@ -23,7 +23,7 @@ export class PageNavigationProvider {
       case 2: 
         return UploadPicturePage;
       default:
-        console.log("Not quite there yet - ");
+      console.log("Not quite there yet - ");
       break
     }
   }

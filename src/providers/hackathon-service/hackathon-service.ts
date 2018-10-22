@@ -53,10 +53,12 @@ export class HackathonService {
       if(hack.id == id) foundHack = hack;
       })
      return foundHack;
+
   }
 
   addHacker(id: number, hacker: any, slot: number) {
     const foundHack = this.allHackathons[id - 1];
+    debugger
     this.checkIfHackerWasSelected(foundHack, hacker);
     if (this.canAddHackerCheck == "granted") foundHack.users[slot] = hacker;
     return this.canAddHackerCheck;
@@ -94,7 +96,9 @@ export class HackathonService {
     const currentPhase = foundHack.phases.find((phase) => {
       return phase['completed'] == false;
     })
+    debugger
     return currentPhase['phaseNumber'];
+    
   }
 
   markPhaseAsCompleted(hackId, phaseNumber) {
@@ -103,8 +107,17 @@ export class HackathonService {
       return phase['phaseNumber'] = phaseNumber;
     })
     phaseToMark['completed'] = true;
+    debugger
   }
 
-
+  savePicture(hackId, currentPhase, image) {
+    debugger
+    const foundHack = this.allHackathons[hackId - 1];
+    const foundPhase = foundHack.phases.find((phase)=> {
+      return phase['phaseNumber'] == currentPhase;
+    })
+    foundPhase['pictures'].push(image);
+    console.log(foundHack);
+  }
 
 }

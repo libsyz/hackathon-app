@@ -1,6 +1,6 @@
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the CameraPage page.
@@ -22,17 +22,21 @@ export class CameraPage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              public hackSrvc: HackathonService) {
+              public hackSrvc: HackathonService,
+              public alertCtrl: AlertController) {
   }
 
   videoSource: any;
   pictureTaken: boolean = false;
   imageData: any;
-  
+  hackId: number;
+  currentPhase: number;
 
   ionViewDidLoad() {
     console.log(this.navParams);
     this.enableCamera();
+    this.hackId = this.navParams.get("hackathonId");
+    this.currentPhase = this.hackSrvc.getCurrentPhase(this.hackId);
     }
 
   enableCamera(){
@@ -56,10 +60,19 @@ export class CameraPage {
   }
 
   savePicture() {
-
     console.log(this.imageData);
-    // stores the pic into the right hackathon, right phase
-    // sends the user to the right page! 
+    try {
+      this.hackSrvc.savePicture(this.hackId, this.currentPhase, this.imageData);
+    }
+    catch (e) {
+      console.log(e);
+      let alert = this.alertCtrl.create({
+        title: "Sorry!",
+        subTitle: "Something went wrong",
+        buttons: ["sucks!"]
+      })
+      alert.present();
+    }
   }
 
   discardPicture() {
