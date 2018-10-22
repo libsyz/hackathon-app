@@ -32,10 +32,14 @@
   </ion-buttons>
 
   <h3 text-center> Enter Your Timeframe</h3>
-  <ion-item>
-      <ion-input type="text">
-      </ion-input>
-</ion-item>
+
+    <ion-item (click)="addTimeframe()">
+        <ion-input class="timeframe-input" [placeholder]="timeframe" 
+                  color='primary' disabled=true type="text"
+                   readonly="true">
+        </ion-input>
+   </ion-item>
+
 </ion-content>
 
 <ion-footer no-outline>

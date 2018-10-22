@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Item } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Item, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the DefineTestProtocolPage page.
@@ -16,7 +16,11 @@ import { IonicPage, NavController, NavParams, Item } from 'ionic-angular';
 export class DefineTestProtocolPage {
   @ViewChild('itemContainer')itemContainer: ElementRef;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  timeframe: string = "";
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -29,5 +33,45 @@ export class DefineTestProtocolPage {
     const inputFields = this.itemContainer.nativeElement as HTMLDivElement;
     inputFields.innerHTML = inputFields.innerHTML + myField;
 
+  }
+
+  addTimeframe(){
+    let timeframeAlert = this.alertCtrl.create();
+    timeframeAlert.setTitle("Choose a timeframe");
+    timeframeAlert.addInput({
+      type: "radio",
+      label: "1 Week",
+      value: "1 Week"
+    })
+    timeframeAlert.addInput({
+      type: "radio",
+      label: "2 Weeks",
+      value: "2 Weeks"
+    })
+    timeframeAlert.addInput({
+      type: "radio",
+      label: "3 Weeks",
+      value: "3 Weeks"
+    })
+    timeframeAlert.addInput({
+      type: "radio",
+      label: "4 Weeks",
+      value: "4 Weeks"
+    })
+    timeframeAlert.addInput({
+      type: "radio",
+      label: "5 Weeks",
+      value: "5 Weeks"
+    })
+    timeframeAlert.addButton({
+      text: "Cancel"
+    })
+    timeframeAlert.addButton({
+      text: "Okay",
+      handler: data =>  {
+        this.timeframe = data;
+      }
+    })
+    timeframeAlert.present();
   }
 }

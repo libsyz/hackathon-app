@@ -4,4 +4,11 @@ page-define-test-protocol {
         color: color($colors, primary);
     }
 
+    .timeframe-input {
+        input[disabled] {
+            opacity: 1;
+        }
+    }
+   
+
 }
