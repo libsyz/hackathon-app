@@ -1,3 +1,4 @@
+import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -19,14 +20,18 @@ export class CameraPage {
   @ViewChild('video') video: ElementRef;
   @ViewChild('image') image: ElementRef;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public hackSrvc: HackathonService) {
   }
 
   videoSource: any;
   pictureTaken: boolean = false;
   imageData: any;
+  
 
   ionViewDidLoad() {
+    console.log(this.navParams);
     this.enableCamera();
     }
 
@@ -51,13 +56,23 @@ export class CameraPage {
   }
 
   savePicture() {
+
     console.log(this.imageData);
     // stores the pic into the right hackathon, right phase
+    // sends the user to the right page! 
+  }
+
+  discardPicture() {
+    this.changeVisibilityConditions();
+    this.imageData = '';
+    this.image.nativeElement.src = '';
   }
 
   changeVisibilityConditions() {
-    this.image.nativeElement.hidden = false;
-    this.video.nativeElement.hidden = true;
-    this.pictureTaken = true;
+    this.image.nativeElement.hidden = !this.image.nativeElement.hidden;
+    this.video.nativeElement.hidden = !this.video.nativeElement.hidden;
+    this.pictureTaken = !this.pictureTaken;
   }
+
+
 }

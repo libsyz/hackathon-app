@@ -15,17 +15,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'upload-picture.html',
 })
 export class UploadPicturePage {
+  hackId: number;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UploadPicturePage');
+    console.log(this.navParams);
+    this.hackId = this.navParams.get("hackathonId");
   }
 
   goToCamera(){
-    this.navCtrl.push(CameraPage);
+    this.navCtrl.push(CameraPage, {hackathonId: this.hackId});
   }
 
 }
