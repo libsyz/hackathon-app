@@ -16,10 +16,10 @@
   <h1> Time is Out!</h1>
   <h3> Enter Your Problem Statement</h3>
   <ion-item>
-      <ion-textarea [(ngModel)]="problemInput"
+      <ion-input [(ngModel)]="problemInput"
                     (keydown)="updateProblem()" 
                     type="text">
-      </ion-textarea>
+      </ion-input>
     </ion-item>
   <p [style.color]="charsColor"
       class="character-count">
