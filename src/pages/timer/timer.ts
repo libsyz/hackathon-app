@@ -34,6 +34,7 @@ export class TimerPage {
   hackId: number;
   currentPhase: number;
   phaseHeader: string;
+  helperText: string;
 
 
   ionViewDidLoad() {
@@ -62,6 +63,7 @@ export class TimerPage {
     this.currentHackathon.phases.forEach((phase)=> {
       if( phase['phaseNumber'] == this.currentPhase) {
         this.phaseHeader = phase['phaseHeader'];
+        this.helperText = phase['helperText']
       }
     })
   }

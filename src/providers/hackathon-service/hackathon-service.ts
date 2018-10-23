@@ -108,12 +108,25 @@ export class HackathonService {
   }
 
   savePictureInPhase(hackId, currentPhase, image) {
-  
     const foundHack = this.allHackathons[hackId - 1];
     const foundPhase = foundHack.phases.find((phase)=> {
       return phase['phaseNumber'] == currentPhase;
     })
     foundPhase['pictures'].push(image);
+  }
+
+  saveTestActions(hackId, actionsArray: any[]) {
+    const foundHack = this.allHackathons[hackId - 1];
+    actionsArray.forEach((action) => {
+      if (action != "") {
+      foundHack.phases[4]['actions'].push(action);
+      }
+    })
+  }
+
+  saveTestTimeframe(hackId, timeframe) {
+    const foundHack = this.allHackathons[hackId - 1];
+    foundHack.phases[4]['timePeriod'] = timeframe;
   }
 
 }

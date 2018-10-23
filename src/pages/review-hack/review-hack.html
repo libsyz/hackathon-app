@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color="primary">
+  <ion-navbar hideBackButton="true" color="primary">
     <ion-title>Review Your Hack</ion-title>
   </ion-navbar>
   <div class="problem-statement">
@@ -57,7 +57,6 @@
     <img class="image-review hidden" [src]="ideateImageURL" data-phase="ideate"alt="ideate image">
     <img class="image-review hidden" [src]="prototypeImageURL" data-phase="prototype"alt="prototype image">
     <div class="test-info hidden" text-center data-phase="test"class="test-info">
-      <p>Testing this shit out</p>
       <p *ngFor="let item of testActions"> {{item}} </p>
       <h6 text-center> EXPECTED TIMEFRAME </h6>
       <p text-center> {{testTimeframe}} </p>

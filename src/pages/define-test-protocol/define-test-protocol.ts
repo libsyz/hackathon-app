@@ -1,3 +1,4 @@
+import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { WellHackedPage } from './../well-hacked/well-hacked';
 import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, Item, AlertController, Form } from 'ionic-angular';
@@ -21,7 +22,7 @@ export class DefineTestProtocolPage {
 
   someAttribute: string = "";
   hackId: number;
-  actionArray = [] = ["","","",""]
+  actionArray: string[] = ["", "", "", ""];
   timeframe: string = "";
   showForms: boolean = false;
   visibleInputs: number = 1;
@@ -29,6 +30,7 @@ export class DefineTestProtocolPage {
   nextStepDisabled: boolean = true;
 
   constructor(public navCtrl: NavController, 
+              public hackSrvc: HackathonService,
               public navParams: NavParams,
               public alertCtrl: AlertController) {
   }
@@ -74,30 +76,15 @@ export class DefineTestProtocolPage {
 
   goToNext(){
     this.saveInformation();
-    // this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
-    //                                     currentPhase: 5});
+    this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
+                                        currentPhase: 5});
   }
-  // fillAction(actionArrayIndex) {
-  //   this.actionArray[actionArrayIndex] = event.srcElement.value;
-  //   event.srcElement.textContent = this.actionArray[actionArrayIndex];
-  //   console.log(this.actionArray);
-  // }
+
 
   saveInformation() {
-    let form = this.actionInputs.nativeElement as HTMLFormElement;
-    let formInputs = Array.from(form.children);
-    formInputs.forEach((input: HTMLElement) => {
-      this.retrieveData(input);
-    })
+    this.hackSrvc.saveTestActions(this.hackId, this.actionArray);
+    this.hackSrvc.saveTestTimeframe(this.hackId, this.timeframe);
 }
-
-retrieveData(input: HTMLElement) {
-  // option 1 - go brute force because I know the HTML structure
-  let inputChildnodes = Array.from(input.childNodes);
-  console.log(inputChildnodes);
-  // option 2 - go recursive - iterate through the data structure until you find something
-
-  }
 
 
   addTimeframe(){
