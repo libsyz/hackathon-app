@@ -6,19 +6,43 @@
 -->
 <ion-header>
 
-  <ion-navbar color="primary">
+  <ion-navbar hideBackButton="true" color="primary">
     <ion-title>Review Your Hack</ion-title>
   </ion-navbar>
   <div class="problem-statement">
       <h3>Problem Statement</h3>
-      <p>Enter the problem statement</p>
+      <p>{{ problemStatement }}</p>
   </div>
   <ion-grid no-padding>
       <ion-row no-margin no-padding>
-        <ion-col text-center col-3 no-margin no-padding> <p class="tab">EMPATHISE </p> </ion-col>
-        <ion-col text-center col-3 no-margin no-padding> <p class="tab">IDEATE </p> </ion-col>
-        <ion-col text-center col-3 no-margin no-padding> <p class="tab">PROTOTYPE </p> </ion-col>
-        <ion-col text-center col-3 no-margin no-padding> <p class="tab">TEST </p> </ion-col>
+        <ion-col (click)="showSection()"
+                 text-center
+                 class="tab active" 
+                 col-3
+                 data-phase="empathise" 
+                 no-margin no-padding> 
+                 <p> EMPATHISE </p> </ion-col>
+        <ion-col (click)="showSection()"
+                 text-center
+                 class="tab" 
+                 col-3
+                 data-phase="ideate" 
+                 no-margin no-padding> 
+                 <p> IDEATE </p> </ion-col>
+        <ion-col (click)="showSection()"
+                 text-center
+                 class="tab" 
+                 col-3
+                 data-phase="prototype" 
+                 no-margin no-padding> 
+                 <p> PROTOTYPE </p> </ion-col>
+        <ion-col (click)="showSection()"
+                 text-center
+                 class="tab" 
+                 col-3
+                 data-phase="test" 
+                 no-margin no-padding> 
+                 <p> TEST </p> </ion-col>
       </ion-row>
   </ion-grid>
 </ion-header>
@@ -27,13 +51,23 @@
   
 
  
-  <h2 text-center> YOU HAVE UPLOADED</h2>
-  <img src="" alt="enter image">
+  <h6 text-center> YOU HAVE UPLOADED</h6>
+  <div #hackathonInfo class="hackathon-info">
+    <img class="image-review hidden" [src]="empathiseImageURL" data-phase="empathise"alt="empathise image">
+    <img class="image-review hidden" [src]="ideateImageURL" data-phase="ideate"alt="ideate image">
+    <img class="image-review hidden" [src]="prototypeImageURL" data-phase="prototype"alt="prototype image">
+    <div class="test-info hidden" text-center data-phase="test"class="test-info">
+      <p *ngFor="let item of testActions"> {{item}} </p>
+      <h6 text-center> EXPECTED TIMEFRAME </h6>
+      <p text-center> {{testTimeframe}} </p>
+    </div>
+  </div>
 
 </ion-content>
 
 <ion-footer no-outline>
   <button ion-button
+          (click)="buildingAmazing()"
           color="primary"
           block large full no-margin> 
           SAVE

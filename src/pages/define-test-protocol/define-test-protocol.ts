@@ -1,5 +1,6 @@
+import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { WellHackedPage } from './../well-hacked/well-hacked';
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, Item, AlertController, Form } from 'ionic-angular';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 
@@ -21,7 +22,7 @@ export class DefineTestProtocolPage {
 
   someAttribute: string = "";
   hackId: number;
-  actionArray = [] = ["","","",""]
+  actionArray: string[] = ["", "", "", ""];
   timeframe: string = "";
   showForms: boolean = false;
   visibleInputs: number = 1;
@@ -29,6 +30,7 @@ export class DefineTestProtocolPage {
   nextStepDisabled: boolean = true;
 
   constructor(public navCtrl: NavController, 
+              public hackSrvc: HackathonService,
               public navParams: NavParams,
               public alertCtrl: AlertController) {
   }
@@ -73,14 +75,17 @@ export class DefineTestProtocolPage {
   }
 
   goToNext(){
+    this.saveInformation();
     this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
                                         currentPhase: 5});
   }
-  // fillAction(actionArrayIndex) {
-  //   this.actionArray[actionArrayIndex] = event.srcElement.value;
-  //   event.srcElement.textContent = this.actionArray[actionArrayIndex];
-  //   console.log(this.actionArray);
-  // }
+
+
+  saveInformation() {
+    this.hackSrvc.saveTestActions(this.hackId, this.actionArray);
+    this.hackSrvc.saveTestTimeframe(this.hackId, this.timeframe);
+}
+
 
   addTimeframe(){
     let timeframeAlert = this.alertCtrl.create();
