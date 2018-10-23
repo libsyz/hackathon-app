@@ -1,5 +1,5 @@
 import { WellHackedPage } from './../well-hacked/well-hacked';
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, Item, AlertController, Form } from 'ionic-angular';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 
@@ -73,14 +73,32 @@ export class DefineTestProtocolPage {
   }
 
   goToNext(){
-    this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
-                                        currentPhase: 5});
+    this.saveInformation();
+    // this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
+    //                                     currentPhase: 5});
   }
   // fillAction(actionArrayIndex) {
   //   this.actionArray[actionArrayIndex] = event.srcElement.value;
   //   event.srcElement.textContent = this.actionArray[actionArrayIndex];
   //   console.log(this.actionArray);
   // }
+
+  saveInformation() {
+    let form = this.actionInputs.nativeElement as HTMLFormElement;
+    let formInputs = Array.from(form.children);
+    formInputs.forEach((input: HTMLElement) => {
+      this.retrieveData(input);
+    })
+}
+
+retrieveData(input: HTMLElement) {
+  // option 1 - go brute force because I know the HTML structure
+  let inputChildnodes = Array.from(input.childNodes);
+  console.log(inputChildnodes);
+  // option 2 - go recursive - iterate through the data structure until you find something
+
+  }
+
 
   addTimeframe(){
     let timeframeAlert = this.alertCtrl.create();
