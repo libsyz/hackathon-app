@@ -38,13 +38,30 @@ export class CameraPage {
   ionViewDidLoad() {
     console.log(this.navParams);
     this.enableCamera();
-    this.hackId = this.navParams.get("hackathonId");
-    this.currentPhase = this.hackSrvc.getCurrentPhase(this.hackId);
+    // this.hackId = this.navParams.get("hackathonId") || 1;
+    // this.currentPhase = this.hackSrvc.getCurrentPhase(this.hackId) || 1;
     }
 
   enableCamera(){
     navigator.mediaDevices.getUserMedia({video: true}).
     then((stream) => {this.videoSource = stream});
+
+  }
+
+  showMediaDevices(){ 
+    navigator.mediaDevices.getUserMedia({video: true}).
+    then((stream) => { 
+      let deviceAlert = this.alertCtrl.create();
+      deviceAlert.setTitle("Choose a camera");
+      stream.getVideoTracks().forEach((videoInput)=> {
+        deviceAlert.addInput({
+          type: "checkbox",
+          label: videoInput.label,
+          value: videoInput.label
+      })
+      deviceAlert.present();
+      })
+    })
   }
 
   takePicture() {
@@ -92,10 +109,10 @@ export class CameraPage {
     this.pictureTaken = !this.pictureTaken;
   }
 
-  goToWellHackedPage(){
-    this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
-                                       currentPhase: this.currentPhase})
-  }
+  // goToWellHackedPage(){
+  //   this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
+  //                                      currentPhase: this.currentPhase})
+  // }
 
 
 }
