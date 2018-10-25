@@ -3,6 +3,7 @@ import { PageNavigationProvider } from './../../providers/page-navigation/page-n
   import { HomePage } from './../../pages/home/home';
   import { Alert, AlertController, NavController, NavParams } from 'ionic-angular';
   import { Component, Input } from '@angular/core';
+import { TimerConfigProvider } from '../../providers/timer-config/timer-config';
 
   /**
    * Generated class for the CountdownComponent component.
@@ -10,6 +11,8 @@ import { PageNavigationProvider } from './../../providers/page-navigation/page-n
    * See https://angular.io/api/core/Component for more info on Angular
    * Components.
    */
+
+   // Is there something like when component is ready / when inputs have been fulfilled? 
   @Component({
     selector: 'countdown',
     templateUrl: 'countdown.html'
@@ -19,22 +22,34 @@ import { PageNavigationProvider } from './../../providers/page-navigation/page-n
 
     countDownActive: boolean = false;
     time: number;
-    minutes: any = "00";
-    seconds: any = "01";
+    TimerInSeconds: number; // get from the service
+    minutes: string; // could call getminutes function when I got timerInSecods
+    seconds: string; // could call getseceonds function when I got timerInSecods
     info: string = "START";
-    fifteenMinutes: number = 1;
 
     constructor(private alertCtrl: AlertController,
                 private navCtrl: NavController,
                 private navParams: NavParams,
-                private pageNavSrvc: PageNavigationProvider)  {
-                console.log(this.navParams);
+                private pageNavSrvc: PageNavigationProvider,
+                private configSrvc: TimerConfigProvider)  {  
     }
 
+    // Strategy one (not preferred) => Pass params that send 
+    // mention the current phase, since the class needs navparams 
+    // to be built, those will be readily available as soon as
+    // the component is initialized
+
+
+    // Strategy two => Look for some way of doing onComponentDidLoad()
+    // so I can rest assured that the Input has been captured
+
+    // Strategy three => looking for a way to listen to the inputs
+    // being there, and then start arranging data
+    
     startCountDown(){
       if (this.countDownActive == false) {
         let timeNow = Date.now();
-        let then = timeNow + this.fifteenMinutes * 1000;
+        let then = timeNow + this.TimerInSeconds * 1000;
         this.time = then - timeNow;
         this.info = "GO!"; 
         this.updateTimer()
