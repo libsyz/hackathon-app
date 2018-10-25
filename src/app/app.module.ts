@@ -1,6 +1,6 @@
 
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -43,6 +43,7 @@ import { HackathonService } from '../providers/hackathon-service/hackathon-servi
 import { HelperMethodsProvider } from '../providers/helper-methods/helper-methods';
 import { ToolsProvider } from '../providers/tools/tools';
 import { PageNavigationProvider } from '../providers/page-navigation/page-navigation';
+import { TimerConfigProvider } from '../providers/timer-config/timer-config';
 
 
 
@@ -105,6 +106,7 @@ import { PageNavigationProvider } from '../providers/page-navigation/page-naviga
     HelperMethodsProvider,
     ToolsProvider,
     PageNavigationProvider,
+    TimerConfigProvider,
   ]
 })
 export class AppModule {}
