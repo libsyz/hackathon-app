@@ -55,7 +55,7 @@ export class CameraPage {
       deviceAlert.setTitle("Choose a camera");
       stream.getVideoTracks().forEach((videoInput)=> {
         deviceAlert.addInput({
-          type: "checkbox",
+          type: "radio",
           label: videoInput.label,
           value: videoInput.label
       })
