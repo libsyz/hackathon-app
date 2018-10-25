@@ -1,18 +1,40 @@
 <!--
   Generated template for the ConfigPage page.
-
+  
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>config-page</ion-title>
+  
+  <ion-navbar color="primary">
+    <ion-title> Set up your hackathon</ion-title>
   </ion-navbar>
-
+  
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item *ngFor="let phase of hackathonPhases">
+      <h2> {{phase['phaseName'] }} Phase  </h2>
+      <span> {{ secondsToMinutes(phase['phaseTime']) }} min. </span>
+      <button (click)=addMinute(phase) color='tertiary' small round icon-only ion-button> 
+        <ion-icon name="add">
+        </ion-icon> 
+      </button> 
+      <button (click)=subtractMinute(phase) color='tertiary' small round icon-only ion-button> 
+        <ion-icon name="remove"> 
+        </ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+  
 </ion-content>
+
+
+<ion-footer> 
+  <button (click)='saveNewConfig()' no-margin ion-button color='primary'
+              block full large>
+    SAVE
+</button>
+</ion-footer>

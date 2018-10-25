@@ -39,4 +39,8 @@ export class TimerConfigProvider {
     return phaseToReturn;
   }
 
+  saveNewConfig(phases) {;
+    this.activeConfig = phases;
+  }
+
 }

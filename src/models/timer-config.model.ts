@@ -2,28 +2,28 @@
 export class timerConfig {
     configObject: {}[] = [
     {
-        phase: "define",
-        phasenumber: 1,
+        phaseName: "define",
+        phaseNumber: 1,
         phaseTime: 900
     },
     {
-        phase: "empathise",
-        phasenumber: 2,
+        phaseName: "empathise",
+        phaseNumber: 2,
         phaseTime: 900
     },
      {
-        phase: "ideate",
-        phasenumber: 3,
+        phaseName: "ideate",
+        phaseNumber: 3,
         phaseTime: 900
     },
     {
-        phase: "prototype",
-        phasenumber: 4,
+        phaseName: "prototype",
+        phaseNumber: 4,
         phaseTime: 900
     },
     {
-        phase: "test",
-        phasenumber: 5,
+        phaseName: "test",
+        phaseNumber: 5,
         phaseTime: 900
     }]
 }

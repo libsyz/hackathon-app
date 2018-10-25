@@ -3,7 +3,7 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, Config } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { FormsModule } from '@angular/forms';
@@ -26,6 +26,8 @@ import { ToolsIdeatePage } from '../pages/tools-ideate/tools-ideate';
 import { ToolsPrototypePage } from './../pages/tools-prototype/tools-prototype';
 import { ReviewHackPage } from './../pages/review-hack/review-hack';
 import { ToolsTestPage } from './../pages/tools-test/tools-test';
+import { ConfigPage } from './../pages/config/config';
+
 
 
 // Components
@@ -67,7 +69,8 @@ import { TimerConfigProvider } from '../providers/timer-config/timer-config';
     ToolsIdeatePage,
     ToolsPrototypePage,
     ToolsTestPage,
-    ReviewHackPage
+    ReviewHackPage,
+    ConfigPage
   ],
   imports: [
     BrowserModule,
@@ -94,7 +97,8 @@ import { TimerConfigProvider } from '../providers/timer-config/timer-config';
     ToolsIdeatePage,
     ToolsPrototypePage,
     ToolsTestPage,
-    ReviewHackPage
+    ReviewHackPage,
+    ConfigPage
 ],
   providers: [
     StatusBar,

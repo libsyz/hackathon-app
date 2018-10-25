@@ -37,6 +37,9 @@ export class HomePage {
     console.log(this.timerSrvc.activeConfig);
     const configModal = this.modalCtrl.create(ConfigPage);
     configModal.present();
+    configModal.onDidDismiss(()=> {
+      console.log(this.timerSrvc.activeConfig);
+    })
   }
 
 }
