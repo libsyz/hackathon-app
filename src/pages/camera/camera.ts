@@ -57,7 +57,11 @@ export class CameraPage {
         deviceAlert.addInput({
           type: "radio",
           label: videoInput.label,
-          value: videoInput.label
+          value: videoInput.id
+      })
+      deviceAlert.addButton({
+        text: "Ok",
+        handler: (data) => console.log(data)
       })
       deviceAlert.present();
       })
