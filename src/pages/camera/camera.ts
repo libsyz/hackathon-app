@@ -53,18 +53,20 @@ export class CameraPage {
     then((stream) => { 
       let deviceAlert = this.alertCtrl.create();
       deviceAlert.setTitle("Choose a camera");
+      console.log(stream.getTracks());
       stream.getVideoTracks().forEach((videoInput)=> {
         deviceAlert.addInput({
           type: "radio",
           label: videoInput.label,
           value: videoInput.id
       })
+    })
       deviceAlert.addButton({
         text: "Ok",
         handler: (data) => console.log(data)
       })
       deviceAlert.present();
-      })
+      
     })
   }
 

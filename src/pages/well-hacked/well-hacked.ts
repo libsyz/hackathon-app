@@ -47,7 +47,6 @@ export class WellHackedPage {
   }
 
   nextPhase(){
-    debugger
     if (this.currentPhase == 5) {
       this.navCtrl.push(ReviewHackPage, {hackathonId: this.hackId});
     }
