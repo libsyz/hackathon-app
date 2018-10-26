@@ -2,7 +2,8 @@ import { PageNavigationProvider } from './../../providers/page-navigation/page-n
   import { DefineProblemPage } from './../../pages/define-problem/define-problem';
   import { HomePage } from './../../pages/home/home';
   import { Alert, AlertController, NavController, NavParams } from 'ionic-angular';
-  import { Component, Input } from '@angular/core';
+  import { Component, Input, OnInit, AfterViewInit, AfterContentChecked, AfterContentInit, AfterViewChecked } from '@angular/core';
+import { TimerConfigProvider } from '../../providers/timer-config/timer-config';
 
   /**
    * Generated class for the CountdownComponent component.
@@ -10,31 +11,45 @@ import { PageNavigationProvider } from './../../providers/page-navigation/page-n
    * See https://angular.io/api/core/Component for more info on Angular
    * Components.
    */
+
+   // Is there something like when component is ready / when inputs have been fulfilled? 
   @Component({
     selector: 'countdown',
     templateUrl: 'countdown.html'
   })
-  export class CountdownComponent {
+  export class CountdownComponent implements AfterContentChecked {
     @Input() currentPhase: number;
 
     countDownActive: boolean = false;
     time: number;
-    minutes: any = "00";
-    seconds: any = "01";
+    timerInSeconds: number; // get from the service
+    minutes: string = "00"; // could call getminutes function when I got timerInSecods
+    seconds: string = "00"; // could call getseceonds function when I got timerInSecods
     info: string = "START";
-    fifteenMinutes: number = 1;
+    countdownIsSet = false;
 
     constructor(private alertCtrl: AlertController,
                 private navCtrl: NavController,
                 private navParams: NavParams,
-                private pageNavSrvc: PageNavigationProvider)  {
-                console.log(this.navParams);
+                private pageNavSrvc: PageNavigationProvider,
+                private configSrvc: TimerConfigProvider)  {  
     }
 
+    ngAfterContentChecked(){
+      if (this.currentPhase != undefined && this.countdownIsSet == false) {
+        this.timerInSeconds = this.configSrvc.returnTime(this.currentPhase);
+        this.minutes = this.getMinutes(this.timerInSeconds * 1000); // SetInterval works in Milliseconds
+        this.seconds = this.getSeconds(this.timerInSeconds * 1000);
+        this.countdownIsSet = true;
+      } 
+    }
+
+
+ 
     startCountDown(){
       if (this.countDownActive == false) {
         let timeNow = Date.now();
-        let then = timeNow + this.fifteenMinutes * 1000;
+        let then = timeNow + this.timerInSeconds * 1000;
         this.time = then - timeNow;
         this.info = "GO!"; 
         this.updateTimer()
@@ -61,7 +76,7 @@ import { PageNavigationProvider } from './../../providers/page-navigation/page-n
       }
 
     getSeconds(time) {
-      let seconds: any = this.time/1000%60;
+      let seconds: any = time/1000%60;
       if (seconds < 10) {
         seconds = `0${seconds}`;
       }
@@ -69,11 +84,11 @@ import { PageNavigationProvider } from './../../providers/page-navigation/page-n
     }
 
     getText(time, interval) {
-      if (time == 0) {
+      if (time <= 0) {
         clearInterval(interval); 
         this.goToNextPhase();
       }  
-      if (time / 1000 / 60 < 120) {
+      if (time / 1000 < 120) {
         this.info = "HURRY UP!";
       }
     }
