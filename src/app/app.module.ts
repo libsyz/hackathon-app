@@ -1,6 +1,6 @@
 
 
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule, Config } from 'ionic-angular';
@@ -74,6 +74,7 @@ import { TimerConfigProvider } from '../providers/timer-config/timer-config';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     IonicModule.forRoot(MyApp)
   ],
