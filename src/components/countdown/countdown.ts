@@ -34,6 +34,7 @@ import { TimerConfigProvider } from '../../providers/timer-config/timer-config';
                 private configSrvc: TimerConfigProvider)  {  
     }
 
+    
     // Strategy one (not preferred) => Pass params that send 
     // mention the current phase, since the class needs navparams 
     // to be built, those will be readily available as soon as
@@ -45,6 +46,12 @@ import { TimerConfigProvider } from '../../providers/timer-config/timer-config';
 
     // Strategy three => looking for a way to listen to the inputs
     // being there, and then start arranging data
+
+
+    // Strategy four => Write a persistent promise that keeps trying 
+    // until the value is different from undefined
+
+    
     
     startCountDown(){
       if (this.countDownActive == false) {
