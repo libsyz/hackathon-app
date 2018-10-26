@@ -52,7 +52,6 @@ export class CameraPage {
   enableCamera(){
     navigator.mediaDevices.getUserMedia({video: true}).
     then((stream) => {
-      debugger
       this.window.stream = stream;
       this.videoSource = stream});
 
@@ -76,7 +75,7 @@ export class CameraPage {
       text: "Ok",
       handler: (deviceId) => {
         this.setNewVideoStream(deviceId);
-        return false;
+        return;
       }
       })
     deviceAlert.present();
@@ -107,7 +106,6 @@ export class CameraPage {
   }
 
   setNewVideoStream(videoStreamId) {
-    debugger
     if (this.window.stream) {
       this.window.stream.getTracks().forEach((track)=> {
         track.stop();
@@ -124,7 +122,6 @@ export class CameraPage {
   }
 
   plugStream(stream) {
-    debugger;
     this.window.stream = stream;
     this.videoSource = stream;
   }
