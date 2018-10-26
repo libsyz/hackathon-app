@@ -38,8 +38,8 @@ export class CameraPage {
   ionViewDidLoad() {
     console.log(this.navParams);
     this.enableCamera();
-    this.hackId = this.navParams.get("hackathonId");
-    this.currentPhase = this.hackSrvc.getCurrentPhase(this.hackId);
+    // this.hackId = this.navParams.get("hackathonId");
+    // this.currentPhase = this.hackSrvc.getCurrentPhase(this.hackId);
     }
 
   enableCamera(){
@@ -49,25 +49,48 @@ export class CameraPage {
   }
 
   showMediaDevices(){ 
-    navigator.mediaDevices.getUserMedia({video: true}).
-    then((stream) => { 
+
+    navigator.mediaDevices.enumerateDevices().then((devices)=> {
+      console.log(devices);
       let deviceAlert = this.alertCtrl.create();
       deviceAlert.setTitle("Choose a camera");
-      console.log(stream.getTracks());
-      stream.getVideoTracks().forEach((videoInput)=> {
+      devices.forEach((device)=> {
+       if (device.kind == "videoinput" as MediaDeviceKind) {
         deviceAlert.addInput({
           type: "radio",
-          label: videoInput.label,
-          value: videoInput.id
+          label: device.label,
+          value: device.deviceId
       })
+     }
     })
-      deviceAlert.addButton({
-        text: "Ok",
-        handler: (data) => console.log(data)
-      })
-      deviceAlert.present();
+    deviceAlert.present();
+    })
+  //   navigator.mediaDevices.getUserMedia({video: true, audio: true}).
+  //   then((stream) => { 
+  //     let deviceAlert = this.alertCtrl.create();
+  //     deviceAlert.setTitle("Choose a camera");
+  //     console.log(stream.getTracks());
+  //     stream.getVideoTracks().forEach((videoInput)=> {
+  //       deviceAlert.addInput({
+  //         type: "radio",
+  //         label: videoInput.label,
+  //         value: videoInput.id
+  //     })
+  //   })
+  //   stream.getAudioTracks().forEach((audioTrack)=> {
+  //     deviceAlert.addInput({
+  //       type: "radio",
+  //       label: audioTrack.label,
+  //       value: audioTrack.id
+  //   })
+  // })
+  //     deviceAlert.addButton({
+  //       text: "Ok",
+  //       handler: (data) => console.log(data)
+  //     })
+  //     deviceAlert.present();
       
-    })
+  //   })
   }
 
   takePicture() {
@@ -88,10 +111,9 @@ export class CameraPage {
   savePicture() {
     console.log(this.imageData);
     try {
-      debugger
-      this.hackSrvc.savePictureInPhase(this.hackId, this.currentPhase, this.imageData);
-      this.hackSrvc.markPhaseAsCompleted(this.hackId, this.currentPhase);
-      this.goToWellHackedPage();
+      // this.hackSrvc.savePictureInPhase(this.hackId, this.currentPhase, this.imageData);
+      // this.hackSrvc.markPhaseAsCompleted(this.hackId, this.currentPhase);
+      // this.goToWellHackedPage();
     }
     catch (e) {
       console.log(e);
@@ -116,10 +138,10 @@ export class CameraPage {
     this.pictureTaken = !this.pictureTaken;
   }
 
-  goToWellHackedPage(){
-    this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
-                                       currentPhase: this.currentPhase})
-  }
+  // goToWellHackedPage(){
+  //   this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
+  //                                      currentPhase: this.currentPhase})
+  // }
 
 
 }
