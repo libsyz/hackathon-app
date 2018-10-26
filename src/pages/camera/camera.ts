@@ -4,6 +4,7 @@ import { PageNavigationProvider } from './../../providers/page-navigation/page-n
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { preserveWhitespacesDefault } from '@angular/compiler';
 
 /**
  * Generated class for the CameraPage page.
@@ -28,14 +29,18 @@ export class CameraPage {
               public hackSrvc: HackathonService,
               public pageNavSrvc: PageNavigationProvider,
               public alertCtrl: AlertController,
-              public toastCtrl: ToastController) {
+              public toastCtrl: ToastController,
+              public windowSrvc: WindowProvider) {
+              this.window = this.windowSrvc.getNativeWindow();
   }
 
+  window: any;
   videoSource: any;
   pictureTaken: boolean = false;
   imageData: any;
   hackId: number;
   currentPhase: number;
+  currentStream: MediaStream;
 
   ionViewDidLoad() {
     console.log(this.navParams);
@@ -47,6 +52,8 @@ export class CameraPage {
   enableCamera(){
     navigator.mediaDevices.getUserMedia({video: true}).
     then((stream) => {
+      debugger
+      this.window.stream = stream;
       this.videoSource = stream});
 
   }
@@ -67,7 +74,10 @@ export class CameraPage {
     })
     deviceAlert.addButton({
       text: "Ok",
-      handler: (deviceId) => this.setNewVideoStream(deviceId)
+      handler: (deviceId) => {
+        this.setNewVideoStream(deviceId);
+        return false;
+      }
       })
     deviceAlert.present();
     })
@@ -97,30 +107,26 @@ export class CameraPage {
   }
 
   setNewVideoStream(videoStreamId) {
-    console.log(videoStreamId);
-    const myToast = this.toastCtrl.create({
-      message: videoStreamId,
-      duration: 2000,
-      position: "top",
-      closeButtonText: "close"
-    })
-    myToast.present();
-    let myStream = this.videoSource as MediaStream;
-    myStream.getTracks().forEach((track) => {
-      track.applyConstraints( {
-        deviceId: videoStreamId,
-        frameRate: 5
-      });
-    this.videoSource = myStream;
-    })
-    // 1. kill the current video streams
+    debugger
+    if (this.window.stream) {
+      this.window.stream.getTracks().forEach((track)=> {
+        track.stop();
+      })
+    }
+    let constraints = {
+      video: {
+        deviceId: {exact: videoStreamId }
+      }
+    }
 
-    // 2. get the id as a constraint
-    // navigator.mediaDevices.getUserMedia({video: { deviceId: videoStreamId}}).
-    // then((stream) => {
-    //   let myStream = stream;
-    //   this.videoSource = stream;
-    // });
+    navigator.mediaDevices.getUserMedia(constraints).
+    then((stream)=> this.plugStream(stream));
+  }
+
+  plugStream(stream) {
+    debugger;
+    this.window.stream = stream;
+    this.videoSource = stream;
   }
 
   takePicture() {
