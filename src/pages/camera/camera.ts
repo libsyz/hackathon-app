@@ -1,8 +1,9 @@
+import { WindowProvider } from './../../providers/window/window';
 import { WellHackedPage } from './../well-hacked/well-hacked';
 import { PageNavigationProvider } from './../../providers/page-navigation/page-navigation';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Component, ViewChild, ElementRef, Input } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the CameraPage page.
@@ -26,7 +27,8 @@ export class CameraPage {
               public navParams: NavParams,
               public hackSrvc: HackathonService,
               public pageNavSrvc: PageNavigationProvider,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public toastCtrl: ToastController) {
   }
 
   videoSource: any;
@@ -44,12 +46,12 @@ export class CameraPage {
 
   enableCamera(){
     navigator.mediaDevices.getUserMedia({video: true}).
-    then((stream) => {this.videoSource = stream});
+    then((stream) => {
+      this.videoSource = stream});
 
   }
 
   showMediaDevices(){ 
-
     navigator.mediaDevices.enumerateDevices().then((devices)=> {
       console.log(devices);
       let deviceAlert = this.alertCtrl.create();
@@ -63,6 +65,10 @@ export class CameraPage {
       })
      }
     })
+    deviceAlert.addButton({
+      text: "Ok",
+      handler: (deviceId) => this.setNewVideoStream(deviceId)
+      })
     deviceAlert.present();
     })
   //   navigator.mediaDevices.getUserMedia({video: true, audio: true}).
@@ -84,13 +90,37 @@ export class CameraPage {
   //       value: audioTrack.id
   //   })
   // })
-  //     deviceAlert.addButton({
-  //       text: "Ok",
-  //       handler: (data) => console.log(data)
-  //     })
+
   //     deviceAlert.present();
       
   //   })
+  }
+
+  setNewVideoStream(videoStreamId) {
+    console.log(videoStreamId);
+    const myToast = this.toastCtrl.create({
+      message: videoStreamId,
+      duration: 2000,
+      position: "top",
+      closeButtonText: "close"
+    })
+    myToast.present();
+    let myStream = this.videoSource as MediaStream;
+    myStream.getTracks().forEach((track) => {
+      track.applyConstraints( {
+        deviceId: videoStreamId,
+        frameRate: 5
+      });
+    this.videoSource = myStream;
+    })
+    // 1. kill the current video streams
+
+    // 2. get the id as a constraint
+    // navigator.mediaDevices.getUserMedia({video: { deviceId: videoStreamId}}).
+    // then((stream) => {
+    //   let myStream = stream;
+    //   this.videoSource = stream;
+    // });
   }
 
   takePicture() {
