@@ -1,8 +1,10 @@
+import { WindowProvider } from './../../providers/window/window';
 import { WellHackedPage } from './../well-hacked/well-hacked';
 import { PageNavigationProvider } from './../../providers/page-navigation/page-navigation';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Component, ViewChild, ElementRef, Input } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { preserveWhitespacesDefault } from '@angular/compiler';
 
 /**
  * Generated class for the CameraPage page.
@@ -26,46 +28,102 @@ export class CameraPage {
               public navParams: NavParams,
               public hackSrvc: HackathonService,
               public pageNavSrvc: PageNavigationProvider,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public toastCtrl: ToastController,
+              public windowSrvc: WindowProvider) {
+              this.window = this.windowSrvc.getNativeWindow();
   }
 
+  window: any;
   videoSource: any;
   pictureTaken: boolean = false;
   imageData: any;
   hackId: number;
   currentPhase: number;
+  currentStream: MediaStream;
 
   ionViewDidLoad() {
     console.log(this.navParams);
     this.enableCamera();
-    this.hackId = this.navParams.get("hackathonId");
-    this.currentPhase = this.hackSrvc.getCurrentPhase(this.hackId);
+    // this.hackId = this.navParams.get("hackathonId");
+    // this.currentPhase = this.hackSrvc.getCurrentPhase(this.hackId);
     }
 
   enableCamera(){
     navigator.mediaDevices.getUserMedia({video: true}).
-    then((stream) => {this.videoSource = stream});
+    then((stream) => {
+      this.window.stream = stream;
+      this.videoSource = stream});
 
   }
 
   showMediaDevices(){ 
-    navigator.mediaDevices.getUserMedia({video: true}).
-    then((stream) => { 
+    navigator.mediaDevices.enumerateDevices().then((devices)=> {
+      console.log(devices);
       let deviceAlert = this.alertCtrl.create();
       deviceAlert.setTitle("Choose a camera");
-      stream.getVideoTracks().forEach((videoInput)=> {
+      devices.forEach((device)=> {
+       if (device.kind == "videoinput" as MediaDeviceKind) {
         deviceAlert.addInput({
           type: "radio",
-          label: videoInput.label,
-          value: videoInput.id
+          label: device.label,
+          value: device.deviceId
       })
-      deviceAlert.addButton({
-        text: "Ok",
-        handler: (data) => console.log(data)
-      })
-      deviceAlert.present();
-      })
+     }
     })
+    deviceAlert.addButton({
+      text: "Ok",
+      handler: (deviceId) => {
+        this.setNewVideoStream(deviceId);
+        return;
+      }
+      })
+    deviceAlert.present();
+    })
+  //   navigator.mediaDevices.getUserMedia({video: true, audio: true}).
+  //   then((stream) => { 
+  //     let deviceAlert = this.alertCtrl.create();
+  //     deviceAlert.setTitle("Choose a camera");
+  //     console.log(stream.getTracks());
+  //     stream.getVideoTracks().forEach((videoInput)=> {
+  //       deviceAlert.addInput({
+  //         type: "radio",
+  //         label: videoInput.label,
+  //         value: videoInput.id
+  //     })
+  //   })
+  //   stream.getAudioTracks().forEach((audioTrack)=> {
+  //     deviceAlert.addInput({
+  //       type: "radio",
+  //       label: audioTrack.label,
+  //       value: audioTrack.id
+  //   })
+  // })
+
+  //     deviceAlert.present();
+      
+  //   })
+  }
+
+  setNewVideoStream(videoStreamId) {
+    if (this.window.stream) {
+      this.window.stream.getTracks().forEach((track)=> {
+        track.stop();
+      })
+    }
+    let constraints = {
+      video: {
+        deviceId: {exact: videoStreamId }
+      }
+    }
+
+    navigator.mediaDevices.getUserMedia(constraints).
+    then((stream)=> this.plugStream(stream));
+  }
+
+  plugStream(stream) {
+    this.window.stream = stream;
+    this.videoSource = stream;
   }
 
   takePicture() {
@@ -86,10 +144,9 @@ export class CameraPage {
   savePicture() {
     console.log(this.imageData);
     try {
-      debugger
-      this.hackSrvc.savePictureInPhase(this.hackId, this.currentPhase, this.imageData);
-      this.hackSrvc.markPhaseAsCompleted(this.hackId, this.currentPhase);
-      this.goToWellHackedPage();
+      // this.hackSrvc.savePictureInPhase(this.hackId, this.currentPhase, this.imageData);
+      // this.hackSrvc.markPhaseAsCompleted(this.hackId, this.currentPhase);
+      // this.goToWellHackedPage();
     }
     catch (e) {
       console.log(e);
@@ -114,10 +171,10 @@ export class CameraPage {
     this.pictureTaken = !this.pictureTaken;
   }
 
-  goToWellHackedPage(){
-    this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
-                                       currentPhase: this.currentPhase})
-  }
+  // goToWellHackedPage(){
+  //   this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
+  //                                      currentPhase: this.currentPhase})
+  // }
 
 
 }

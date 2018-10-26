@@ -38,7 +38,6 @@ export class ReviewHackPage {
   }
 
   ionViewDidLoad() {
-    debugger
     console.log('ionViewDidLoad ReviewHackPage');
     this.hackId = this.navParams.get("hackathonId");
     this.loadHackathonInfo(this.hackId);

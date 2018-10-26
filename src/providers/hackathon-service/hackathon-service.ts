@@ -1,6 +1,6 @@
 import { ToolsProblemStatementPage } from './../../pages/tools-problem-statement/tools-problem-statement';
 import { Hackathon } from './../../models/hackathon.model';
-// import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 
@@ -10,7 +10,7 @@ export class HackathonService {
   allHackathons: Hackathon[] = [];
   canAddHackerCheck = "granted";
 
-  constructor() {
+  constructor(private httpSrvc: HttpClient) {
   }
 
   getHackathons(){

@@ -1,6 +1,6 @@
 
 
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule, Config } from 'ionic-angular';
@@ -46,6 +46,7 @@ import { HelperMethodsProvider } from '../providers/helper-methods/helper-method
 import { ToolsProvider } from '../providers/tools/tools';
 import { PageNavigationProvider } from '../providers/page-navigation/page-navigation';
 import { TimerConfigProvider } from '../providers/timer-config/timer-config';
+import { WindowProvider } from '../providers/window/window';
 
 
 
@@ -74,6 +75,7 @@ import { TimerConfigProvider } from '../providers/timer-config/timer-config';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     IonicModule.forRoot(MyApp)
   ],
@@ -111,6 +113,7 @@ import { TimerConfigProvider } from '../providers/timer-config/timer-config';
     ToolsProvider,
     PageNavigationProvider,
     TimerConfigProvider,
+    WindowProvider,
   ]
 })
 export class AppModule {}
