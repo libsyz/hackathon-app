@@ -38,8 +38,8 @@ export class CameraPage {
   ionViewDidLoad() {
     console.log(this.navParams);
     this.enableCamera();
-    // this.hackId = this.navParams.get("hackathonId") || 1;
-    // this.currentPhase = this.hackSrvc.getCurrentPhase(this.hackId) || 1;
+    this.hackId = this.navParams.get("hackathonId");
+    this.currentPhase = this.hackSrvc.getCurrentPhase(this.hackId);
     }
 
   enableCamera(){
@@ -86,9 +86,10 @@ export class CameraPage {
   savePicture() {
     console.log(this.imageData);
     try {
+      debugger
       this.hackSrvc.savePictureInPhase(this.hackId, this.currentPhase, this.imageData);
       this.hackSrvc.markPhaseAsCompleted(this.hackId, this.currentPhase);
-      // this.goToWellHackedPage();
+      this.goToWellHackedPage();
     }
     catch (e) {
       console.log(e);
@@ -113,10 +114,10 @@ export class CameraPage {
     this.pictureTaken = !this.pictureTaken;
   }
 
-  // goToWellHackedPage(){
-  //   this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
-  //                                      currentPhase: this.currentPhase})
-  // }
+  goToWellHackedPage(){
+    this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
+                                       currentPhase: this.currentPhase})
+  }
 
 
 }
