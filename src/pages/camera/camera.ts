@@ -74,39 +74,18 @@ export class CameraPage {
     deviceAlert.addButton({
       text: "Ok",
       handler: (deviceId) => {
-        this.setNewVideoStream(deviceId);
-        return;
-      }
+        new Promise((resolve) => {
+          this.setNewVideoStream(deviceId);
+          })
+          return
+        }
       })
     deviceAlert.present();
     })
-  //   navigator.mediaDevices.getUserMedia({video: true, audio: true}).
-  //   then((stream) => { 
-  //     let deviceAlert = this.alertCtrl.create();
-  //     deviceAlert.setTitle("Choose a camera");
-  //     console.log(stream.getTracks());
-  //     stream.getVideoTracks().forEach((videoInput)=> {
-  //       deviceAlert.addInput({
-  //         type: "radio",
-  //         label: videoInput.label,
-  //         value: videoInput.id
-  //     })
-  //   })
-  //   stream.getAudioTracks().forEach((audioTrack)=> {
-  //     deviceAlert.addInput({
-  //       type: "radio",
-  //       label: audioTrack.label,
-  //       value: audioTrack.id
-  //   })
-  // })
-
-  //     deviceAlert.present();
-      
-  //   })
   }
 
   setNewVideoStream(videoStreamId) {
-    if (this.window.stream) {
+     if (this.window.stream) {
       this.window.stream.getTracks().forEach((track)=> {
         track.stop();
       })
@@ -144,9 +123,9 @@ export class CameraPage {
   savePicture() {
     console.log(this.imageData);
     try {
-      // this.hackSrvc.savePictureInPhase(this.hackId, this.currentPhase, this.imageData);
-      // this.hackSrvc.markPhaseAsCompleted(this.hackId, this.currentPhase);
-      // this.goToWellHackedPage();
+      this.hackSrvc.savePictureInPhase(this.hackId, this.currentPhase, this.imageData);
+      this.hackSrvc.markPhaseAsCompleted(this.hackId, this.currentPhase);
+      this.goToWellHackedPage();
     }
     catch (e) {
       console.log(e);
@@ -171,10 +150,10 @@ export class CameraPage {
     this.pictureTaken = !this.pictureTaken;
   }
 
-  // goToWellHackedPage(){
-  //   this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
-  //                                      currentPhase: this.currentPhase})
-  // }
+  goToWellHackedPage(){
+    this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
+                                       currentPhase: this.currentPhase})
+  }
 
 
 }
