@@ -2,7 +2,7 @@ import { PageNavigationProvider } from './../../providers/page-navigation/page-n
   import { DefineProblemPage } from './../../pages/define-problem/define-problem';
   import { HomePage } from './../../pages/home/home';
   import { Alert, AlertController, NavController, NavParams } from 'ionic-angular';
-  import { Component, Input } from '@angular/core';
+  import { Component, Input, OnInit, AfterViewInit, AfterContentChecked, AfterContentInit, AfterViewChecked } from '@angular/core';
 import { TimerConfigProvider } from '../../providers/timer-config/timer-config';
 
   /**
@@ -17,15 +17,16 @@ import { TimerConfigProvider } from '../../providers/timer-config/timer-config';
     selector: 'countdown',
     templateUrl: 'countdown.html'
   })
-  export class CountdownComponent {
+  export class CountdownComponent implements AfterContentChecked {
     @Input() currentPhase: number;
 
     countDownActive: boolean = false;
     time: number;
-    TimerInSeconds: number; // get from the service
-    minutes: string; // could call getminutes function when I got timerInSecods
-    seconds: string; // could call getseceonds function when I got timerInSecods
+    timerInSeconds: number; // get from the service
+    minutes: string = "00"; // could call getminutes function when I got timerInSecods
+    seconds: string = "00"; // could call getseceonds function when I got timerInSecods
     info: string = "START";
+    countdownIsSet = false;
 
     constructor(private alertCtrl: AlertController,
                 private navCtrl: NavController,
@@ -34,29 +35,21 @@ import { TimerConfigProvider } from '../../providers/timer-config/timer-config';
                 private configSrvc: TimerConfigProvider)  {  
     }
 
-    
-    // Strategy one (not preferred) => Pass params that send 
-    // mention the current phase, since the class needs navparams 
-    // to be built, those will be readily available as soon as
-    // the component is initialized
+    ngAfterContentChecked(){
+      if (this.currentPhase != undefined && this.countdownIsSet == false) {
+        this.timerInSeconds = this.configSrvc.returnTime(this.currentPhase);
+        this.minutes = this.getMinutes(this.timerInSeconds * 1000); // SetInterval works in Milliseconds
+        this.seconds = this.getSeconds(this.timerInSeconds * 1000);
+        this.countdownIsSet = true;
+      } 
+    }
 
 
-    // Strategy two => Look for some way of doing onComponentDidLoad()
-    // so I can rest assured that the Input has been captured
-
-    // Strategy three => looking for a way to listen to the inputs
-    // being there, and then start arranging data
-
-
-    // Strategy four => Write a persistent promise that keeps trying 
-    // until the value is different from undefined
-
-    
-    
+ 
     startCountDown(){
       if (this.countDownActive == false) {
         let timeNow = Date.now();
-        let then = timeNow + this.TimerInSeconds * 1000;
+        let then = timeNow + this.timerInSeconds * 1000;
         this.time = then - timeNow;
         this.info = "GO!"; 
         this.updateTimer()
@@ -83,7 +76,7 @@ import { TimerConfigProvider } from '../../providers/timer-config/timer-config';
       }
 
     getSeconds(time) {
-      let seconds: any = this.time/1000%60;
+      let seconds: any = time/1000%60;
       if (seconds < 10) {
         seconds = `0${seconds}`;
       }
@@ -91,11 +84,11 @@ import { TimerConfigProvider } from '../../providers/timer-config/timer-config';
     }
 
     getText(time, interval) {
-      if (time == 0) {
+      if (time <= 0) {
         clearInterval(interval); 
         this.goToNextPhase();
       }  
-      if (time / 1000 / 60 < 120) {
+      if (time / 1000 < 120) {
         this.info = "HURRY UP!";
       }
     }
