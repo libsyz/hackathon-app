@@ -36,7 +36,7 @@ export class HackathonMocksProvider {
           phaseHeader: "Empathise",
           helperText: "Get into the shoes of your users and walk a mile!",
           wellHackedText: "Ideas", 
-          pictures: ["./../../assets/imgs/hack-images/prototype-1.png"],
+          pictures: ["./../../assets/imgs/hack-images/empathise-1.jpg"],
           completed: true
       },
       {
@@ -44,7 +44,7 @@ export class HackathonMocksProvider {
           phaseHeader: "Ideate",
           helperText: "Generate as many ideas as possible. Go for volume",
           wellHackedText: "Prototype", 
-          pictures: ["./../../assets/imgs/hack-images/prototype-1.png"],
+          pictures: ["./../../assets/imgs/hack-images/ideate-1.png"],
           completed: true
           
       },
@@ -95,7 +95,7 @@ export class HackathonMocksProvider {
           phaseHeader: "Empathise",
           helperText: "Get into the shoes of your users and walk a mile!",
           wellHackedText: "Ideas", 
-          pictures: ["./../../assets/imgs/hack-images/prototype-2.jpg"],
+          pictures: ["./../../assets/imgs/hack-images/empathise-2.jpeg"],
           completed: true
       },
       {
@@ -103,7 +103,7 @@ export class HackathonMocksProvider {
           phaseHeader: "Ideate",
           helperText: "Generate as many ideas as possible. Go for volume",
           wellHackedText: "Prototype", 
-          pictures: ["./../../assets/imgs/hack-images/prototype-2.jpg"],
+          pictures: ["./../../assets/imgs/hack-images/ideate-2.jpeg"],
           completed: true
           
       },
@@ -121,8 +121,8 @@ export class HackathonMocksProvider {
           phaseHeader: "Test",
           helperText: "How would you validate your idea? What assumptions need to be tested?",
           wellHackedText: "Test Protocol", 
-          actions: ["action 1", "action 2", "action 3", "action 4", "action 5"],
-          timePeriod: "",
+          actions: [ "Consult with Justice Leage", "Consult with Lucius Fox", "Test armor with Wonderwoman"],
+          timePeriod: "5 weeks",
           completed: false
       }
   ]
