@@ -1,3 +1,33 @@
 page-hackathon-show {
+    h6 {
+        color: color($colors, primary);
+    }
 
+    .problem-statement {
+        background-color: #F8E71C;
+        padding: 15px 15px;
+        h3 {
+            margin: 0px;
+        }
+    }
+    .tab {
+        background-color: color($colors, tertiary);
+        color: #000;
+        
+        font-size: 12px;
+        padding: 15px 0px;
+        margin: 0px;
+    }
+
+    .active {
+        background-color: color($colors, primary);
+        color: #fff;
+    }
+    .img {
+        display: block;
+    }
+
+    .hidden {
+        display: none;
+    }
 }
