@@ -3,6 +3,11 @@ export class Hackathon {
     title: string = "nothing";
     id: number = 0;
     users: any[] = ["","","","",""];
+    owner: {name: string,
+            imageUrl: string} = {
+                name: "Bender Rodriguez", 
+                imageUrl: "./../../assets/imgs/bender_rodriguez.jpeg"
+            };
     phases: {}[] = [
         {
             phaseNumber: 1,

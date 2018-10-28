@@ -1,3 +1,4 @@
+import { HackathonMocksProvider } from './../hackathon-mocks/hackathon-mocks';
 import { ToolsProblemStatementPage } from './../../pages/tools-problem-statement/tools-problem-statement';
 import { Hackathon } from './../../models/hackathon.model';
 import { HttpClient } from '@angular/common/http';
@@ -8,16 +9,18 @@ import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 @Injectable()
 export class HackathonService {
   allHackathons: Hackathon[] = [];
+  mockUpsImported: boolean = false;
   canAddHackerCheck = "granted";
 
-  constructor(private httpSrvc: HttpClient) {
+  constructor(private httpSrvc: HttpClient,
+              private mockSrvc: HackathonMocksProvider) {
   }
 
   getHackathons(){
     return this.allHackathons;
   }
 
-  saveHackathon(hackathon){
+  saveHackathon(hackathon: Hackathon){
     this.allHackathons.push(hackathon);
   }
 
@@ -128,5 +131,17 @@ export class HackathonService {
     const foundHack = this.allHackathons[hackId - 1];
     foundHack.phases[4]['timePeriod'] = timeframe;
   }
+
+  importMockUps() {
+    if (this.mockUpsImported == false) {
+      let mockUp1 = this.mockSrvc.generateHack1();
+      let mockUp2 = this.mockSrvc.generateHack2();
+      this.saveHackathon(mockUp1);
+      this.saveHackathon(mockUp2);
+      this.mockUpsImported = true;
+    }
+  }
+
+
 
 }

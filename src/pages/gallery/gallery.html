@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color='secondary'>
-    <ion-title color='primary'> the hackathon gallery </ion-title>
+    <ion-title color='primary'> The Hackathon Gallery </ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,6 +15,12 @@
 
 
 <ion-content padding>
-  <ion-searchbar></ion-searchbar>
+  <ion-card *ngFor="let hack of hacksToDisplay"(click)="buildingAmazing()">
+    <img class="card-image" [src]="hack.phases[3]['pictures'][0]" alt="" >
+    <div class="hack-info">
+      <img class='hacker-avatar' [src]="hack.owner.imageUrl" alt="">
+      <p class='hack-title'> {{hack.title}} </p>
+    </div>
+  </ion-card>
 
 </ion-content>

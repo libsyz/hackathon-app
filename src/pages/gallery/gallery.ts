@@ -1,3 +1,7 @@
+import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
+import { HackathonMocksProvider } from './../../providers/hackathon-mocks/hackathon-mocks';
+import { Hackathon } from './../../models/hackathon.model';
+import { HelperMethodsProvider } from './../../providers/helper-methods/helper-methods';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -15,11 +19,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class GalleryPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public helperCtrl: HelperMethodsProvider,
+              public mockSrvc: HackathonMocksProvider,
+              public hackSrvc: HackathonService) {
   }
+
+  hacksToDisplay: Hackathon[];
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GalleryPage');
+    this.importHackathons();
   }
+
+  importHackathons() {
+    this.hackSrvc.importMockUps();
+    this.hacksToDisplay = this.hackSrvc.getHackathons();
+    console.log(this.hacksToDisplay);
+  }
+  buildingAmazing(){
+    this.helperCtrl.buildingAmazing();
+  }
+
+
 
 }
