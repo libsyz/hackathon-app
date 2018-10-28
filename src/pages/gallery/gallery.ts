@@ -1,3 +1,4 @@
+import { HackathonShowPage } from './../hackathon-show/hackathon-show';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { HackathonMocksProvider } from './../../providers/hackathon-mocks/hackathon-mocks';
 import { Hackathon } from './../../models/hackathon.model';
@@ -39,6 +40,10 @@ export class GalleryPage {
   }
   buildingAmazing(){
     this.helperCtrl.buildingAmazing();
+  }
+
+  showHackathon(hackathon){
+    this.navCtrl.push(HackathonShowPage, {showHackId: hackathon.id})
   }
 
 

@@ -27,7 +27,7 @@ import { ToolsPrototypePage } from './../pages/tools-prototype/tools-prototype';
 import { ReviewHackPage } from './../pages/review-hack/review-hack';
 import { ToolsTestPage } from './../pages/tools-test/tools-test';
 import { ConfigPage } from './../pages/config/config';
-
+import { HackathonShowPage } from './../pages/hackathon-show/hackathon-show';
 
 
 // Components
@@ -72,7 +72,8 @@ import { HackathonMocksProvider } from '../providers/hackathon-mocks/hackathon-m
     ToolsPrototypePage,
     ToolsTestPage,
     ReviewHackPage,
-    ConfigPage
+    ConfigPage,
+    HackathonShowPage
   ],
   imports: [
     BrowserModule,
@@ -101,7 +102,8 @@ import { HackathonMocksProvider } from '../providers/hackathon-mocks/hackathon-m
     ToolsPrototypePage,
     ToolsTestPage,
     ReviewHackPage,
-    ConfigPage
+    ConfigPage,
+    HackathonShowPage
 ],
   providers: [
     StatusBar,

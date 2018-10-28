@@ -26,4 +26,8 @@ page-gallery {
         margin-left: 10px;
         font-size: 16px;
     }
+
+    .gallery-background {
+        background-color: color($colors, tertiary);
+    }
 }

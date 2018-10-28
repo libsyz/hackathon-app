@@ -12,10 +12,8 @@
 
 </ion-header>
 
-
-
-<ion-content padding>
-  <ion-card *ngFor="let hack of hacksToDisplay"(click)="buildingAmazing()">
+<ion-content class='gallery-background' padding>
+  <ion-card *ngFor="let hack of hacksToDisplay" (click)="showHackathon(hack)">
     <img class="card-image" [src]="hack.phases[3]['pictures'][0]" alt="" >
     <div class="hack-info">
       <img class='hacker-avatar' [src]="hack.owner.imageUrl" alt="">
