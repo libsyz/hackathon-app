@@ -47,6 +47,7 @@ import { ToolsProvider } from '../providers/tools/tools';
 import { PageNavigationProvider } from '../providers/page-navigation/page-navigation';
 import { TimerConfigProvider } from '../providers/timer-config/timer-config';
 import { WindowProvider } from '../providers/window/window';
+import { HackathonMocksProvider } from '../providers/hackathon-mocks/hackathon-mocks';
 
 
 
@@ -114,6 +115,7 @@ import { WindowProvider } from '../providers/window/window';
     PageNavigationProvider,
     TimerConfigProvider,
     WindowProvider,
+    HackathonMocksProvider,
   ]
 })
 export class AppModule {}
