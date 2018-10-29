@@ -43,7 +43,7 @@ export class GalleryPage {
   }
 
   showHackathon(hackathon){
-    this.navCtrl.push(HackathonShowPage, {showHackId: hackathon.id})
+  this.navCtrl.push(HackathonShowPage, {showHackId: hackathon.id})
   }
 
 

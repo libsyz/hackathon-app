@@ -38,14 +38,18 @@ export class ConfigPage {
     const phaseToAdd = this.hackathonPhases.find((hackathonPhase) => {
       return hackathonPhase['phaseNumber'] == phase['phaseNumber']
     } )
-    phaseToAdd['phaseTime'] += 60;
+    if (phaseToAdd['phaseTime'] < 1800){ 
+      phaseToAdd['phaseTime'] += 60;
+    }
   }
 
   subtractMinute(phase) {
     const phaseToAdd = this.hackathonPhases.find((hackathonPhase) => {
       return hackathonPhase['phaseNumber'] == phase['phaseNumber']
     } )
-    phaseToAdd['phaseTime'] -= 60;
+    if (phaseToAdd['phaseTime'] > 0){ 
+      phaseToAdd['phaseTime'] -= 60;
+    }
   }
 
   saveNewConfig() {
