@@ -28,6 +28,7 @@ import { ReviewHackPage } from './../pages/review-hack/review-hack';
 import { ToolsTestPage } from './../pages/tools-test/tools-test';
 import { ConfigPage } from './../pages/config/config';
 import { HackathonShowPage } from './../pages/hackathon-show/hackathon-show';
+import { NotificationsPage } from './../pages/notifications/notifications';
 
 
 // Components
@@ -48,6 +49,7 @@ import { PageNavigationProvider } from '../providers/page-navigation/page-naviga
 import { TimerConfigProvider } from '../providers/timer-config/timer-config';
 import { WindowProvider } from '../providers/window/window';
 import { HackathonMocksProvider } from '../providers/hackathon-mocks/hackathon-mocks';
+import { NotificationsProvider } from '../providers/notifications/notifications';
 
 
 
@@ -73,7 +75,8 @@ import { HackathonMocksProvider } from '../providers/hackathon-mocks/hackathon-m
     ToolsTestPage,
     ReviewHackPage,
     ConfigPage,
-    HackathonShowPage
+    HackathonShowPage,
+    NotificationsPage
   ],
   imports: [
     BrowserModule,
@@ -103,7 +106,8 @@ import { HackathonMocksProvider } from '../providers/hackathon-mocks/hackathon-m
     ToolsTestPage,
     ReviewHackPage,
     ConfigPage,
-    HackathonShowPage
+    HackathonShowPage,
+    NotificationsPage
 ],
   providers: [
     StatusBar,
@@ -118,6 +122,7 @@ import { HackathonMocksProvider } from '../providers/hackathon-mocks/hackathon-m
     TimerConfigProvider,
     WindowProvider,
     HackathonMocksProvider,
+    NotificationsProvider,
   ]
 })
 export class AppModule {}

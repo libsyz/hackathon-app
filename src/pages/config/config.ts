@@ -1,3 +1,4 @@
+import { NotificationsPage } from './../notifications/notifications';
 import { timerConfig } from './../../models/timer-config.model';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -57,5 +58,9 @@ export class ConfigPage {
     return this.hackathonPhases.find((hackathonPhase) => {
       return hackathonPhase['phaseNumber'] == phase['phaseNumber']
     })
+  }
+
+  goToFacilitatorAdmin() {
+    this.navCtrl.push(NotificationsPage);
   }
 }
