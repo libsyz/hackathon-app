@@ -1,3 +1,6 @@
+import { Phase, DefinePhase } from './phase.interface';
+
+
 
 export class Hackathon {
     title: string = "nothing";
@@ -8,7 +11,7 @@ export class Hackathon {
                 name: "Bender Rodriguez", 
                 imageUrl: "./../../assets/imgs/bender_rodriguez.jpeg"
             };
-    phases: {}[] = [
+    phases: any[] = [
         {
             phaseNumber: 1,
             phaseHeader: "Problem Statement",
@@ -40,7 +43,6 @@ export class Hackathon {
             helperText: "What would an MVP look like?",
             wellHackedText: "Prototype", 
             pictures: [],
-            timePeriod: "",
             completed: false
         },
         {
