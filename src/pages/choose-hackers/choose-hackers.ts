@@ -31,14 +31,16 @@ export class ChooseHackersPage {
     this.hackId = this.navParams.get("hackathonId")
   }
 
-  updateHackersChosen(boolean) {
+  updateHackersChosen(eventEmitterObj) {
     let numberOfHackers = this.hackSrvc.getNumberOfHackers(this.navParams.data);
     this.checkForEnoughHackers(numberOfHackers);
   }
 
 
-  checkForEnoughHackers(numberOfHackers){
-    numberOfHackers > 1 ? this.gotEnoughHackers = true : this.gotEnoughHackers = false;
+  checkForEnoughHackers(hackId){
+    debugger
+    const foundHack = this.hackSrvc.findHackathon(hackId);
+    this.gotEnoughHackers = foundHack.hasEnoughHackers();
   }
   
   goToTimer(){

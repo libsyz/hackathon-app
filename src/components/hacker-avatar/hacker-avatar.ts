@@ -1,3 +1,4 @@
+import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { HackersListPage } from './../../pages/hackers-list/hackers-list';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ModalController, NavController, NavParams } from 'ionic-angular';
@@ -16,7 +17,7 @@ import { ModalController, NavController, NavParams } from 'ionic-angular';
 
 
 export class HackerAvatarComponent {
-  @Input() slot: any;
+  @Input() hackerName: any;
   @Output() wasSelected = new EventEmitter();
 
   hackerSelected: boolean = false;
@@ -33,7 +34,6 @@ export class HackerAvatarComponent {
 
 
   showHackersModal() {
-    console.log(this.slot);
     const myModal = this.modalCtrl.create(HackersListPage, {hackathonId: this.currentHackId, slot: this.slot});
     myModal.onDidDismiss((data)=> {
       this.updateHackerStatus(data);
@@ -42,17 +42,25 @@ export class HackerAvatarComponent {
   }
 
   updateHackerStatus(data) {
-    // If the data contains a hacker, we should render the image
     if (data.data != "clear") {
       this.hackerSelected = true;
-      this.hackerImageReference = data.data.imageUrl;
-      this.wasSelected.emit(this.hackerSelected);
+      this.hackerName = data.hacker.name;
+      this.hackerImageReference = data.hacker.imageUrl;
+      this.emitData();
     }
     else {
-      this.hackerSelected = false;
+      this.hackerSelected = true;
+      this.hackerName = '';
       this.hackerImageReference = '';
-      this.wasSelected.emit(this.hackerSelected);
+      this.emitData();
     }
 
+  }
+
+  emitData() {
+    this.wasSelected.emit({ 
+                            hackerSelected: this.hackerSelected, 
+                            hackerName: this.hackerName
+                          });
   }
 }

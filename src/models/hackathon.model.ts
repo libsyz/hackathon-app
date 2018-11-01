@@ -1,11 +1,10 @@
 import { Phase, DefinePhase } from './phase.interface';
 
 
-
 export class Hackathon {
     title: string = "nothing";
     id: number = 0;
-    users: any[] = ["","","","",""];
+    users: any[] = [];
     owner: {name: string,
             imageUrl: string} = {
                 name: "Bender Rodriguez", 
@@ -56,4 +55,7 @@ export class Hackathon {
         }
     ]
     
+    hasEnoughHackers() {
+        return this.users.length > 2 ? true: false;
+    }
 }
