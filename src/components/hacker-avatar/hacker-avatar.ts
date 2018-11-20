@@ -34,7 +34,7 @@ export class HackerAvatarComponent {
 
 
   showHackersModal() {
-    const myModal = this.modalCtrl.create(HackersListPage, {hackathonId: this.currentHackId, slot: this.slot});
+    const myModal = this.modalCtrl.create(HackersListPage, {hackathonId: this.currentHackId});
     myModal.onDidDismiss((data)=> {
       this.updateHackerStatus(data);
     })

@@ -1,3 +1,5 @@
+import { SignUpPage } from './../sign-up/sign-up';
+import { SignInPage } from './../sign-in/sign-in';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -20,6 +22,13 @@ export class SignInOrUpPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignInOrUpPage');
+  }
+
+  signIn() {
+    this.navCtrl.setRoot(SignInPage)
+  }
+  signUp() {
+    this.navCtrl.setRoot(SignUpPage)
   }
 
 }

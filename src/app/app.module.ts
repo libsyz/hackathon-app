@@ -1,5 +1,4 @@
 
-
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -10,6 +9,12 @@ import { FormsModule } from '@angular/forms';
 import { MyApp } from './app.component';
 
 // Pages
+
+import { SignInPage } from './../pages/sign-in/sign-in';
+import { SignUpPage } from './../pages/sign-up/sign-up';
+import { SignInOrUpPage } from './../pages/sign-in-or-up/sign-in-or-up';
+
+//-- Hackathon Pages
 
 import { HomePage } from '../pages/home/home';
 import { ChooseHackersPage } from './../pages/choose-hackers/choose-hackers';
@@ -30,13 +35,16 @@ import { ConfigPage } from './../pages/config/config';
 import { HackathonShowPage } from './../pages/hackathon-show/hackathon-show';
 import { NotificationsPage } from './../pages/notifications/notifications';
 
+//-- Auth Pages
+
+
+
 
 // Components
 
 import { HackerAvatarComponent } from './../components/hacker-avatar/hacker-avatar';
 import { HackersListPage } from '../pages/hackers-list/hackers-list';
 import { CountdownComponent } from './../components/countdown/countdown';
-
 
 
 // Services
@@ -77,7 +85,10 @@ import { AuthProvider } from '../providers/auth/auth';
     ReviewHackPage,
     ConfigPage,
     HackathonShowPage,
-    NotificationsPage
+    NotificationsPage,
+    SignInOrUpPage,
+    SignUpPage,
+    SignInPage
   ],
   imports: [
     BrowserModule,
@@ -108,7 +119,10 @@ import { AuthProvider } from '../providers/auth/auth';
     ReviewHackPage,
     ConfigPage,
     HackathonShowPage,
-    NotificationsPage
+    NotificationsPage,
+    SignInPage,
+    SignUpPage,
+    SignInOrUpPage
 ],
   providers: [
     StatusBar,
