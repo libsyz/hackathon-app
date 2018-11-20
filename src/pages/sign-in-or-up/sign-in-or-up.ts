@@ -30,5 +30,5 @@ export class SignInOrUpPage {
   signUp() {
     this.navCtrl.setRoot(SignUpPage)
   }
-
+  
 }

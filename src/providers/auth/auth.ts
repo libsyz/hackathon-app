@@ -14,4 +14,10 @@ export class AuthProvider {
     console.log('Hello AuthProvider Provider');
   }
 
+  signUp(){
+    this.http.post("http://localhost:3001",{
+      "data": "the booty" 
+    } )
+  }
+
 }
