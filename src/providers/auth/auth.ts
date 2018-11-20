@@ -9,6 +9,8 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class AuthProvider {
+  token: string;
+  url = "http://localhost:3000/api/users/sign_in"
 
   constructor(public http: HttpClient) {
     console.log('Hello AuthProvider Provider');
@@ -18,6 +20,10 @@ export class AuthProvider {
     this.http.post("http://localhost:3001",{
       "data": "the booty" 
     } )
+  }
+
+  signIn(loginData){
+    return this.http.post(this.url, loginData);
   }
 
 }
