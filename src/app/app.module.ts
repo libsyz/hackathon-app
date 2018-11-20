@@ -50,6 +50,7 @@ import { TimerConfigProvider } from '../providers/timer-config/timer-config';
 import { WindowProvider } from '../providers/window/window';
 import { HackathonMocksProvider } from '../providers/hackathon-mocks/hackathon-mocks';
 import { NotificationsProvider } from '../providers/notifications/notifications';
+import { AuthProvider } from '../providers/auth/auth';
 
 
 
@@ -123,6 +124,7 @@ import { NotificationsProvider } from '../providers/notifications/notifications'
     WindowProvider,
     HackathonMocksProvider,
     NotificationsProvider,
+    AuthProvider,
   ]
 })
 export class AppModule {}
