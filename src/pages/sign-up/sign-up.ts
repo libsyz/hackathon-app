@@ -56,7 +56,7 @@ export class SignUpPage {
       const postResponse = this.authSrvc.signUp(signUpData);
       postResponse.subscribe(
         response => {
-          this.authSrvc.token = response['data']['token'];
+          this.authSrvc.userData.token = response['data']['token'];
           this.navCtrl.push(HomePage);
         },
         error => {
