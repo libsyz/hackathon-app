@@ -4,4 +4,30 @@ page-gallery {
         text-transform: uppercase;
     }
 
+    .card-image {
+        height: 300px;
+        width: 100%;
+    }
+
+    .hacker-avatar {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+    }
+
+    .hack-info {
+        padding: 20px 10px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .hack-title {
+        margin-left: 10px;
+        font-size: 16px;
+    }
+
+    .gallery-background {
+        background-color: color($colors, tertiary);
+    }
 }

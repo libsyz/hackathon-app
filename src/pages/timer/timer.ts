@@ -1,3 +1,5 @@
+import { NotificationsProvider } from './../../providers/notifications/notifications';
+import { Phase } from './../../models/phase.interface';
 import { ToolsProvider } from './../../providers/tools/tools';
 import { Hackathon } from './../../models/hackathon.model';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
@@ -26,7 +28,8 @@ export class TimerPage {
               public hackSrvc: HackathonService,
               public toolsSrvc: ToolsProvider,
               public toastCtrl: ToastController,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public notificationSrvc: NotificationsProvider) {
   }
 
 
@@ -51,6 +54,7 @@ export class TimerPage {
       position: 'bottom',
       showCloseButton: true
     });
+    this.sendCallForHelp();
     myToast.present();
   }
 
@@ -60,11 +64,16 @@ export class TimerPage {
   }
 
   getText() {
-    this.currentHackathon.phases.forEach((phase)=> {
-      if( phase['phaseNumber'] == this.currentPhase) {
-        this.phaseHeader = phase['phaseHeader'];
-        this.helperText = phase['helperText']
+    this.currentHackathon.phases.forEach((phase: Phase)=> {
+      if( phase.phaseNumber == this.currentPhase) {
+        this.phaseHeader = phase.phaseHeader;
+        this.helperText = phase.helperText;
       }
     })
+  }
+
+  sendCallForHelp(){
+    const newNotification = this.notificationSrvc.buildNotification(this.currentHackathon);
+    this.notificationSrvc.addNotification(newNotification);
   }
 }

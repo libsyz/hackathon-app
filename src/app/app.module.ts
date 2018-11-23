@@ -1,15 +1,20 @@
 
-
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule, Config } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MyApp } from './app.component';
 
 // Pages
+
+import { SignInPage } from './../pages/sign-in/sign-in';
+import { SignUpPage } from './../pages/sign-up/sign-up';
+import { SignInOrUpPage } from './../pages/sign-in-or-up/sign-in-or-up';
+
+//-- Hackathon Pages
 
 import { HomePage } from '../pages/home/home';
 import { ChooseHackersPage } from './../pages/choose-hackers/choose-hackers';
@@ -27,6 +32,11 @@ import { ToolsPrototypePage } from './../pages/tools-prototype/tools-prototype';
 import { ReviewHackPage } from './../pages/review-hack/review-hack';
 import { ToolsTestPage } from './../pages/tools-test/tools-test';
 import { ConfigPage } from './../pages/config/config';
+import { HackathonShowPage } from './../pages/hackathon-show/hackathon-show';
+import { NotificationsPage } from './../pages/notifications/notifications';
+
+//-- Auth Pages
+
 
 
 
@@ -35,7 +45,6 @@ import { ConfigPage } from './../pages/config/config';
 import { HackerAvatarComponent } from './../components/hacker-avatar/hacker-avatar';
 import { HackersListPage } from '../pages/hackers-list/hackers-list';
 import { CountdownComponent } from './../components/countdown/countdown';
-
 
 
 // Services
@@ -47,6 +56,9 @@ import { ToolsProvider } from '../providers/tools/tools';
 import { PageNavigationProvider } from '../providers/page-navigation/page-navigation';
 import { TimerConfigProvider } from '../providers/timer-config/timer-config';
 import { WindowProvider } from '../providers/window/window';
+import { HackathonMocksProvider } from '../providers/hackathon-mocks/hackathon-mocks';
+import { NotificationsProvider } from '../providers/notifications/notifications';
+import { AuthProvider } from '../providers/auth/auth';
 
 
 
@@ -71,12 +83,18 @@ import { WindowProvider } from '../providers/window/window';
     ToolsPrototypePage,
     ToolsTestPage,
     ReviewHackPage,
-    ConfigPage
+    ConfigPage,
+    HackathonShowPage,
+    NotificationsPage,
+    SignInOrUpPage,
+    SignUpPage,
+    SignInPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -100,7 +118,12 @@ import { WindowProvider } from '../providers/window/window';
     ToolsPrototypePage,
     ToolsTestPage,
     ReviewHackPage,
-    ConfigPage
+    ConfigPage,
+    HackathonShowPage,
+    NotificationsPage,
+    SignInPage,
+    SignUpPage,
+    SignInOrUpPage
 ],
   providers: [
     StatusBar,
@@ -114,6 +137,9 @@ import { WindowProvider } from '../providers/window/window';
     PageNavigationProvider,
     TimerConfigProvider,
     WindowProvider,
+    HackathonMocksProvider,
+    NotificationsProvider,
+    AuthProvider,
   ]
 })
 export class AppModule {}

@@ -19,9 +19,10 @@ import { IonicPage, NavController, NavParams, ViewController, AlertController } 
 })
 export class HackersListPage {
 
- hackers: any;
- currentHackId:  number;
+ hackerInSlot: any;
+ currentHackId: number;
  slot: number;
+ hackers: any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private hackersListSrvc: hackersList,
@@ -33,22 +34,25 @@ export class HackersListPage {
 
 
   ionViewDidLoad() {
+    this.hackers = this.hackersListSrvc.getUsers();
     this.currentHackId = this.navParams.get("hackathonId");
     this.slot = this.navParams.get("slot");
-    this.hackers = this.hackersListSrvc.getUsers();
   }
 
   dropPage() {
-    this.hackSrvc.clearHacker(this.currentHackId, this.slot);
+    this.hackSrvc.clearHacker(this.currentHackId, this.hackerInSlot);
     this.viewCtrl.dismiss({data: "clear"});
   }
 
   selectHacker(hacker, slot) {
-    let operationPossible = this.hackSrvc.addHacker(this.currentHackId, hacker, slot);
+    debugger
+    let alreadySelected = this.hackSrvc.addHacker(this.currentHackId, hacker);
 
-    if (operationPossible == "granted") {
-      this.viewCtrl.dismiss({data: hacker, 
-                           hackathonId: this.currentHackId});
+    if (alreadySelected == false) {
+      this.viewCtrl.dismiss({
+                             hacker: hacker, 
+                             hackathonId: this.currentHackId
+                            });
     }
     else {
       this.hackerAlreadySelectedAlert();

@@ -1,9 +1,16 @@
+import { Phase, DefinePhase } from './phase.interface';
+
 
 export class Hackathon {
     title: string = "nothing";
     id: number = 0;
-    users: any[] = ["","","","",""];
-    phases: {}[] = [
+    users: any[] = [];
+    owner: {name: string,
+            imageUrl: string} = {
+                name: "Bender Rodriguez", 
+                imageUrl: "./../../assets/imgs/bender_rodriguez.jpeg"
+            };
+    phases: any[] = [
         {
             phaseNumber: 1,
             phaseHeader: "Problem Statement",
@@ -35,7 +42,6 @@ export class Hackathon {
             helperText: "What would an MVP look like?",
             wellHackedText: "Prototype", 
             pictures: [],
-            timePeriod: "",
             completed: false
         },
         {
@@ -49,4 +55,7 @@ export class Hackathon {
         }
     ]
     
+    hasEnoughHackers() {
+        return this.users.length > 2 ? true: false;
+    }
 }

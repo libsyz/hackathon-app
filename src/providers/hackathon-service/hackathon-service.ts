@@ -1,3 +1,5 @@
+import { hackersList } from './../../services/hackers-list.service';
+import { HackathonMocksProvider } from './../hackathon-mocks/hackathon-mocks';
 import { ToolsProblemStatementPage } from './../../pages/tools-problem-statement/tools-problem-statement';
 import { Hackathon } from './../../models/hackathon.model';
 import { HttpClient } from '@angular/common/http';
@@ -8,29 +10,27 @@ import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 @Injectable()
 export class HackathonService {
   allHackathons: Hackathon[] = [];
-  canAddHackerCheck = "granted";
+  mockUpsImported: boolean = false;
 
-  constructor(private httpSrvc: HttpClient) {
+
+  constructor(private httpSrvc: HttpClient,
+              private mockSrvc: HackathonMocksProvider) {
   }
 
   getHackathons(){
     return this.allHackathons;
   }
 
-  saveHackathon(hackathon){
+  saveHackathon(hackathon: Hackathon){
     this.allHackathons.push(hackathon);
   }
 
   createHackathon(){
     const newHackathon = new Hackathon;
-    // give the hackathon the last ID. 
-    // If there are no previous hackathons, give it an ID of 1.
     this.provideLastID(newHackathon);
     this.saveHackathon(newHackathon);
     console.log(newHackathon);
     return newHackathon;
-    // Add the hackathon to the repo
-    // Now I have 
   }
 
 
@@ -56,23 +56,28 @@ export class HackathonService {
 
   }
 
-  addHacker(id: number, hacker: any, slot: number) {
-    const foundHack = this.allHackathons[id - 1];
-    this.checkIfHackerWasSelected(foundHack, hacker);
-    if (this.canAddHackerCheck == "granted") foundHack.users[slot] = hacker;
-    return this.canAddHackerCheck;
+  addHacker(id: number, hacker: any) {
+    const foundHack = this.findHackathon(id);
+    let alreadySelected = this.checkIfHackerWasAlreadySelected(foundHack, hacker);
+    if (alreadySelected === false) foundHack.users.push(hacker);
+    return alreadySelected;
   }
 
-  checkIfHackerWasSelected(foundHack, hacker) {
+  checkIfHackerWasAlreadySelected(foundHack, hacker) {
+    let hackerWasAlreadySelected = false;
     foundHack.users.forEach((user)=> {
-      if (user.name == hacker.name) this.canAddHackerCheck = "denied";
+      if (user.name == hacker.name) hackerWasAlreadySelected = true;
     })
+    return hackerWasAlreadySelected
   }
 
-  clearHacker(hackId, slot) {
-    let foundHack = this.allHackathons[hackId - 1];
-    foundHack.users[slot] = "";
-    this.canAddHackerCheck = "granted";
+  clearHacker(hackId, hackerName) {
+    let foundHack = this.findHackathon(hackId);
+    foundHack.users.forEach((user, index)=> {
+      if (user.name == hackerName.name) {
+        foundHack.users.splice(index, 1);
+      }
+    })
   }
 
   getNumberOfHackers(hackId) {
@@ -128,5 +133,18 @@ export class HackathonService {
     const foundHack = this.allHackathons[hackId - 1];
     foundHack.phases[4]['timePeriod'] = timeframe;
   }
+
+  importMockUps() {
+    if (this.mockUpsImported == false) {
+      let mockUp1 = this.mockSrvc.generateHack1();
+      let mockUp2 = this.mockSrvc.generateHack2();
+      this.saveHackathon(mockUp1);
+      this.saveHackathon(mockUp2);
+      this.mockUpsImported = true;
+    }
+  }
+
+  
+
 
 }

@@ -1,3 +1,4 @@
+import { SignInOrUpPage } from './../pages/sign-in-or-up/sign-in-or-up';
 import { CameraPage } from './../pages/camera/camera';
 import { ReviewHackPage } from './../pages/review-hack/review-hack';
 import { HomePage } from './../pages/home/home';
@@ -12,7 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = SignInOrUpPage;
 
   constructor(platform: Platform, 
               statusBar: StatusBar, 

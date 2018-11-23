@@ -1,0 +1,24 @@
+<!--
+  Generated template for the NotificationsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title> Facilitator Notifications </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  
+  <ion-list>
+    <ion-item *ngFor="let notification of notifications">
+      {{ notification }}
+    </ion-item>
+  </ion-list>
+
+</ion-content>

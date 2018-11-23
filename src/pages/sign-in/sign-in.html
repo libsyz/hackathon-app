@@ -1,0 +1,49 @@
+<!--
+  Generated template for the SignInPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+
+
+
+<ion-content padding>
+
+  <form [formGroup]="signInForm">
+    <ion-list>
+        <ion-item>
+          <ion-label fixed>email</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+
+        <div class="error-message"
+          *ngIf='(signInForm.controls.email.touched && signInForm.controls.email.invalid)'>
+          Please introduce your email
+        </div>
+        <ion-item>
+          <ion-label fixed>Password</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+
+        <div class="error-message"
+          *ngIf='(signInForm.controls.password.touched && signInForm.controls.password.invalid)'>
+          Please introduce your password
+        </div>
+      
+      </ion-list>
+
+    </form>
+
+</ion-content>
+
+<ion-footer>
+    <button (click)="signIn()"
+            ion-button
+            full
+            large
+            block
+            no-margin
+            color="primary">SIGN IN</button>
+</ion-footer>

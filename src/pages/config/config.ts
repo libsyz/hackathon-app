@@ -1,3 +1,4 @@
+import { NotificationsPage } from './../notifications/notifications';
 import { timerConfig } from './../../models/timer-config.model';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -35,21 +36,31 @@ export class ConfigPage {
   }
 
   addMinute(phase) {
-    const phaseToAdd = this.hackathonPhases.find((hackathonPhase) => {
-      return hackathonPhase['phaseNumber'] == phase['phaseNumber']
-    } )
-    phaseToAdd['phaseTime'] += 60;
+    const phaseToAdd = this.findPhaseByNumber(phase);
+    if (phaseToAdd['phaseTime'] < 1800){ 
+      phaseToAdd['phaseTime'] += 60;
+    }
   }
 
   subtractMinute(phase) {
-    const phaseToAdd = this.hackathonPhases.find((hackathonPhase) => {
-      return hackathonPhase['phaseNumber'] == phase['phaseNumber']
-    } )
-    phaseToAdd['phaseTime'] -= 60;
+    const phaseToSubtract = this.findPhaseByNumber(phase);
+    if (phaseToSubtract['phaseTime'] > 0){ 
+      phaseToSubtract['phaseTime'] -= 60;
+    }
   }
 
   saveNewConfig() {
     this.configSrvc.saveNewConfig(this.hackathonPhases);
     this.navCtrl.pop();
+  }
+
+  findPhaseByNumber(phase) {
+    return this.hackathonPhases.find((hackathonPhase) => {
+      return hackathonPhase['phaseNumber'] == phase['phaseNumber']
+    })
+  }
+
+  goToFacilitatorAdmin() {
+    this.navCtrl.push(NotificationsPage);
   }
 }
