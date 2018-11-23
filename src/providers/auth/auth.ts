@@ -16,10 +16,8 @@ export class AuthProvider {
     console.log('Hello AuthProvider Provider');
   }
 
-  signUp(){
-    this.http.post("http://localhost:3001",{
-      "data": "the booty" 
-    } )
+  signUp(signUpData){
+    return this.http.post("http://localhost:3000/api/users", signUpData)
   }
 
   signIn(loginData){

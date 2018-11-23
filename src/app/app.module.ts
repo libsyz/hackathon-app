@@ -5,7 +5,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule, Config } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MyApp } from './app.component';
 
 // Pages
@@ -94,6 +94,7 @@ import { AuthProvider } from '../providers/auth/auth';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

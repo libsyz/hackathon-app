@@ -1,3 +1,4 @@
+import { FormGroup, FormControl } from '@angular/forms';
 import { HomePage } from './../home/home';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
@@ -23,21 +24,19 @@ export class SignInPage {
               private alertCtrl: AlertController) {
   }
 
-  username: string; 
-  password: string;
+  signInForm = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl('')
+  }); 
 
-  loginData = {
-               email: "miguel@miguel.com",
-               password: "123456"
-              };
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignInPage');
   }
 
   signIn(){
-    console.log(this.loginData);
-    let signInData = this.authSrvc.signIn(this.loginData);
+    let loginData = this.signInForm.value;
+    let signInData = this.authSrvc.signIn(loginData);
     signInData.subscribe(
       data => {
       console.log(data);
@@ -45,6 +44,7 @@ export class SignInPage {
       this.navCtrl.push(HomePage);
     },
       error => {
+        // All these notifications could be isolated in a service
         let errorNotification = this.alertCtrl.create();
         errorNotification.setTitle("Whoops!");
         errorNotification.setSubTitle("either your email or your password is wrong")

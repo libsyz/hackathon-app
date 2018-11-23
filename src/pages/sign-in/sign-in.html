@@ -10,19 +10,23 @@
 
 
 <ion-content padding>
-    <ion-list>
 
+  <form [formGroup]="signInForm">
+    <ion-list>
         <ion-item>
-          <ion-label fixed>Username</ion-label>
-          <ion-input type="text" value=""></ion-input>
+          <ion-label fixed>email</ion-label>
+          <ion-input type="text" formControlName="email"></ion-input>
         </ion-item>
       
         <ion-item>
           <ion-label fixed>Password</ion-label>
-          <ion-input type="password"></ion-input>
+          <ion-input formControlName="password"></ion-input>
         </ion-item>
       
       </ion-list>
+
+    </form>
+
 </ion-content>
 
 <ion-footer>

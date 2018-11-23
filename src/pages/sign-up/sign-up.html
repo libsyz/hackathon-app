@@ -8,45 +8,47 @@
 
 
 
-
 <ion-content padding>
+  
     <ion-list>
-
+        <form [formGroup]="signUpForm">
         <ion-item>
-          <ion-label [(ngModel)]="email" fixed>email</ion-label>
-          <ion-input type="text" value=""></ion-input>
+          <ion-label fixed>email</ion-label>
+          <ion-input formControlName="email"   type="text" value=""></ion-input>
         </ion-item>
       
         <ion-item>
-          <ion-label [(ngModel)]="password" fixed>Password</ion-label>
-          <ion-input type="password"></ion-input>
+          <ion-label fixed>Password</ion-label>
+          <ion-input formControlName="password"   type="password"></ion-input>
         </ion-item>
 
         <ion-item>
-            <ion-label [(ngModel)]="firstName" fixed>First Name</ion-label>
-            <ion-input type="text" value=""></ion-input>
+            <ion-label fixed>First Name</ion-label>
+            <ion-input formControlName="firstName"   type="text" value=""></ion-input>
           </ion-item>
         
         <ion-item>
-            <ion-label [(ngModel)]="lastName" fixed>Last Name</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-label fixed>Last Name</ion-label>
+            <ion-input formControlName="lastName"   type="text"></ion-input>
         </ion-item>
 
         <ion-item>
-            <ion-label [(ngModel)]="role" fixed>Role</ion-label>
-            <ion-input type="text" value=""></ion-input>
+            <ion-label fixed>Role</ion-label>
+            <ion-input  formControlName="role"  type="text" value=""></ion-input>
           </ion-item>
         
         <ion-item>
-            <ion-label [(ngModel)]="company" fixed>Company</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-label fixed>Company</ion-label>
+            <ion-input formControlName="company" type="text"></ion-input>
         </ion-item>
-      
+       </form> 
       </ion-list>
+    
 </ion-content>
 
 <ion-footer>
-    <button ion-button
+    <button (click)="signUp()"
+            ion-button
             full
             large
             block
