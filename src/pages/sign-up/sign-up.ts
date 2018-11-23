@@ -1,5 +1,5 @@
 import { HomePage } from './../home/home';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -23,33 +23,51 @@ export class SignUpPage {
 
   // Probably would make sense to keep both forms in other file and export them
   signUpForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    role: new FormControl(''),
-    company: new FormControl()
+    email: new FormControl('', 
+      [
+        Validators.required, 
+        Validators.email
+      ]),
+    password: new FormControl('', 
+      [
+        Validators.required,
+        Validators.minLength(6)
+      ]),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    role: new FormControl('', Validators.required),
+    company: new FormControl('', Validators.required)
   })
 
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignUpPage');
+    console.log(this.signUpForm);
+  }
+
+  showForm() {
+    console.log(this.signUpForm);
   }
 
   signUp() {
     // this.authSrvc.signUp();
-    let signUpData = this.signUpForm.value;
+    if (this.signUpForm.valid) {
 
-    const postResponse = this.authSrvc.signUp(signUpData);
-    postResponse.subscribe(
-      response => {
-        this.authSrvc.token = response['data']['token'];
-        this.navCtrl.push(HomePage)
-      },
-      error => {
-        console.log("Whoops something went horrible!");
-        console.log(error);
-      })
+      let signUpData = this.signUpForm.value;
+      const postResponse = this.authSrvc.signUp(signUpData);
+      postResponse.subscribe(
+        response => {
+          this.authSrvc.token = response['data']['token'];
+          this.navCtrl.push(HomePage);
+        },
+        error => {
+          console.log("Whoops something went horrible!");
+          console.log(error);
+        })
+    }
+
+    else {
+      console.log("sorry bro");
+    }
   }
-
+ 
 }

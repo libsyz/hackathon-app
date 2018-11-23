@@ -32,6 +32,7 @@ export class SignInPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignInPage');
+    console.log(this.signInForm);
   }
 
   signIn(){
