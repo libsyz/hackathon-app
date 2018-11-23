@@ -2,7 +2,7 @@ import { HomePage } from './../home/home';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the SignUpPage page.
@@ -18,7 +18,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SignUpPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private authSrvc: AuthProvider) {
+    private authSrvc: AuthProvider, private alertCtrl: AlertController) {
 }
 
   // Probably would make sense to keep both forms in other file and export them
@@ -60,7 +60,11 @@ export class SignUpPage {
           this.navCtrl.push(HomePage);
         },
         error => {
-          console.log("Whoops something went horrible!");
+          let errorNotification = this.alertCtrl.create();
+          errorNotification.setTitle("Whoops!");
+          errorNotification.setSubTitle("Something did not work out, sorry!");
+          errorNotification.addButton("ok");
+          errorNotification.present();
           console.log(error);
         })
     }

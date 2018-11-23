@@ -1,4 +1,4 @@
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HomePage } from './../home/home';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
@@ -25,25 +25,25 @@ export class SignInPage {
   }
 
   signInForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
+    email: new FormControl('', [ Validators.email, Validators.required]),
+    password: new FormControl('', [ Validators.required ])
   }); 
 
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignInPage');
-    console.log(this.signInForm);
+    console.log(this.signInForm.valid);
   }
 
   signIn(){
-    let loginData = this.signInForm.value;
-    let signInData = this.authSrvc.signIn(loginData);
-    signInData.subscribe(
-      data => {
-      console.log(data);
-      this.authSrvc.token = data['token'];
-      this.navCtrl.push(HomePage);
-    },
+    if (this.signInForm.valid) {
+      let loginData = this.signInForm.value;
+      let signInData = this.authSrvc.signIn(loginData);
+      signInData.subscribe(
+        data => {
+          console.log(data);
+          this.authSrvc.token = data['token'];
+          this.navCtrl.push(HomePage);
+        },
       error => {
         // All these notifications could be isolated in a service
         let errorNotification = this.alertCtrl.create();
@@ -53,7 +53,8 @@ export class SignInPage {
         errorNotification.present();
         console.log(error);
       });
-
-  }
+    }
+      
+    }
 
 }

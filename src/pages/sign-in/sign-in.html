@@ -17,10 +17,20 @@
           <ion-label fixed>email</ion-label>
           <ion-input type="email" formControlName="email"></ion-input>
         </ion-item>
+
+        <div class="error-message"
+          *ngIf='(signInForm.controls.email.touched && signInForm.controls.email.invalid)'>
+          Please introduce your email
+        </div>
         <ion-item>
           <ion-label fixed>Password</ion-label>
           <ion-input type="password" formControlName="password"></ion-input>
         </ion-item>
+
+        <div class="error-message"
+          *ngIf='(signInForm.controls.password.touched && signInForm.controls.password.invalid)'>
+          Please introduce your password
+        </div>
       
       </ion-list>
 
@@ -30,7 +40,6 @@
 
 <ion-footer>
     <button (click)="signIn()"
-            disabled="signInForm.valid"
             ion-button
             full
             large
