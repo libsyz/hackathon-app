@@ -47,11 +47,14 @@ export class HomePage {
 
   newHack() {
     const newHack = this.hackSrvc.createHackathon();
-
-    // so - wait for the server to come back with the newly created hackathon
-    // get the hackathon ID and pass it to the ChooseHackersPage
-    
-    this.navCtrl.push(ChooseHackersPage, {hackathonId: newHack.id});
+    newHack.subscribe(
+      response => {
+        console.log(response);
+    },
+      error => {
+        console.log("something went wrong");
+        console.log(error);
+      })
   }
 
   goToGallery() {

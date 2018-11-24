@@ -1,5 +1,5 @@
 import { User } from './../../models/user.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -32,6 +32,22 @@ export class AuthProvider {
 
   getUserData(){
     return this.http.get(`http://localhost:3000/api/users/${this.userData['id']}` )
+  }
+
+  getAuthenticatedHeaders(){
+    if (this.userData.token) { 
+      
+    console.log(this.userData.token)
+      let headers = new HttpHeaders({
+        name: "Miguelito",
+        surmano: "true"
+      });
+      return headers;
+    }
+    else {
+      console.log( "Sorry, something went wrong with the token", 
+                   {token: this.userData.token})
+    }
   }
 
 }
