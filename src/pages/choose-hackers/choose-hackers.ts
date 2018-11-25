@@ -1,3 +1,4 @@
+import { hackersList } from './../../services/hackers-list.service';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { TimerPage } from './../timer/timer';
 import { Component } from '@angular/core';
@@ -23,12 +24,14 @@ export class ChooseHackersPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController,
-              public hackSrvc: HackathonService) {
+              public hackSrvc: HackathonService,
+              public hackListSrvc: hackersList) {
   }
 
   ionViewDidLoad() {
     this.hackerSlots = [0, 1, 2, 3, 4];
-    this.hackId = this.navParams.get("hackathonId")
+    this.hackId = this.navParams.get("hackathonId");
+    this.hackListSrvc.getUsers();
   }
 
   updateHackersChosen(eventEmitterObj) {

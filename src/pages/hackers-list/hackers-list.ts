@@ -34,7 +34,7 @@ export class HackersListPage {
 
 
   ionViewDidLoad() {
-    this.hackers = this.hackersListSrvc.getUsers();
+    this.hackers = this.hackersListSrvc.users;
     this.currentHackId = this.navParams.get("hackathonId");
     this.slot = this.navParams.get("slot");
   }
@@ -45,7 +45,6 @@ export class HackersListPage {
   }
 
   selectHacker(hacker, slot) {
-    debugger
     let alreadySelected = this.hackSrvc.addHacker(this.currentHackId, hacker);
 
     if (alreadySelected == false) {
