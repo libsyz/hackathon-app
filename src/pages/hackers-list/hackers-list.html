@@ -12,13 +12,13 @@
 
 <ion-content padding>
     <ion-list>
-      <ion-item (click)="selectHacker(item, slot)" 
-                *ngFor="let item of hackers">
+      <ion-item (click)="selectHacker(hacker, slot)" 
+                *ngFor="let hacker of hackers">
         <div class="circle">
           <img class="avatar-image" 
-               src="./../../assets/imgs/{{item.avatarPic}}" alt="">
+               src="./../../assets/imgs/{{hacker.avatarPic}}" alt="">
         </div>
-        <p> {{ item.firstName }} {{  item.lastName }}</p>
+        <p> {{ hacker.firstName }} {{  hacker.lastName }}</p>
       </ion-item>
     </ion-list>
 </ion-content>

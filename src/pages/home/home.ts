@@ -50,9 +50,8 @@ export class HomePage {
     newHack.subscribe(
       response => {
         console.log(response);
-        debugger
-        this.navCtrl.push(ChooseHackersPage, 
-                          { hackId: response['hackathon_id']});
+        this.authSrvc.currentHackId = response['hackathon_id']
+        this.navCtrl.push(ChooseHackersPage);
     },
       error => {
         console.log("something went wrong");

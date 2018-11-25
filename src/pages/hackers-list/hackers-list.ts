@@ -1,3 +1,4 @@
+import { AuthProvider } from './../../providers/auth/auth';
 import { Hackathon } from './../../models/hackathon.model';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { hackersList } from './../../services/hackers-list.service';
@@ -29,7 +30,8 @@ export class HackersListPage {
               private hackersListSrvc: hackersList,
               public viewCtrl: ViewController,
               public hackSrvc: HackathonService,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public authSrvc: AuthProvider) {
 
   }
 
@@ -43,6 +45,15 @@ export class HackersListPage {
   
   selectHacker(hacker, slot) {
    // Ok mi pana
+   const selectionResult = this.hackSrvc.addHackerToHackathon(hacker['id'], this.authSrvc.currentHackId);
+   selectionResult.subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+   )
    // Call the API to add a hacker to the current hackathon
    // Three scenarios
    // 200 - The hacker has been added to the hackathon

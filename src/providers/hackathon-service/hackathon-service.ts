@@ -15,12 +15,13 @@ export class HackathonService {
   mockUpsImported: boolean = false;
 
 
-  constructor(private httpSrvc: HttpClient,
+  constructor(private http: HttpClient,
               private mockSrvc: HackathonMocksProvider,
               private authSrvc: AuthProvider) {
   }
 
   hackathonsEndpoint: string = "http://localhost:3000/api/hackathons"
+  addHackerToHackathonEndpoint: string = "http://localhost:3000/api/hackathons/add_hacker"
 
   getHackathons(){
     return this.allHackathons;
@@ -32,7 +33,7 @@ export class HackathonService {
 
   createHackathon(){
   const authHeaders = this.authSrvc.getAuthenticatedHeaders();
-  return this.httpSrvc.post(this.hackathonsEndpoint, {user: "watch the token" },  { headers: authHeaders })
+  return this.http.post(this.hackathonsEndpoint, {user: "watch the token" },  { headers: authHeaders })
   }
 
 
@@ -44,20 +45,16 @@ export class HackathonService {
      return foundHack;
   }
 
-  addHacker(id: number, hacker: any) {
-    const foundHack = this.findHackathon(id);
-    let alreadySelected = this.checkIfHackerWasAlreadySelected(foundHack, hacker);
-    if (alreadySelected === false) foundHack.users.push(hacker);
-    return alreadySelected;
+  addHackerToHackathon(hacker_id: number, hackathon_id: any) {
+    const authHeaders = this.authSrvc.getAuthenticatedHeaders();
+    return this.http.patch(this.addHackerToHackathonEndpoint, 
+                         {
+                          hacker_id: hacker_id,
+                          hackathon_id: hackathon_id
+                          }, 
+                          { headers: authHeaders} )
   }
 
-  checkIfHackerWasAlreadySelected(foundHack, hacker) {
-    let hackerWasAlreadySelected = false;
-    foundHack.users.forEach((user)=> {
-      if (user.name == hacker.name) hackerWasAlreadySelected = true;
-    })
-    return hackerWasAlreadySelected
-  }
 
   clearHacker(hackId, hackerName) {
     let foundHack = this.findHackathon(hackId);
