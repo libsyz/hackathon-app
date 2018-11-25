@@ -35,12 +35,10 @@ export class AuthProvider {
   }
 
   getAuthenticatedHeaders(){
-    if (this.userData.token) { 
-      
+    if (this.userData.token) {   
     console.log(this.userData.token)
       let headers = new HttpHeaders({
-        name: "Miguelito",
-        surmano: "true"
+        Authentication: this.userData.token,
       });
       return headers;
     }

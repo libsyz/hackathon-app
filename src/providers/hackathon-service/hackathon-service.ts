@@ -32,7 +32,7 @@ export class HackathonService {
 
   createHackathon(){
   const authHeaders = this.authSrvc.getAuthenticatedHeaders();
-  return this.httpSrvc.post(this.hackathonsEndpoint, {listo: "listo!"},  { headers: authHeaders })
+  return this.httpSrvc.post(this.hackathonsEndpoint, {user: "watch the token" },  { headers: authHeaders })
   }
 
 
