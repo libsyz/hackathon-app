@@ -1,3 +1,4 @@
+import { User } from './../../models/user.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HomePage } from './../home/home';
 import { AuthProvider } from './../../providers/auth/auth';
@@ -31,7 +32,6 @@ export class SignInPage {
 
 
   ionViewDidLoad() {
-    console.log(this.signInForm.valid);
   }
 
   signIn(){
@@ -40,9 +40,12 @@ export class SignInPage {
       let signInData = this.authSrvc.signIn(loginData);
       signInData.subscribe(
         data => {
-          console.log(data);
-          this.authSrvc.token = data['token'];
-          this.navCtrl.push(HomePage);
+          let userData: any;
+          userData = data;
+          this.authSrvc.setCurrentUser(userData);
+          this.navCtrl.push(HomePage, { 
+            firstName: userData.firstName 
+          });
         },
       error => {
         // All these notifications could be isolated in a service

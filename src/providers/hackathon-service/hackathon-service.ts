@@ -1,3 +1,4 @@
+import { AuthProvider } from './../auth/auth';
 import { hackersList } from './../../services/hackers-list.service';
 import { HackathonMocksProvider } from './../hackathon-mocks/hackathon-mocks';
 import { ToolsProblemStatementPage } from './../../pages/tools-problem-statement/tools-problem-statement';
@@ -7,6 +8,7 @@ import { Injectable } from '@angular/core';
 import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 
 
+
 @Injectable()
 export class HackathonService {
   allHackathons: Hackathon[] = [];
@@ -14,8 +16,11 @@ export class HackathonService {
 
 
   constructor(private httpSrvc: HttpClient,
-              private mockSrvc: HackathonMocksProvider) {
+              private mockSrvc: HackathonMocksProvider,
+              private authSrvc: AuthProvider) {
   }
+
+  hackathonsEndpoint: string = "http://localhost:3000/api/hackathons"
 
   getHackathons(){
     return this.allHackathons;
@@ -26,26 +31,10 @@ export class HackathonService {
   }
 
   createHackathon(){
-    const newHackathon = new Hackathon;
-    this.provideLastID(newHackathon);
-    this.saveHackathon(newHackathon);
-    console.log(newHackathon);
-    return newHackathon;
+  const authHeaders = this.authSrvc.getAuthenticatedHeaders();
+  return this.httpSrvc.post(this.hackathonsEndpoint, {user: "watch the token" },  { headers: authHeaders })
   }
 
-
-  provideLastID(myHackathon: Hackathon){
-      if(this.allHackathons == undefined) {
-        myHackathon.id = 1;
-      }
-      else {
-        let idCounter = 0;
-        this.allHackathons.forEach((hackathon) => {
-           hackathon.id > idCounter ? idCounter = hackathon.id : "";
-        });
-        myHackathon.id = idCounter + 1;
-      }
-    }
 
   findHackathon(id) {
      let foundHack: Hackathon;
@@ -53,7 +42,6 @@ export class HackathonService {
       if(hack.id == id) foundHack = hack;
       })
      return foundHack;
-
   }
 
   addHacker(id: number, hacker: any) {

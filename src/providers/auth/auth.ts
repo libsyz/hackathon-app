@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { User } from './../../models/user.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -9,11 +10,16 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class AuthProvider {
-  token: string;
+  userData: User;
+
   url = "http://localhost:3000/api/users/sign_in"
 
   constructor(public http: HttpClient) {
     console.log('Hello AuthProvider Provider');
+  }
+
+  setCurrentUser(apiData: User) {
+    this.userData = apiData;
   }
 
   signUp(signUpData){
@@ -22,6 +28,24 @@ export class AuthProvider {
 
   signIn(loginData){
     return this.http.post(this.url, loginData);
+  }
+
+  getUserData(){
+    return this.http.get(`http://localhost:3000/api/users/${this.userData['id']}` )
+  }
+
+  getAuthenticatedHeaders(){
+    if (this.userData.token) {   
+    console.log(this.userData.token)
+      let headers = new HttpHeaders({
+        Authentication: this.userData.token,
+      });
+      return headers;
+    }
+    else {
+      console.log( "Sorry, something went wrong with the token", 
+                   {token: this.userData.token})
+    }
   }
 
 }
