@@ -21,6 +21,7 @@ export class HackersListPage {
 
  hackerInSlot: any;
  currentHackId: number;
+ userId: number;
  slot: number;
  hackers: any[];
 
@@ -34,30 +35,22 @@ export class HackersListPage {
 
 
   ionViewDidLoad() {
-    this.hackers = this.hackersListSrvc.users;
     this.currentHackId = this.navParams.get("hackathonId");
     this.slot = this.navParams.get("slot");
+    this.hackers = this.hackersListSrvc.users
   }
 
-  dropPage() {
-    this.hackSrvc.clearHacker(this.currentHackId, this.hackerInSlot);
-    this.viewCtrl.dismiss({data: "clear"});
-  }
-
+  
   selectHacker(hacker, slot) {
-    let alreadySelected = this.hackSrvc.addHacker(this.currentHackId, hacker);
-
-    if (alreadySelected == false) {
-      this.viewCtrl.dismiss({
-                             hacker: hacker, 
-                             hackathonId: this.currentHackId
-                            });
-    }
-    else {
-      this.hackerAlreadySelectedAlert();
-    }
-
+   // Ok mi pana
+   // Call the API to add a hacker to the current hackathon
+   // Three scenarios
+   // 200 - The hacker has been added to the hackathon
+   // 200 - The hacker was already there, so it could not be added
+   // 500 - Something got messed up unexpectedly
   }
+  
+
 
   hackerAlreadySelectedAlert() {
     let myAlert = this.alertCtrl.create({
@@ -66,6 +59,11 @@ export class HackersListPage {
       buttons: ['got it']}
     )
     myAlert.present();
+  }
+
+  dropPage() {
+    this.hackSrvc.clearHacker(this.currentHackId, this.hackerInSlot);
+    this.viewCtrl.dismiss({data: "clear"});
   }
 
 }
