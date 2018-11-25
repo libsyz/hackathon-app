@@ -12,9 +12,9 @@ export class hackersList {
     getUsers(){
         this.http.get("http://localhost:3000/api/users").subscribe(
             data => {
-                console.log(data);
                 const usersFromApi = data as {}[];
                 this.users = usersFromApi;
+                console.log(this.users);
             },
             error => {
                 console.log(error);

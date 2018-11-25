@@ -22,7 +22,8 @@ export class ChooseHackersPage {
   gotEnoughHackers: boolean = false;
   hackId: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
               public alertCtrl: AlertController,
               public hackSrvc: HackathonService,
               public hackListSrvc: hackersList) {
@@ -41,12 +42,11 @@ export class ChooseHackersPage {
 
 
   checkForEnoughHackers(hackId){
-    debugger
     const foundHack = this.hackSrvc.findHackathon(hackId);
     this.gotEnoughHackers = foundHack.hasEnoughHackers();
   }
   
   goToTimer(){
-  this.navCtrl.push(TimerPage, {hackathonId: this.hackId});
+  this.navCtrl.push(TimerPage, { hackathonId: this.hackId });
   }
 }
