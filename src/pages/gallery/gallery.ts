@@ -35,7 +35,7 @@ export class GalleryPage {
 
   importHackathons() {
     this.hackSrvc.importMockUps();
-    this.hacksToDisplay = this.hackSrvc.getHackathons();
+    // this.hacksToDisplay = this.hackSrvc.getHackathons();
     console.log(this.hacksToDisplay);
   }
   buildingAmazing(){

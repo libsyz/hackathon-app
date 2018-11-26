@@ -40,7 +40,7 @@ export class TimerPage {
 
 
   ionViewDidLoad() {
-    debugger
+  
     this.currentPhase = this.hackSrvc.currentPhase;
     this.currentHackathon = this.hackSrvc.currentHackathon;
     this.getText();

@@ -1,3 +1,4 @@
+import { AuthProvider } from './../auth/auth';
 import { Hackathon } from './../../models/hackathon.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -11,17 +12,19 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class NotificationsProvider {
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient,
+              public authSrvc: AuthProvider) {
     console.log('Hello NotificationsProvider Provider');
   }
 
   notifications: any[] = [];
-
-  buildNotification(hackathon: Hackathon) {
+  // This needs to push notifications to the panel via http!
+  buildNotification(hackathon) {
     const date = new Date();
     const hour = date.getHours();
     const minutes = date.getMinutes();
-    const notification = `Hacker ${hackathon.owner.name} got stuck at ${hour}:${minutes} !`
+    const hackerName = `${this.authSrvc.userData.firstName} ${this.authSrvc.userData.lastName}`
+    const notification = `Hacker ${hackerName} got stuck at ${hour}:${minutes} !`
     return notification;
   }
 
@@ -30,11 +33,4 @@ export class NotificationsProvider {
     console.log(this.notifications);
   }
 
-  getNotifications() {
-    return this.notifications;
-  }
-
-  clearNotifications() {
-    this.notifications = [];
-  }
 }

@@ -124,7 +124,7 @@ export class CameraPage {
     console.log(this.imageData);
     try {
       this.hackSrvc.savePictureInPhase(this.hackId, this.currentPhase, this.imageData);
-      this.hackSrvc.markPhaseAsCompleted(this.hackId, this.currentPhase);
+      // this.hackSrvc.markPhaseAsCompleted(this.hackId, this.currentPhase);
       this.goToWellHackedPage();
     }
     catch (e) {

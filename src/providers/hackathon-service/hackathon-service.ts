@@ -70,7 +70,7 @@ export class HackathonService {
   }
 
   updateCurrentPhase() {
-    debugger
+  
     const phaseFound = this.currentHackathon['phases'].find(phase => {
         return phase['completed'] == null })
     this.currentPhase = phaseFound['phaseOrder'];
