@@ -46,7 +46,7 @@ export class CameraPage {
     console.log(this.navParams);
     this.enableCamera();
     this.hackId = this.navParams.get("hackathonId");
-    this.currentPhase = this.hackSrvc.getCurrentPhase(this.hackId);
+    this.currentPhase = this.hackSrvc.currentPhase;
     }
 
   enableCamera(){

@@ -1,3 +1,4 @@
+import { AuthProvider } from './../../providers/auth/auth';
 import { Hackathon } from './../../models/hackathon.model';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { hackersList } from './../../services/hackers-list.service';
@@ -21,6 +22,7 @@ export class HackersListPage {
 
  hackerInSlot: any;
  currentHackId: number;
+ userId: number;
  slot: number;
  hackers: any[];
 
@@ -28,36 +30,41 @@ export class HackersListPage {
               private hackersListSrvc: hackersList,
               public viewCtrl: ViewController,
               public hackSrvc: HackathonService,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public authSrvc: AuthProvider) {
 
   }
 
 
   ionViewDidLoad() {
-    this.hackers = this.hackersListSrvc.getUsers();
-    this.currentHackId = this.navParams.get("hackathonId");
     this.slot = this.navParams.get("slot");
+    this.hackerInSlot = this.navParams.get("hackerId");
+    this.hackers = this.hackersListSrvc.users
   }
 
-  dropPage() {
-    this.hackSrvc.clearHacker(this.currentHackId, this.hackerInSlot);
-    this.viewCtrl.dismiss({data: "clear"});
+  
+  selectHacker(hacker) {
+   // Ok mi pana
+   const selectionResult = this.hackSrvc.addHackerToHackathon(hacker['id'], this.hackerInSlot, this.hackSrvc.currentHackId);
+   selectionResult.subscribe(
+      response => {
+        console.log(response);
+        this.manageSelectionResult(response, hacker);
+      },
+      error => {
+        console.log(error)
+        this.somethingWentWrong();;
+      }
+   )
   }
-
-  selectHacker(hacker, slot) {
-    debugger
-    let alreadySelected = this.hackSrvc.addHacker(this.currentHackId, hacker);
-
-    if (alreadySelected == false) {
-      this.viewCtrl.dismiss({
-                             hacker: hacker, 
-                             hackathonId: this.currentHackId
-                            });
-    }
-    else {
+  
+  manageSelectionResult(ApiData, hacker){
+    if (ApiData['status'] == 'already selected') {
       this.hackerAlreadySelectedAlert();
     }
-
+    else {
+      this.viewCtrl.dismiss({ hacker: hacker });
+    }
   }
 
   hackerAlreadySelectedAlert() {
@@ -67,6 +74,24 @@ export class HackersListPage {
       buttons: ['got it']}
     )
     myAlert.present();
+  }
+
+  somethingWentWrong(){
+    let errorAlert = this.alertCtrl.create({
+      title: 'Whoops!',
+      subTitle: 'Something went wrong',
+      buttons: ['got it']}
+    )
+    errorAlert.present();
+  }
+
+  dropPage() {
+    if (this.hackerInSlot){
+      const cleared = this.hackSrvc.clearHacker(this.hackerInSlot);
+      cleared.subscribe();
+     }
+    this.viewCtrl.dismiss({ data: "clear" });
+
   }
 
 }
