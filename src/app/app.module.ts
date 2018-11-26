@@ -1,3 +1,4 @@
+
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -59,6 +60,7 @@ import { WindowProvider } from '../providers/window/window';
 import { HackathonMocksProvider } from '../providers/hackathon-mocks/hackathon-mocks';
 import { NotificationsProvider } from '../providers/notifications/notifications';
 import { AuthProvider } from '../providers/auth/auth';
+import { CloudinaryUploaderProvider } from '../providers/cloudinary-uploader/cloudinary-uploader';
 
 
 
@@ -130,6 +132,7 @@ import { AuthProvider } from '../providers/auth/auth';
     StatusBar,
     SplashScreen,
     hackersList,
+    CloudinaryUploaderProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HackathonService,
     HttpClient,
@@ -141,6 +144,7 @@ import { AuthProvider } from '../providers/auth/auth';
     HackathonMocksProvider,
     NotificationsProvider,
     AuthProvider,
+    CloudinaryUploaderProvider,
   ]
 })
 export class AppModule {}

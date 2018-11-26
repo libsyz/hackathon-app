@@ -1,11 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { WindowProvider } from './../../providers/window/window';
 import { WellHackedPage } from './../well-hacked/well-hacked';
 import { PageNavigationProvider } from './../../providers/page-navigation/page-navigation';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { Component, ViewChild, ElementRef, Input } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
-import { preserveWhitespacesDefault } from '@angular/compiler';
-import { Cloudinary } from 'cloudinary-core';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController, Loading } from 'ionic-angular';
+import { CloudinaryUploaderProvider } from '../../providers/cloudinary-uploader/cloudinary-uploader';
+import { CATCH_ERROR_VAR } from '@angular/compiler/src/output/output_ast';
 
 
 /**
@@ -33,14 +34,17 @@ export class CameraPage {
               public alertCtrl: AlertController,
               public toastCtrl: ToastController,
               public windowSrvc: WindowProvider,
-              public cloudinary: Cloudinary) {
+              public loadingCtrl: LoadingController,
+              public cloudinary: CloudinaryUploaderProvider) {
               this.window = this.windowSrvc.getNativeWindow();
   }
 
+  saveWasSuccessful: boolean;
   window: any;
   videoSource: any;
   pictureTaken: boolean = false;
   imageData: any;
+  imageUrl: any;
   hackId: number;
   currentPhase: number;
   currentStream: MediaStream;
@@ -119,27 +123,24 @@ export class CameraPage {
 
     this.imageData = targetCanvas.toDataURL('image/png');
     this.image.nativeElement.src = this.imageData;
-
     this.toggleCamera()
   }
 
-  savePicture() {
-    console.log(this.imageData);
-    try {
-      this.hackSrvc.savePictureInPhase(this.hackId, this.currentPhase, this.imageData);
-      // this.hackSrvc.markPhaseAsCompleted(this.hackId, this.currentPhase);
-      this.goToWellHackedPage();
-    }
-    catch (e) {
-      console.log(e);
-      let alert = this.alertCtrl.create({
-        title: "Sorry!",
-        subTitle: "Something went wrong",
-        buttons: ["sucks!"]
-      })
-      alert.present();
-    }
+  async savePicture() {
+    let cloudinaryData;
+    let loading = this.loadingCtrl.create()
+    loading.setContent("Uploading...")
+    loading.present();
+    let cloudinaryResponse = await this.cloudinary.uploadPicture(this.imageData).toPromise()
+    let postImageToServerResponse = await this.hackSrvc.savePicture(cloudinaryResponse['secure_url']).toPromise();
+    this.hackSrvc.currentHackathon = postImageToServerResponse;
+    this.hackSrvc.updateCurrentPhase();
+    console.log(cloudinaryResponse, "We have duly waited for the response");
+    loading.dismiss();
+    this.goToWellHackedPage();
   }
+
+
 
   discardPicture() {
     this.toggleCamera();
@@ -154,8 +155,7 @@ export class CameraPage {
   }
 
   goToWellHackedPage(){
-    this.navCtrl.push(WellHackedPage)
+    this.navCtrl.push(WellHackedPage);
   }
-
 
 }
