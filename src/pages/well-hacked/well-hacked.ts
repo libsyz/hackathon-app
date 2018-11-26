@@ -20,7 +20,7 @@ import { TimerPage } from '../timer/timer';
 export class WellHackedPage {
   hackId: number;
   currentHackathon: Hackathon;
-  currentPhase: number;
+  finishedPhase: number;
   headerText: string;
   contentText: string;
 
@@ -31,28 +31,26 @@ export class WellHackedPage {
   }
 
   ionViewDidLoad() {
-    this.hackId = this.navParams.get("hackathonId");
-    this.currentPhase = this.navParams.get("currentPhase");
-    this.currentHackathon = this.hackSrvc.findHackathon(this.hackId);
+    this.finishedPhase = this.hackSrvc.currentPhase - 1;
+    this.currentHackathon = this.hackSrvc.currentHackathon;
     this.getPageText();
 
   }
   getPageText(){
     this.currentHackathon.phases.forEach(phase => {
-      if (phase['phaseNumber'] === this.currentPhase ) {
-        this.headerText = phase['phaseHeader'];
+      if (phase['phaseNumber'] === this.finishedPhase ) {
+        this.headerText = phase['headerText'];
         this.contentText = phase['wellHackedText'];
       }
     }); 
   }
 
   nextPhase(){
-    if (this.currentPhase == 5) {
+    if (this.hackSrvc.currentPhase == 5) {
       this.navCtrl.push(ReviewHackPage, {hackathonId: this.hackId});
     }
     else {
-      this.navCtrl.push(TimerPage, {hackathonId: this.hackId, 
-        currentPhase: this.currentPhase + 1 } );
+      this.navCtrl.push(TimerPage);
     }
  
   }

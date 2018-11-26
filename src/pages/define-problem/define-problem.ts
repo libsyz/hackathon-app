@@ -38,7 +38,6 @@ export class DefineProblemPage {
 
   ionViewDidLoad(){
     this.problemInput = "";
-    this.hackId = this.navParams.get("hackathonId");
     }
 
   updateProblem(){
@@ -56,8 +55,15 @@ export class DefineProblemPage {
       this.showToast("Your problem should not exceed 120 characters long");
     }
     else {
-      this.hackSrvc.saveProblemStatement(this.problemInput, this.hackId);
-      this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId, currentPhase: 1});
+      this.hackSrvc.saveProblemStatement(this.problemInput).subscribe(response => {
+        console.log(response);
+        this.hackSrvc.currentHackathon = response;
+        this.hackSrvc.updateCurrentPhase();
+        this.navCtrl.push(WellHackedPage);
+      }, error => {
+        this.showToast("Sorry, something went wrong!")
+      });
+      
     }
   }
 
