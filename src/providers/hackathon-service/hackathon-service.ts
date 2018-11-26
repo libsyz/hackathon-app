@@ -11,9 +11,9 @@ import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 
 @Injectable()
 export class HackathonService {
-  allHackathons: Hackathon[] = [];
-  mockUpsImported: boolean = false;
-
+  currentHackathon: any;
+  currentHackId: number;
+  currentPhase: number;
 
   constructor(private http: HttpClient,
               private mockSrvc: HackathonMocksProvider,
@@ -22,111 +22,76 @@ export class HackathonService {
 
   hackathonsEndpoint: string = "http://localhost:3000/api/hackathons"
   addHackerToHackathonEndpoint: string = "http://localhost:3000/api/hackathons/add_hacker"
+  removeHackerFromHackathonEndpoint: string = "http://localhost:3000/api/hackathons/remove_hacker"
 
-  getHackathons(){
-    return this.allHackathons;
-  }
 
-  saveHackathon(hackathon: Hackathon){
-    this.allHackathons.push(hackathon);
-  }
 
   createHackathon(){
   const authHeaders = this.authSrvc.getAuthenticatedHeaders();
-  return this.http.post(this.hackathonsEndpoint, {user: "watch the token" },  { headers: authHeaders })
+  return this.http.post(this.hackathonsEndpoint, { user: "watch the token" },  { headers: authHeaders })
   }
 
 
-  findHackathon(id) {
-     let foundHack: Hackathon;
-     this.allHackathons.forEach((hack)=> {
-      if(hack.id == id) foundHack = hack;
-      })
-     return foundHack;
-  }
-
-  addHackerToHackathon(hacker_id: number, hackathon_id: any) {
+  addHackerToHackathon(hackerId: number, hackerInSlot:number,  hackathonId: any) {
     const authHeaders = this.authSrvc.getAuthenticatedHeaders();
     return this.http.patch(this.addHackerToHackathonEndpoint, 
                          {
-                          hacker_id: hacker_id,
-                          hackathon_id: hackathon_id
+                          hacker_id: hackerId,
+                          hackathon_id: hackathonId,
+                          hacker_in_slot_id: hackerInSlot
                           }, 
                           { headers: authHeaders} )
   }
 
 
-  clearHacker(hackId, hackerName) {
-    let foundHack = this.findHackathon(hackId);
-    foundHack.users.forEach((user, index)=> {
-      if (user.name == hackerName.name) {
-        foundHack.users.splice(index, 1);
-      }
-    })
+  clearHacker(hackerName) {
+    const authHeaders = this.authSrvc.getAuthenticatedHeaders();
+    return this.http.patch(this.removeHackerFromHackathonEndpoint, 
+                  {
+                    hacker_in_slot_id: hackerName,
+                    hackathon_id: this.currentHackId
+                  }, 
+                  {headers: authHeaders})
   }
 
-  getNumberOfHackers(hackId) {
-    const foundHack = this.allHackathons[hackId.hackathonId - 1];
-    let numberOfHackers = 0;
-    foundHack.users.forEach((user)=> { 
-      if (user != "") numberOfHackers++;
-    })
-    return numberOfHackers;
+  getNumberOfHackers() {
+    const authHeaders = this.authSrvc.getAuthenticatedHeaders();
+    const hack_id  = this.currentHackId;
+    return this.http.get(`http://localhost:3000/api/hackathons/${hack_id}`, {headers: authHeaders})
   }
+
+  checkForEnoughHackers(hackersEnlisted){
+    return hackersEnlisted > 2 ? true : false;
+  }
+  
 
   saveProblemStatement(inputText: string, hackId) {
-    const foundHack = this.allHackathons[hackId -1];
-    foundHack.phases[0]['problemStatement'] = inputText;
-    this.markPhaseAsCompleted(hackId, 1);
+
   }
 
-  getCurrentPhase(hackId) {
-    const foundHack = this.allHackathons[hackId -1];
-    const currentPhase = foundHack.phases.find((phase) => {
-      return phase['completed'] == false;
-    })
-    return currentPhase['phaseNumber'];
-    
+  updateCurrentPhase() {
+    debugger
+    const phaseFound = this.currentHackathon['phases'].find(phase => {
+        return phase['completed'] == null })
+    this.currentPhase = phaseFound['phaseOrder'];
   }
 
-  markPhaseAsCompleted(hackId, phaseNumber) {
-    const foundHack = this.allHackathons[hackId -1];
-    const phaseToMark = foundHack.phases.find((phase) => {
-      return phase['phaseNumber'] == phaseNumber;
-    })
-    phaseToMark['completed'] = true;
+  markPhaseAsCompleted() {
   }
 
   savePictureInPhase(hackId, currentPhase, image) {
-    const foundHack = this.allHackathons[hackId - 1];
-    const foundPhase = foundHack.phases.find((phase)=> {
-      return phase['phaseNumber'] == currentPhase;
-    })
-    foundPhase['pictures'].push(image);
+
   }
 
   saveTestActions(hackId, actionsArray: any[]) {
-    const foundHack = this.allHackathons[hackId - 1];
-    actionsArray.forEach((action) => {
-      if (action != "") {
-      foundHack.phases[4]['actions'].push(action);
-      }
-    })
+
   }
 
   saveTestTimeframe(hackId, timeframe) {
-    const foundHack = this.allHackathons[hackId - 1];
-    foundHack.phases[4]['timePeriod'] = timeframe;
+
   }
 
   importMockUps() {
-    if (this.mockUpsImported == false) {
-      let mockUp1 = this.mockSrvc.generateHack1();
-      let mockUp2 = this.mockSrvc.generateHack2();
-      this.saveHackathon(mockUp1);
-      this.saveHackathon(mockUp2);
-      this.mockUpsImported = true;
-    }
   }
 
   

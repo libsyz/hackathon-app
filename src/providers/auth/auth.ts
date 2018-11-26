@@ -11,7 +11,6 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthProvider {
   userData: User;
-  currentHackId: number;
 
   url = "http://localhost:3000/api/users/sign_in"
 

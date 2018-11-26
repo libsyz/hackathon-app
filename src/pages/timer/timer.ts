@@ -1,5 +1,4 @@
 import { NotificationsProvider } from './../../providers/notifications/notifications';
-import { Phase } from './../../models/phase.interface';
 import { ToolsProvider } from './../../providers/tools/tools';
 import { Hackathon } from './../../models/hackathon.model';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
@@ -33,17 +32,17 @@ export class TimerPage {
   }
 
 
-  currentHackathon: Hackathon;
+  currentHackathon: any;
   hackId: number;
   currentPhase: number;
-  phaseHeader: string;
+  headerText: string;
   helperText: string;
 
 
   ionViewDidLoad() {
-    this.hackId = this.navParams.get("hackathonId");
-    this.currentPhase = this.hackSrvc.getCurrentPhase(this.hackId);
-    this.currentHackathon = this.hackSrvc.findHackathon(this.hackId);
+    debugger
+    this.currentPhase = this.hackSrvc.currentPhase;
+    this.currentHackathon = this.hackSrvc.currentHackathon;
     this.getText();
   }
 
@@ -64,10 +63,10 @@ export class TimerPage {
   }
 
   getText() {
-    this.currentHackathon.phases.forEach((phase: Phase)=> {
-      if( phase.phaseNumber == this.currentPhase) {
-        this.phaseHeader = phase.phaseHeader;
-        this.helperText = phase.helperText;
+    this.currentHackathon.phases.forEach((phase)=> {
+      if( phase['phaseOrder'] == this.currentPhase) {
+        this.headerText = phase['headerText'];
+        this.helperText = phase['helperText'];
       }
     })
   }

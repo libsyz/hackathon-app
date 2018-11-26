@@ -28,11 +28,9 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-    console.log("Halloooo");
     console.log(this.navParams);
     this.welcomeUser(this.navParams.get("firstName"));
     this.timerSrvc.loadConfig();
-    // Could embed in navparams if we are coming from the 
   }
 
   welcomeUser(firstName){
@@ -50,7 +48,10 @@ export class HomePage {
     newHack.subscribe(
       response => {
         console.log(response);
-        this.authSrvc.currentHackId = response['hackathon_id']
+        this.hackSrvc.currentHackathon = response;
+        this.hackSrvc.currentHackId = response['hackathon_id'];
+        this.hackSrvc.updateCurrentPhase();
+
         this.navCtrl.push(ChooseHackersPage);
     },
       error => {

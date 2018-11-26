@@ -21,6 +21,7 @@ export class HackerAvatarComponent {
   @Output() wasSelected = new EventEmitter();
 
   hackerSelected: boolean = false;
+  hackerId: number;
   hackerImageReference: string;
   text: string;
   currentHackId: number;
@@ -34,23 +35,27 @@ export class HackerAvatarComponent {
 
 
   showHackersModal() {
-    const myModal = this.modalCtrl.create(HackersListPage, {hackathonId: this.currentHackId});
-    myModal.onDidDismiss((data)=> {
-      this.updateHackerStatus(data);
+    const myModal = this.modalCtrl.create(HackersListPage, {hackathonId: this.currentHackId,
+                                                            hackerId: this.hackerId});
+    myModal.onDidDismiss((hackerData)=> {
+      this.updateHackerStatus(hackerData);
     })
     myModal.present();
   }
 
-  updateHackerStatus(data) {
-    if (data.data != "clear") {
+  updateHackerStatus(hacker) {
+    console.log(hacker);
+    if (hacker.data != "clear") {
       this.hackerSelected = true;
-      this.hackerName = data.hacker.name;
-      this.hackerImageReference = data.hacker.imageUrl;
+      this.hackerId = hacker.hacker.id;
+      this.hackerName = hacker.hacker.firstName;
+      this.hackerImageReference = hacker.hacker.avatarPic;
       this.emitData();
     }
     else {
-      this.hackerSelected = true;
-      this.hackerName = '';
+      this.hackerSelected = false;
+      this.hackerId = null;
+      this.hackerName = null;
       this.hackerImageReference = '';
       this.emitData();
     }
@@ -58,7 +63,7 @@ export class HackerAvatarComponent {
   }
 
   emitData() {
-    this.wasSelected.emit({ 
+  this.wasSelected.emit({ 
                             hackerSelected: this.hackerSelected, 
                             hackerName: this.hackerName
                           });

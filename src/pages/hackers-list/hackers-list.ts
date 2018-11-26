@@ -37,31 +37,35 @@ export class HackersListPage {
 
 
   ionViewDidLoad() {
-    this.currentHackId = this.navParams.get("hackathonId");
     this.slot = this.navParams.get("slot");
+    this.hackerInSlot = this.navParams.get("hackerId");
     this.hackers = this.hackersListSrvc.users
   }
 
   
-  selectHacker(hacker, slot) {
+  selectHacker(hacker) {
    // Ok mi pana
-   const selectionResult = this.hackSrvc.addHackerToHackathon(hacker['id'], this.authSrvc.currentHackId);
+   const selectionResult = this.hackSrvc.addHackerToHackathon(hacker['id'], this.hackerInSlot, this.hackSrvc.currentHackId);
    selectionResult.subscribe(
       response => {
         console.log(response);
+        this.manageSelectionResult(response, hacker);
       },
       error => {
-        console.log(error);
+        console.log(error)
+        this.somethingWentWrong();;
       }
    )
-   // Call the API to add a hacker to the current hackathon
-   // Three scenarios
-   // 200 - The hacker has been added to the hackathon
-   // 200 - The hacker was already there, so it could not be added
-   // 500 - Something got messed up unexpectedly
   }
   
-
+  manageSelectionResult(ApiData, hacker){
+    if (ApiData['status'] == 'already selected') {
+      this.hackerAlreadySelectedAlert();
+    }
+    else {
+      this.viewCtrl.dismiss({ hacker: hacker });
+    }
+  }
 
   hackerAlreadySelectedAlert() {
     let myAlert = this.alertCtrl.create({
@@ -72,9 +76,22 @@ export class HackersListPage {
     myAlert.present();
   }
 
+  somethingWentWrong(){
+    let errorAlert = this.alertCtrl.create({
+      title: 'Whoops!',
+      subTitle: 'Something went wrong',
+      buttons: ['got it']}
+    )
+    errorAlert.present();
+  }
+
   dropPage() {
-    this.hackSrvc.clearHacker(this.currentHackId, this.hackerInSlot);
-    this.viewCtrl.dismiss({data: "clear"});
+    if (this.hackerInSlot){
+      const cleared = this.hackSrvc.clearHacker(this.hackerInSlot);
+      cleared.subscribe();
+     }
+    this.viewCtrl.dismiss({ data: "clear" });
+
   }
 
 }

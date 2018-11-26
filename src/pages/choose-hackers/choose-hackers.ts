@@ -1,3 +1,4 @@
+import { AuthProvider } from './../../providers/auth/auth';
 import { hackersList } from './../../services/hackers-list.service';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { TimerPage } from './../timer/timer';
@@ -20,10 +21,11 @@ export class ChooseHackersPage {
   hackerSlots: number[];
   // Default, the organizer already counts for 1
   gotEnoughHackers: boolean = false;
-  hackId: string;
+  hackId;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
+              public authSrvc: AuthProvider, 
               public alertCtrl: AlertController,
               public hackSrvc: HackathonService,
               public hackListSrvc: hackersList) {
@@ -31,22 +33,37 @@ export class ChooseHackersPage {
 
   ionViewDidLoad() {
     this.hackerSlots = [0, 1, 2, 3, 4];
-    this.hackId = this.navParams.get("hackathonId");
+    this.hackId = this.hackSrvc.currentHackId;
     this.hackListSrvc.getUsers();
   }
 
   updateHackersChosen(eventEmitterObj) {
-    let numberOfHackers = this.hackSrvc.getNumberOfHackers(this.navParams.data);
-    this.checkForEnoughHackers(numberOfHackers);
+    const numberOfHackers = this.hackSrvc.getNumberOfHackers();
+    numberOfHackers.subscribe(response => {
+        console.log(response);
+        const hackersEnlisted = response['hackathon']['hackers_enlisted'];
+        this.checkForEnoughHackers(hackersEnlisted);
+    } )
   }
 
-
-  checkForEnoughHackers(hackId){
-    const foundHack = this.hackSrvc.findHackathon(hackId);
-    this.gotEnoughHackers = foundHack.hasEnoughHackers();
+  checkForEnoughHackers(hackersEnlisted){
+    this.gotEnoughHackers = this.hackSrvc.checkForEnoughHackers(hackersEnlisted);
   }
-  
+
   goToTimer(){
-  this.navCtrl.push(TimerPage, { hackathonId: this.hackId });
+  this.navCtrl.push(TimerPage);
   }
+
+  // What do I need to decide
+
+  // How to figure out what is the next phase
+
+  // Everytime I do a get request to know if the hackathon is done
+
+  // When is it appropropriate to do so
+
+  // This is crucial for the flow of the app - 
+  // As soon as possible 
+
+  // Where to store that information appropriately
 }
