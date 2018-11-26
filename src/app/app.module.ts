@@ -6,7 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MyApp } from './app.component';
-
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as  Cloudinary from 'cloudinary-core';
 // Pages
 
 import { SignInPage } from './../pages/sign-in/sign-in';
@@ -94,6 +95,7 @@ import { AuthProvider } from '../providers/auth/auth';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'dhodayze1'}),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
