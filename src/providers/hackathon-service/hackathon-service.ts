@@ -23,7 +23,7 @@ export class HackathonService {
   hackathonsEndpoint: string = "http://localhost:3000/api/hackathons"
   addHackerToHackathonEndpoint: string = "http://localhost:3000/api/hackathons/add_hacker"
   removeHackerFromHackathonEndpoint: string = "http://localhost:3000/api/hackathons/remove_hacker"
-
+  editHackathonPhaseEndpoint: string = "http://localhost:3000/api/hackathon_phases/edit_phase"
 
 
   createHackathon(){
@@ -51,7 +51,9 @@ export class HackathonService {
                     hacker_in_slot_id: hackerName,
                     hackathon_id: this.currentHackId
                   }, 
-                  {headers: authHeaders})
+                  { 
+                    headers: authHeaders
+                  })
   }
 
   getNumberOfHackers() {
@@ -65,12 +67,21 @@ export class HackathonService {
   }
   
 
-  saveProblemStatement(inputText: string, hackId) {
+  saveProblemStatement(inputText: string) {
+    const authHeaders = this.authSrvc.getAuthenticatedHeaders();
+    return this.http.patch(this.editHackathonPhaseEndpoint, 
+                  {
+                    hackathon_id: this.currentHackId,
+                    phase_number: this.currentPhase,
+                    edit_problem_statement: inputText
+                  }, 
+                  { 
+                    headers: authHeaders 
+                  })
 
   }
 
   updateCurrentPhase() {
-  
     const phaseFound = this.currentHackathon['phases'].find(phase => {
         return phase['completed'] == null })
     this.currentPhase = phaseFound['phaseOrder'];

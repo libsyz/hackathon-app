@@ -41,19 +41,19 @@ export class HackathonShowPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReviewHackPage');
     this.hackId = this.navParams.get("showHackId");
-    this.loadHackathonInfo(this.hackId);
+    // this.loadHackathonInfo(this.hackId);
     this.showTargetData("empathise");
   }
 
-  loadHackathonInfo(hackId){
-    const hackathonToLoad = this.hackSrvc.findHackathon(hackId);
-    this.problemStatement = hackathonToLoad.phases[0]['problemStatement'];
-    this.empathiseImageURL = hackathonToLoad.phases[1]['pictures'][0];
-    this.ideateImageURL= hackathonToLoad.phases[2]['pictures'][0];
-    this.prototypeImageURL= hackathonToLoad.phases[3]['pictures'][0];
-    this.testActions = hackathonToLoad.phases[4]['actions'];
-    this.testTimeframe = hackathonToLoad.phases[4]['timePeriod'];
-  }
+  // loadHackathonInfo(hackId){
+  //   const hackathonToLoad = this.hackSrvc.findHackathon(hackId);
+  //   this.problemStatement = hackathonToLoad.phases[0]['problemStatement'];
+  //   this.empathiseImageURL = hackathonToLoad.phases[1]['pictures'][0];
+  //   this.ideateImageURL= hackathonToLoad.phases[2]['pictures'][0];
+  //   this.prototypeImageURL= hackathonToLoad.phases[3]['pictures'][0];
+  //   this.testActions = hackathonToLoad.phases[4]['actions'];
+  //   this.testTimeframe = hackathonToLoad.phases[4]['timePeriod'];
+  // }
 
   showSection(){
     this.highlightTargetTab(event);
