@@ -5,6 +5,8 @@ import { HackathonService } from './../../providers/hackathon-service/hackathon-
 import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { preserveWhitespacesDefault } from '@angular/compiler';
+import { Cloudinary } from 'cloudinary-core';
+
 
 /**
  * Generated class for the CameraPage page.
@@ -30,7 +32,8 @@ export class CameraPage {
               public pageNavSrvc: PageNavigationProvider,
               public alertCtrl: AlertController,
               public toastCtrl: ToastController,
-              public windowSrvc: WindowProvider) {
+              public windowSrvc: WindowProvider,
+              public cloudinary: Cloudinary) {
               this.window = this.windowSrvc.getNativeWindow();
   }
 
@@ -117,7 +120,7 @@ export class CameraPage {
     this.imageData = targetCanvas.toDataURL('image/png');
     this.image.nativeElement.src = this.imageData;
 
-    this.changeVisibilityConditions()
+    this.toggleCamera()
   }
 
   savePicture() {
@@ -139,20 +142,19 @@ export class CameraPage {
   }
 
   discardPicture() {
-    this.changeVisibilityConditions();
+    this.toggleCamera();
     this.imageData = '';
     this.image.nativeElement.src = '';
   }
 
-  changeVisibilityConditions() {
+  toggleCamera() {
     this.image.nativeElement.hidden = !this.image.nativeElement.hidden;
     this.video.nativeElement.hidden = !this.video.nativeElement.hidden;
     this.pictureTaken = !this.pictureTaken;
   }
 
   goToWellHackedPage(){
-    this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
-                                       currentPhase: this.currentPhase})
+    this.navCtrl.push(WellHackedPage)
   }
 
 
