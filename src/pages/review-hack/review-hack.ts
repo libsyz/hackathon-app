@@ -48,17 +48,17 @@ export class ReviewHackPage {
     loading.setContent("Fetching data...")
     loading.present();
 
-    // all this shit between //// is setup - God knows I gotta become better at testing
+    // // all this shit between //// is setup - God knows I gotta become better at testing
 
-    ////
-    this.authSrvc.userData = {    token: "VmFrxdFEu2XnWNZ6p2Us",
-                                  firstName: "sample",
-                                  lastName: "sample",
-                                  position: "sample",
-                                  company: "sample" }
-    this.aheaders = this.authSrvc.getAuthenticatedHeaders();
+    // ////
+    // this.authSrvc.userData = {    token: "VmFrxdFEu2XnWNZ6p2Us",
+    //                               firstName: "sample",
+    //                               lastName: "sample",
+    //                               position: "sample",
+    //                               company: "sample" }
+    // this.aheaders = this.authSrvc.getAuthenticatedHeaders();
 
-    ////
+    // ////
     this.loadHackathonInfo();
     this.showTargetData("empathise");
     loading.dismiss();
@@ -66,10 +66,8 @@ export class ReviewHackPage {
   }
 
   async loadHackathonInfo(){
-
     // response should change back to this.hackSrvc.getSingleHackathon().toPromise() aftertesting  
-    let response = await this.http.get("http://localhost:3000/api/hackathons/217", { headers: this.aheaders} ).toPromise();
-    console.log(response);
+    let response = await this.hackSrvc.getSingleHackathon().toPromise();
     this.hackathonToShow = response['hackathon'];
     this.problemStatement =  this.hackathonToShow['problem_statement']
     this.empathiseImageURL =  this.hackathonToShow['empathise_url']

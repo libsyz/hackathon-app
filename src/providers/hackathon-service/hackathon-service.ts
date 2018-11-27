@@ -22,8 +22,8 @@ export class HackathonService {
   }
 
   hackathonsEndpoint: string = "http://localhost:3000/api/hackathons"
-  addHackerToHackathonEndpoint: string = "http://localhost:3000/api/hackathons/add_hacker"
-  removeHackerFromHackathonEndpoint: string = "http://localhost:3000/api/hackathons/remove_hacker"
+  addHackerToHackathonEndpoint: string = "http://localhost:3000/api/add_hacker"
+  removeHackerFromHackathonEndpoint: string = "http://localhost:3000/api/remove_hacker"
   editHackathonPhaseEndpoint: string = "http://localhost:3000/api/hackathon_phases/edit_phase"
 
 
@@ -35,7 +35,7 @@ export class HackathonService {
 
   addHackerToHackathon(hackerId: number, hackerInSlot:number,  hackathonId: any) {
     const authHeaders = this.authSrvc.getAuthenticatedHeaders();
-    return this.http.patch(this.addHackerToHackathonEndpoint, 
+    return this.http.put(this.addHackerToHackathonEndpoint, 
                          {
                           hacker_id: hackerId,
                           hackathon_id: hackathonId,
@@ -131,12 +131,13 @@ export class HackathonService {
   }
 
   addTitleToHackathon(data){
+    // The API signs the hackathon as as complete if the request is successful
     const authHeaders = this.authSrvc.getAuthenticatedHeaders();
-    return this.http.put(this.hackathonsEndpoint + "/" + 217, 
+    return this.http.put(this.hackathonsEndpoint + "/" + this.currentHackId, 
                          data, 
                          { headers: authHeaders })
   }
-  
+
   clearApplicationState(){
     this.currentHackathon = null;
     this.currentHackId = null;

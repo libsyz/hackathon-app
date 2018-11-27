@@ -32,7 +32,6 @@ export class HackersListPage {
               public hackSrvc: HackathonService,
               public alertCtrl: AlertController,
               public authSrvc: AuthProvider) {
-
   }
 
 

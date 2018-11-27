@@ -1,6 +1,6 @@
 <!-- Generated template for the HackerAvatarComponent component -->
 <div (click)='showHackersModal()'
      class='hacker-avatar'>
-  <img *ngIf="hackerSelected" src="./../../assets/imgs/{{hackerImageReference}}" alt="">
+  <img *ngIf="hackerSelected" src="{{hackerImageReference}}" alt="">
   <p *ngIf="!hackerSelected">tap to add a hacker!</p>
 </div>
