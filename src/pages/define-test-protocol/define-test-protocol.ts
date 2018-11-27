@@ -36,8 +36,7 @@ export class DefineTestProtocolPage {
   }
 
   ionViewDidLoad() {
-    console.log(this.navParams);
-    this.hackId = this.navParams.get("hackathonId");
+    this.hackId = this.hackSrvc.currentHackId;
     console.log('ionViewDidLoad DefineTestProtocolPage');
   }
 
@@ -76,15 +75,15 @@ export class DefineTestProtocolPage {
 
   goToNext(){
     this.saveInformation();
-    this.navCtrl.push(WellHackedPage, {hackathonId: this.hackId,
-                                        currentPhase: 5});
+    this.navCtrl.push(WellHackedPage);
   }
 
 
   saveInformation() {
-    this.hackSrvc.saveTestActions(this.hackId, this.actionArray);
-    this.hackSrvc.saveTestTimeframe(this.hackId, this.timeframe);
-}
+    const saveTestResponse = this.hackSrvc.saveTest(this.actionArray, this.timeframe).toPromise();
+    this.hackSrvc.currentHackathon = saveTestResponse;
+    this.hackSrvc.updateCurrentPhase();
+  }
 
 
   addTimeframe(){

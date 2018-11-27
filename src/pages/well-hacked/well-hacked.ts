@@ -22,7 +22,7 @@ export class WellHackedPage {
   currentHackathon: Hackathon;
   finishedPhase: number;
   headerText: string;
-  contentText: string;
+  wellHackedText: string;
 
 
   constructor(public navCtrl: NavController, 
@@ -31,22 +31,23 @@ export class WellHackedPage {
   }
 
   ionViewDidLoad() {
+    debugger
     this.finishedPhase = this.hackSrvc.currentPhase - 1;
     this.currentHackathon = this.hackSrvc.currentHackathon;
     this.getPageText();
-
   }
+
   getPageText(){
     this.currentHackathon.phases.forEach(phase => {
-      if (phase['phaseNumber'] === this.finishedPhase ) {
+      if (phase['phaseOrder'] === this.finishedPhase ) {
         this.headerText = phase['headerText'];
-        this.contentText = phase['wellHackedText'];
+        this.wellHackedText = phase['wellHackedText'];
       }
     }); 
-  }
+}
 
   nextPhase(){
-    if (this.hackSrvc.currentPhase == 5) {
+    if (this.finishedPhase == 5) {
       this.navCtrl.push(ReviewHackPage, {hackathonId: this.hackId});
     }
     else {

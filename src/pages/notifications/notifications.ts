@@ -24,13 +24,13 @@ export class NotificationsPage {
   notifications: any[];
   
   ionViewDidLoad() {
-    this.notifications = this.notificationSrvc.getNotifications();
+    // this.notifications = this.notificationSrvc.getNotifications();
     this.refreshNotifications();
   }
 
   refreshNotifications() {
     setInterval(() => {
-      this.notifications = this.notificationSrvc.getNotifications();
+      // this.notifications = this.notificationSrvc.getNotifications();
     }, 3000);
   } 
 }

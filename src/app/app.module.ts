@@ -7,7 +7,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MyApp } from './app.component';
-
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as  Cloudinary from 'cloudinary-core';
 // Pages
 
 import { SignInPage } from './../pages/sign-in/sign-in';
@@ -59,6 +60,7 @@ import { WindowProvider } from '../providers/window/window';
 import { HackathonMocksProvider } from '../providers/hackathon-mocks/hackathon-mocks';
 import { NotificationsProvider } from '../providers/notifications/notifications';
 import { AuthProvider } from '../providers/auth/auth';
+import { CloudinaryUploaderProvider } from '../providers/cloudinary-uploader/cloudinary-uploader';
 
 
 
@@ -95,6 +97,7 @@ import { AuthProvider } from '../providers/auth/auth';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'dhodayze1'}),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -129,6 +132,7 @@ import { AuthProvider } from '../providers/auth/auth';
     StatusBar,
     SplashScreen,
     hackersList,
+    CloudinaryUploaderProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HackathonService,
     HttpClient,
@@ -140,6 +144,7 @@ import { AuthProvider } from '../providers/auth/auth';
     HackathonMocksProvider,
     NotificationsProvider,
     AuthProvider,
+    CloudinaryUploaderProvider,
   ]
 })
 export class AppModule {}
