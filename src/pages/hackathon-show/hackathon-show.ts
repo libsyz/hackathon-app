@@ -24,13 +24,12 @@ export class HackathonShowPage {
   empathiseImageURL: string;
   ideateImageURL: string;
   prototypeImageURL: string;
-  testActions: string[];
-  testTimeframe: string;
+  testTimeframe: any;
+  testProtocol: any;
 
   // hackathonIdentifier
 
-  currentHackathon: Hackathon;
-  hackId: number;
+  hackathon: any;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -40,20 +39,20 @@ export class HackathonShowPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReviewHackPage');
-    this.hackId = this.navParams.get("showHackId");
-    // this.loadHackathonInfo(this.hackId);
+    this.hackathon = this.navParams.get("hack");
+    debugger
+    this.loadHackathonInfo();
     this.showTargetData("empathise");
   }
 
-  // loadHackathonInfo(hackId){
-  //   const hackathonToLoad = this.hackSrvc.findHackathon(hackId);
-  //   this.problemStatement = hackathonToLoad.phases[0]['problemStatement'];
-  //   this.empathiseImageURL = hackathonToLoad.phases[1]['pictures'][0];
-  //   this.ideateImageURL= hackathonToLoad.phases[2]['pictures'][0];
-  //   this.prototypeImageURL= hackathonToLoad.phases[3]['pictures'][0];
-  //   this.testActions = hackathonToLoad.phases[4]['actions'];
-  //   this.testTimeframe = hackathonToLoad.phases[4]['timePeriod'];
-  // }
+  loadHackathonInfo(){
+    this.problemStatement =  this.hackathon['problem_statement']
+    this.empathiseImageURL =  this.hackathon['empathise_url']
+    this.ideateImageURL=  this.hackathon['ideate_url']
+    this.prototypeImageURL =  this.hackathon['prototype_url']
+    this.testProtocol = this.hackathon['test_protocol']
+    this.testTimeframe =  this.hackathon['test_timeframe']
+  }
 
   showSection(){
     this.highlightTargetTab(event);

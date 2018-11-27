@@ -4,7 +4,7 @@ import { HackathonMocksProvider } from './../../providers/hackathon-mocks/hackat
 import { Hackathon } from './../../models/hackathon.model';
 import { HelperMethodsProvider } from './../../providers/helper-methods/helper-methods';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the GalleryPage page.
@@ -23,26 +23,32 @@ export class GalleryPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public helperCtrl: HelperMethodsProvider,
               public mockSrvc: HackathonMocksProvider,
-              public hackSrvc: HackathonService) {
+              public hackSrvc: HackathonService,
+              public loadingCtrl: LoadingController) {
   }
 
-  hacksToDisplay: Hackathon[];
+  hacksToDisplay: any[];
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GalleryPage');
+    let loading = this.loadingCtrl.create();
+    loading.setContent("loading hackathons...")
+    loading.present();
     this.importHackathons();
+    loading.dismiss();
   }
 
-  importHackathons() {
-    // this.hacksToDisplay = this.hackSrvc.getHackathons();
-    // Api call to get all hackathons and then display
+  async importHackathons() {
+    let hackathons: any;
+    hackathons = await this.hackSrvc.getHackathons().toPromise();
+    this.hacksToDisplay = hackathons['hackathons'];
   }
   buildingAmazing(){
     this.helperCtrl.buildingAmazing();
   }
 
   showHackathon(hackathon){
-  this.navCtrl.push(HackathonShowPage, {showHackId: hackathon.id})
+  this.navCtrl.push(HackathonShowPage, {hack: hackathon})
   }
 
 
