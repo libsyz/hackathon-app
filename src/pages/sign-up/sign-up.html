@@ -35,31 +35,31 @@
 
         <ion-item>
             <ion-label fixed>First Name</ion-label>
-            <ion-input formControlName="firstName"   type="text" required value=""></ion-input>
+            <ion-input formControlName="name"   type="text" required value=""></ion-input>
         </ion-item>
 
         <div class="error-message"
-          *ngIf='(signUpForm.controls.firstName.touched && signUpForm.controls.firstName.invalid)'>
+          *ngIf='(signUpForm.controls.name.touched && signUpForm.controls.name.invalid)'>
           Please introduce your first name 
         </div>  
         
         <ion-item>
             <ion-label fixed>Last Name</ion-label>
-            <ion-input formControlName="lastName"   required type="text"></ion-input>
+            <ion-input formControlName="surname"   required type="text"></ion-input>
         </ion-item>
 
         <div class="error-message"
-          *ngIf='(signUpForm.controls.lastName.touched && signUpForm.controls.lastName.invalid)'>
+          *ngIf='(signUpForm.controls.surname.touched && signUpForm.controls.surname.invalid)'>
           Please introduce your last name 
         </div>
 
         <ion-item>
             <ion-label fixed>Role</ion-label>
-            <ion-input  formControlName="role" required type="text" value=""></ion-input>
+            <ion-input  formControlName="position" required type="text" value=""></ion-input>
         </ion-item>
 
         <div class="error-message"
-          *ngIf='(signUpForm.controls.role.touched && signUpForm.controls.role.invalid)'>
+          *ngIf='(signUpForm.controls.position.touched && signUpForm.controls.position.invalid)'>
           Please introduce the your current position  
         </div>
         

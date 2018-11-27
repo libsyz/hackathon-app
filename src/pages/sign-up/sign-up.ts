@@ -21,7 +21,7 @@ export class SignUpPage {
     private authSrvc: AuthProvider, private alertCtrl: AlertController) {
 }
 
-  // Probably would make sense to keep both forms in other file and export them
+  // form keys changed to lowercase to pass the API requirements
   signUpForm = new FormGroup({
     email: new FormControl('', 
       [
@@ -33,9 +33,9 @@ export class SignUpPage {
         Validators.required,
         Validators.minLength(6)
       ]),
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    role: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required),
+    surname: new FormControl('', Validators.required),
+    position: new FormControl('', Validators.required),
     company: new FormControl('', Validators.required)
   })
 
@@ -55,8 +55,11 @@ export class SignUpPage {
       let signUpData = this.signUpForm.value;
       const postResponse = this.authSrvc.signUp(signUpData);
       postResponse.subscribe(
-        response => {
-          this.authSrvc.userData.token = response['data']['token'];
+        data => {
+          let userData: any;
+          userData = data;
+          debugger
+          this.authSrvc.setCurrentUser(userData);
           this.navCtrl.push(HomePage);
         },
         error => {
