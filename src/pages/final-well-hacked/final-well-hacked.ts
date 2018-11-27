@@ -1,3 +1,5 @@
+import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
+import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -15,11 +17,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FinalWellHackedPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public hackSrvc: HackathonService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FinalWellHackedPage');
+  }
+
+  sendBackHome(){
+    this.hackSrvc.clearApplicationState();
+   
+    this.navCtrl.setRoot(HomePage)
   }
 
 }

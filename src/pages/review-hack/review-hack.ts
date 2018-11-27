@@ -1,3 +1,4 @@
+import { FinalWellHackedPage } from './../final-well-hacked/final-well-hacked';
 import { AuthProvider } from './../../providers/auth/auth';
 import { HttpClient } from '@angular/common/http';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
@@ -110,12 +111,7 @@ export class ReviewHackPage {
   }
 
   goToSaveHackathon() {
-    // show an alert'ish command that asks for the hackathon name
-    // on dismiss 
     this.showSavePrompt();
-    // send the data to the api to update the name of the hackathon
-    // send the user to the final well hacked page
-  
   }
 
 showSavePrompt() {
@@ -140,6 +136,7 @@ showSavePrompt() {
           handler: data => {
             // data format => {title: "string"}
             this.hackSrvc.addTitleToHackathon(data).toPromise().then(data => { console.log(data) });
+            this.navCtrl.push(FinalWellHackedPage)
           }
         }
       ]

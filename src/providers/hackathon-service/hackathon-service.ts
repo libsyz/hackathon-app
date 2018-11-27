@@ -136,5 +136,11 @@ export class HackathonService {
                          data, 
                          { headers: authHeaders })
   }
+  
+  clearApplicationState(){
+    this.currentHackathon = null;
+    this.currentHackId = null;
+    this.currentPhase = null;
+  }
 
 }
