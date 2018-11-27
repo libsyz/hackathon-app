@@ -6,6 +6,7 @@ import { Hackathon } from './../../models/hackathon.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
+import { getNonHydratedSegmentIfLinkAndUrlMatch } from 'ionic-angular/navigation/url-serializer';
 
 
 
@@ -42,7 +43,6 @@ export class HackathonService {
                           }, 
                           { headers: authHeaders} )
   }
-
 
   clearHacker(hackerName) {
     const authHeaders = this.authSrvc.getAuthenticatedHeaders();
@@ -112,5 +112,10 @@ export class HackathonService {
         return phase['completed'] == null })
     this.currentPhase = phaseFound['phaseOrder'];
   }  
+
+  getHackathons(){
+    const authHeaders = this.authSrvc.getAuthenticatedHeaders();
+    return this.http.get(this.hackathonsEndpoint, {headers: authHeaders});
+  }
 
 }

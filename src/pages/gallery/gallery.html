@@ -14,10 +14,10 @@
 
 <ion-content class='gallery-background' padding>
   <ion-card *ngFor="let hack of hacksToDisplay" (click)="showHackathon(hack)">
-    <img class="card-image" [src]="hack.phases[3]['pictures'][0]" alt="" >
+    <img class="card-image" [src]="hack['prototype_url']" alt="" >
     <div class="hack-info">
-      <img class='hacker-avatar' [src]="hack.owner.imageUrl" alt="">
-      <p class='hack-title'> {{hack.title}} </p>
+      <img class='hacker-avatar' [src]="hack['lead_hacker']['avatar_pic']" alt="">
+      <p class='hack-title'> {{ hack['title'] }} </p>
     </div>
   </ion-card>
 
