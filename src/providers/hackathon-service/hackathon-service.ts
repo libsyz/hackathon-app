@@ -94,6 +94,7 @@ export class HackathonService {
   }
 
   saveTest(actionArray, TestTimeframe) {
+    debugger
     const authHeaders = this.authSrvc.getAuthenticatedHeaders();
     return this.http.patch(this.editHackathonPhaseEndpoint, 
                   {
@@ -116,6 +117,24 @@ export class HackathonService {
   getHackathons(){
     const authHeaders = this.authSrvc.getAuthenticatedHeaders();
     return this.http.get(this.hackathonsEndpoint, {headers: authHeaders});
+  }
+
+  getSingleHackathon() {
+    const authHeaders = this.authSrvc.getAuthenticatedHeaders();
+    return this.http.get(this.hackathonsEndpoint + "/" + this.currentHackId, 
+                        {headers: authHeaders});
+  }
+
+  setEndOfHackathon() {
+    debugger
+    this.currentPhase = 6;
+  }
+
+  addTitleToHackathon(data){
+    const authHeaders = this.authSrvc.getAuthenticatedHeaders();
+    return this.http.put(this.hackathonsEndpoint + "/" + 217, 
+                         data, 
+                         { headers: authHeaders })
   }
 
 }

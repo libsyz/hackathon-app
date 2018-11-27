@@ -75,14 +75,14 @@ export class DefineTestProtocolPage {
 
   goToNext(){
     this.saveInformation();
+    this.hackSrvc.setEndOfHackathon();
     this.navCtrl.push(WellHackedPage);
   }
 
 
-  saveInformation() {
-    const saveTestResponse = this.hackSrvc.saveTest(this.actionArray, this.timeframe).toPromise();
+  async saveInformation() {
+    const saveTestResponse = await this.hackSrvc.saveTest(this.actionArray, this.timeframe).toPromise();
     this.hackSrvc.currentHackathon = saveTestResponse;
-    this.hackSrvc.updateCurrentPhase();
   }
 
 

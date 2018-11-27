@@ -13,7 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = SignInOrUpPage;
+  rootPage:any = ReviewHackPage;
 
   constructor(platform: Platform, 
               statusBar: StatusBar, 

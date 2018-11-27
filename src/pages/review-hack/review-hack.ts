@@ -1,7 +1,9 @@
+import { AuthProvider } from './../../providers/auth/auth';
+import { HttpClient } from '@angular/common/http';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { Hackathon } from './../../models/hackathon.model';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Loading, LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the ReviewHackPage page.
@@ -23,43 +25,63 @@ export class ReviewHackPage {
   empathiseImageURL: string;
   ideateImageURL: string;
   prototypeImageURL: string;
-  testActions: string[];
-  testTimeframe: string;
-
+  testProtocol: any;
+  testTimeframe: any;
+  aheaders: any;
   // hackathonIdentifier
 
-  currentHackathon: Hackathon;
+  hackathonToShow: any;
   hackId: number;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public hackSrvc: HackathonService,
-              public alertCtrl: AlertController) {
+              public loadingCtrl: LoadingController,
+              public alertCtrl: AlertController,
+              public authSrvc: AuthProvider,
+              public http: HttpClient) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ReviewHackPage');
-    this.hackId = this.navParams.get("hackathonId");
-    this.loadHackathonInfo(this.hackId);
+    let loading = this.loadingCtrl.create()
+    loading.setContent("Fetching data...")
+    loading.present();
+
+    // all this shit between //// is setup - God knows I gotta become better at testing
+
+    ////
+    this.authSrvc.userData = {    token: "VmFrxdFEu2XnWNZ6p2Us",
+                                  firstName: "sample",
+                                  lastName: "sample",
+                                  position: "sample",
+                                  company: "sample" }
+    this.aheaders = this.authSrvc.getAuthenticatedHeaders();
+
+    ////
+    this.loadHackathonInfo();
     this.showTargetData("empathise");
+    loading.dismiss();
+
   }
 
-  loadHackathonInfo(hackId){
-    // const hackathonToLoad = this.hackSrvc.findHackathon(hackId);
-    // this.problemStatement = hackathonToLoad.phases[0]['problemStatement'];
-    // this.empathiseImageURL = hackathonToLoad.phases[1]['pictures'][0];
-    // this.ideateImageURL= hackathonToLoad.phases[2]['pictures'][0];
-    // this.prototypeImageURL= hackathonToLoad.phases[3]['pictures'][0];
-    // this.testActions = hackathonToLoad.phases[4]['actions'];
-    // this.testTimeframe = hackathonToLoad.phases[4]['timePeriod'];
+  async loadHackathonInfo(){
+
+    // response should change back to this.hackSrvc.getSingleHackathon().toPromise() aftertesting  
+    let response = await this.http.get("http://localhost:3000/api/hackathons/217", { headers: this.aheaders} ).toPromise();
+    console.log(response);
+    this.hackathonToShow = response['hackathon'];
+    this.problemStatement =  this.hackathonToShow['problem_statement']
+    this.empathiseImageURL =  this.hackathonToShow['empathise_url']
+    this.ideateImageURL=  this.hackathonToShow['ideate_url']
+    this.prototypeImageURL =  this.hackathonToShow['prototype_url']
+    this.testProtocol = this.hackathonToShow['test_protocol']
+    this.testTimeframe =  this.hackathonToShow['test_timeframe']
   }
 
   showSection(){
     this.highlightTargetTab(event);
     let dataset = event.srcElement.parentElement.dataset;
     this.showTargetData(dataset.phase);
-    // activate your current section
-    // second behavior - show the right content
   }
 
   highlightTargetTab(event: Event) {
@@ -87,13 +109,41 @@ export class ReviewHackPage {
     })
   }
 
-  buildingAmazing() {
-    let myAlert = this.alertCtrl.create({
-      title: "Hold on",
-      subTitle: "We are building something amazing!",
-      buttons: ["got it"]
-    });
-    myAlert.present();
+  goToSaveHackathon() {
+    // show an alert'ish command that asks for the hackathon name
+    // on dismiss 
+    this.showSavePrompt();
+    // send the data to the api to update the name of the hackathon
+    // send the user to the final well hacked page
+  
   }
 
+showSavePrompt() {
+    const savePrompt = this.alertCtrl.create({
+      title: 'Save your hackathon',
+      message: "Enter a catchy name that gets eyes on your team's idea!",
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Title'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            // data format => {title: "string"}
+            this.hackSrvc.addTitleToHackathon(data).toPromise().then(data => { console.log(data) });
+          }
+        }
+      ]
+    });
+    savePrompt.present();
+  }
 }

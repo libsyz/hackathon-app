@@ -127,16 +127,17 @@ export class CameraPage {
   }
 
   async savePicture() {
-    let cloudinaryData;
-    let loading = this.loadingCtrl.create()
-    loading.setContent("Uploading...")
-    loading.present();
-    let cloudinaryResponse = await this.cloudinary.uploadPicture(this.imageData).toPromise()
-    let postImageToServerResponse = await this.hackSrvc.savePicture(cloudinaryResponse['secure_url']).toPromise();
-    this.hackSrvc.currentHackathon = postImageToServerResponse;
-    this.hackSrvc.updateCurrentPhase();
-    console.log(cloudinaryResponse, "We have duly waited for the response");
-    loading.dismiss();
+    // let cloudinaryData;
+    // let loading = this.loadingCtrl.create()
+    // loading.setContent("Uploading...")
+    // loading.present();
+    // let cloudinaryResponse = await this.cloudinary.uploadPicture(this.imageData).toPromise()
+    // let postImageToServerResponse = await this.hackSrvc.savePicture(cloudinaryResponse['secure_url']).toPromise();
+    // this.hackSrvc.currentHackathon = postImageToServerResponse;
+    // this.hackSrvc.updateCurrentPhase();
+    // console.log(cloudinaryResponse, "We have duly waited for the response");
+    // loading.dismiss();
+    this.hackSrvc.currentPhase++
     this.goToWellHackedPage();
   }
 
