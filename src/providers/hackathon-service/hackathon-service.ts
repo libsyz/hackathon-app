@@ -78,7 +78,6 @@ export class HackathonService {
                   { 
                     headers: authHeaders 
                   })
-
   }
 
   savePicture(imageUrl) {
@@ -92,29 +91,26 @@ export class HackathonService {
                   { 
                     headers: authHeaders 
                   })
+  }
 
+  saveTest(actionArray, TestTimeframe) {
+    const authHeaders = this.authSrvc.getAuthenticatedHeaders();
+    return this.http.patch(this.editHackathonPhaseEndpoint, 
+                  {
+                    hackathon_id: this.currentHackId,
+                    phase_number: this.currentPhase,
+                    edit_test_protocol: actionArray,
+                    edit_test_timeframe: TestTimeframe
+                  }, 
+                  { 
+                    headers: authHeaders 
+                  })
   }
 
   updateCurrentPhase() {
     const phaseFound = this.currentHackathon['phases'].find(phase => {
         return phase['completed'] == null })
     this.currentPhase = phaseFound['phaseOrder'];
-  }
-
-
-
-  saveTestActions(hackId, actionsArray: any[]) {
-
-  }
-
-  saveTestTimeframe(hackId, timeframe) {
-
-  }
-
-  importMockUps() {
-  }
-
-  
-
+  }  
 
 }
