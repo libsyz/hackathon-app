@@ -1,3 +1,4 @@
+import { HackathonService } from './../hackathon-service/hackathon-service';
 import { AuthProvider } from './../auth/auth';
 import { Hackathon } from './../../models/hackathon.model';
 import { HttpClient } from '@angular/common/http';
@@ -13,24 +14,19 @@ import { Injectable } from '@angular/core';
 export class NotificationsProvider {
 
   constructor(public http: HttpClient,
-              public authSrvc: AuthProvider) {
+              public authSrvc: AuthProvider,
+              public hackSrvc: HackathonService) {
     console.log('Hello NotificationsProvider Provider');
   }
 
   notifications: any[] = [];
   // This needs to push notifications to the panel via http!
-  buildNotification(hackathon) {
-    const date = new Date();
-    const hour = date.getHours();
-    const minutes = date.getMinutes();
-    const hackerName = `${this.authSrvc.userData.firstName} ${this.authSrvc.userData.lastName}`
-    const notification = `Hacker ${hackerName} got stuck at ${hour}:${minutes} !`
-    return notification;
+  notificationsApiEndpoint = "http://localhost/api/notifications"
+
+  addNotification() {
+    return this.http.post(this.notificationsApiEndpoint, 
+                  { hack_id: this.hackSrvc.currentHackId })
   }
 
-  addNotification(notification) {
-    this.notifications.push(notification);
-    console.log(this.notifications);
-  }
 
 }

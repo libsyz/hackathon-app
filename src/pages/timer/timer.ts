@@ -72,7 +72,11 @@ export class TimerPage {
   }
 
   sendCallForHelp(){
-    const newNotification = this.notificationSrvc.buildNotification(this.currentHackathon);
-    this.notificationSrvc.addNotification(newNotification);
+  this.notificationSrvc.addNotification().toPromise()
+  .then(res => {
+        console.log(res);
+      },err => { 
+        console.log(err)
+      })
   }
 }
