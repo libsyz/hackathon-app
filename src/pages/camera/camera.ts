@@ -137,9 +137,10 @@ export class CameraPage {
     this.hackSrvc.updateCurrentPhase();
     console.log(cloudinaryResponse, "We have duly waited for the response");
     loading.dismiss();
+    //test line below - uncomment all above for page to work as intended
+    // this.hackSrvc.currentPhase++
     this.goToWellHackedPage();
   }
-
 
 
   discardPicture() {

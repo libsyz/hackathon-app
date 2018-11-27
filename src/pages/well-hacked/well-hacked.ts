@@ -48,7 +48,7 @@ export class WellHackedPage {
 
   nextPhase(){
     if (this.finishedPhase == 5) {
-      this.navCtrl.push(ReviewHackPage, {hackathonId: this.hackId});
+      this.navCtrl.push(ReviewHackPage);
     }
     else {
       this.navCtrl.push(TimerPage);

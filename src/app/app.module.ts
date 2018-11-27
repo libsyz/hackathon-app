@@ -35,6 +35,8 @@ import { ToolsTestPage } from './../pages/tools-test/tools-test';
 import { ConfigPage } from './../pages/config/config';
 import { HackathonShowPage } from './../pages/hackathon-show/hackathon-show';
 import { NotificationsPage } from './../pages/notifications/notifications';
+import { FinalWellHackedPage } from './../pages/final-well-hacked/final-well-hacked';
+
 
 //-- Auth Pages
 
@@ -90,7 +92,8 @@ import { CloudinaryUploaderProvider } from '../providers/cloudinary-uploader/clo
     NotificationsPage,
     SignInOrUpPage,
     SignUpPage,
-    SignInPage
+    SignInPage,
+    FinalWellHackedPage
   ],
   imports: [
     BrowserModule,
@@ -126,7 +129,8 @@ import { CloudinaryUploaderProvider } from '../providers/cloudinary-uploader/clo
     NotificationsPage,
     SignInPage,
     SignUpPage,
-    SignInOrUpPage
+    SignInOrUpPage,
+    FinalWellHackedPage
 ],
   providers: [
     StatusBar,

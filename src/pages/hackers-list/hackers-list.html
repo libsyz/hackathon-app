@@ -16,7 +16,7 @@
                 *ngFor="let hacker of hackers">
         <div class="circle">
           <img class="avatar-image" 
-               src="./../../assets/imgs/{{hacker.avatarPic}}" alt="">
+               src="{{hacker.avatarPic}}" alt="">
         </div>
         <p> {{ hacker.firstName }} {{  hacker.lastName }}</p>
       </ion-item>
