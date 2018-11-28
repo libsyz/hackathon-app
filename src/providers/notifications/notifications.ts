@@ -21,7 +21,7 @@ export class NotificationsProvider {
 
   notifications: any[] = [];
   // This needs to push notifications to the panel via http!
-  notificationsApiEndpoint = "http://localhost:3000/api/notifications"
+  notificationsApiEndpoint = "https://hackathon-app.herokuapp.com/api/notifications"
 
   addNotification() {
     return this.http.post(this.notificationsApiEndpoint, 

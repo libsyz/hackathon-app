@@ -6,7 +6,7 @@ import { Header } from 'ionic-angular';
 
 @Injectable()
 export class hackersList {
-    HackersEndpoint: string = "http://localhost:3000/api/users"
+    HackersEndpoint: string = "https://hackathon-app.herokuapp.com/api/users"
     users: {}[]; 
     constructor(private http: HttpClient,
                 private authSrvc: AuthProvider){
@@ -14,7 +14,7 @@ export class hackersList {
 
     getUsers(){
         const authHeaders = this.authSrvc.getAuthenticatedHeaders();
-        this.http.get("http://localhost:3000/api/users", { headers: authHeaders}).subscribe(
+        this.http.get("https://hackathon-app.herokuapp.com/api/users", { headers: authHeaders}).subscribe(
             data => {
                 const usersFromApi = data as {}[];
                 this.users = usersFromApi;
