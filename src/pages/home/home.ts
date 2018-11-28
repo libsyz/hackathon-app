@@ -44,7 +44,6 @@ export class HomePage {
   } 
 
   newHack() {
-    debugger
     const newHack = this.hackSrvc.createHackathon();
     newHack.subscribe(
       response => {
