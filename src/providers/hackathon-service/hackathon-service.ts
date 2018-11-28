@@ -94,7 +94,7 @@ export class HackathonService {
   }
 
   saveTest(actionArray, TestTimeframe) {
-    debugger
+    
     const authHeaders = this.authSrvc.getAuthenticatedHeaders();
     return this.http.patch(this.editHackathonPhaseEndpoint, 
                   {
@@ -126,7 +126,7 @@ export class HackathonService {
   }
 
   setEndOfHackathon() {
-    debugger
+    
     this.currentPhase = 6;
   }
 

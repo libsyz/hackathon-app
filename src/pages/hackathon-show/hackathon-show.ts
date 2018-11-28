@@ -40,7 +40,7 @@ export class HackathonShowPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReviewHackPage');
     this.hackathon = this.navParams.get("hack");
-    debugger
+    
     this.loadHackathonInfo();
     this.showTargetData("empathise");
   }

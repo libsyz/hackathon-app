@@ -58,8 +58,9 @@ export class SignUpPage {
         data => {
           let userData: any;
           userData = data;
-          debugger
+  
           this.authSrvc.setCurrentUser(userData);
+          console.log(this.authSrvc.userData)
           this.navCtrl.push(HomePage);
         },
         error => {
