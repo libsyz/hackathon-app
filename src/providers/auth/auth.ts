@@ -12,7 +12,7 @@ import { Injectable } from '@angular/core';
 export class AuthProvider {
   userData: User;
 
-  url = "http://localhost:3000/api/users/sign_in"
+  url = "https://hackathon-app.herokuapp.com/api/users/sign_in"
 
   constructor(public http: HttpClient) {
     console.log('Hello AuthProvider Provider');
@@ -23,7 +23,7 @@ export class AuthProvider {
   }
 
   signUp(signUpData){
-    return this.http.post("http://localhost:3000/api/users", signUpData)
+    return this.http.post("https://hackathon-app.herokuapp.com/api/users", signUpData)
   }
 
   signIn(loginData){
@@ -31,7 +31,7 @@ export class AuthProvider {
   }
 
   getUserData(){
-    return this.http.get(`http://localhost:3000/api/users/${this.userData['id']}` )
+    return this.http.get(`https://hackathon-app.herokuapp.com/api/users/${this.userData['id']}` )
   }
 
   getAuthenticatedHeaders(){

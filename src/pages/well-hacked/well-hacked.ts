@@ -31,7 +31,7 @@ export class WellHackedPage {
   }
 
   ionViewDidLoad() {
-    debugger
+    
     this.finishedPhase = this.hackSrvc.currentPhase - 1;
     this.currentHackathon = this.hackSrvc.currentHackathon;
     this.getPageText();

@@ -16,7 +16,7 @@ export class CloudinaryUploaderProvider {
   }
 
   uploadPicture(imageData) {
-    return this.http.post("http://api.cloudinary.com/v1_1/dhodayze1/image/upload"
+    return this.http.post("https://api.cloudinary.com/v1_1/dhodayze1/image/upload"
     , {
       file: imageData,
       upload_preset: "hackathon_upload" 

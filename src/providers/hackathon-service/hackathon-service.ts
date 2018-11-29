@@ -21,10 +21,10 @@ export class HackathonService {
               private authSrvc: AuthProvider) {
   }
 
-  hackathonsEndpoint: string = "http://localhost:3000/api/hackathons"
-  addHackerToHackathonEndpoint: string = "http://localhost:3000/api/add_hacker"
-  removeHackerFromHackathonEndpoint: string = "http://localhost:3000/api/remove_hacker"
-  editHackathonPhaseEndpoint: string = "http://localhost:3000/api/hackathon_phases/edit_phase"
+  hackathonsEndpoint: string = "https://hackathon-app.herokuapp.com/api/hackathons"
+  addHackerToHackathonEndpoint: string = "https://hackathon-app.herokuapp.com/api/add_hacker"
+  removeHackerFromHackathonEndpoint: string = "https://hackathon-app.herokuapp.com/api/remove_hacker"
+  editHackathonPhaseEndpoint: string = "https://hackathon-app.herokuapp.com/api/hackathon_phases/edit_phase"
 
 
   createHackathon(){
@@ -59,7 +59,7 @@ export class HackathonService {
   getNumberOfHackers() {
     const authHeaders = this.authSrvc.getAuthenticatedHeaders();
     const hack_id  = this.currentHackId;
-    return this.http.get(`http://localhost:3000/api/hackathons/${hack_id}`, {headers: authHeaders})
+    return this.http.get(`https://hackathon-app.herokuapp.com/api/hackathons/${hack_id}`, {headers: authHeaders})
   }
 
   checkForEnoughHackers(hackersEnlisted){
@@ -94,7 +94,7 @@ export class HackathonService {
   }
 
   saveTest(actionArray, TestTimeframe) {
-    debugger
+    
     const authHeaders = this.authSrvc.getAuthenticatedHeaders();
     return this.http.patch(this.editHackathonPhaseEndpoint, 
                   {
@@ -126,7 +126,7 @@ export class HackathonService {
   }
 
   setEndOfHackathon() {
-    debugger
+    
     this.currentPhase = 6;
   }
 

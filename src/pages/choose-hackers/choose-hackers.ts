@@ -53,17 +53,4 @@ export class ChooseHackersPage {
   goToTimer(){
   this.navCtrl.push(TimerPage);
   }
-
-  // What do I need to decide
-
-  // How to figure out what is the next phase
-
-  // Everytime I do a get request to know if the hackathon is done
-
-  // When is it appropropriate to do so
-
-  // This is crucial for the flow of the app - 
-  // As soon as possible 
-
-  // Where to store that information appropriately
 }

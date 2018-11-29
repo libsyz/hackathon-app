@@ -84,7 +84,7 @@ export class CameraPage {
         new Promise((resolve) => {
           this.setNewVideoStream(deviceId);
           })
-          return
+          return // Alert won't leave without this return
         }
       })
     deviceAlert.present();
@@ -92,11 +92,8 @@ export class CameraPage {
   }
 
   setNewVideoStream(videoStreamId) {
-     if (this.window.stream) {
-      this.window.stream.getTracks().forEach((track)=> {
-        track.stop();
-      })
-    }
+    this.stopCamera();
+    
     let constraints = {
       video: {
         deviceId: {exact: videoStreamId }
@@ -139,6 +136,7 @@ export class CameraPage {
     loading.dismiss();
     //test line below - uncomment all above for page to work as intended
     // this.hackSrvc.currentPhase++
+    this.stopCamera();
     this.goToWellHackedPage();
   }
 
@@ -157,6 +155,14 @@ export class CameraPage {
 
   goToWellHackedPage(){
     this.navCtrl.push(WellHackedPage);
+  }
+
+  stopCamera(){
+    if (this.window.stream) {
+      this.window.stream.getTracks().forEach((track)=> {
+        track.stop();
+      })
+    }
   }
 
 }
