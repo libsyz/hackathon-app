@@ -84,7 +84,7 @@ export class CameraPage {
         new Promise((resolve) => {
           this.setNewVideoStream(deviceId);
           })
-          return
+          return // Alert won't leave without this return
         }
       })
     deviceAlert.present();
@@ -92,11 +92,8 @@ export class CameraPage {
   }
 
   setNewVideoStream(videoStreamId) {
-     if (this.window.stream) {
-      this.window.stream.getTracks().forEach((track)=> {
-        track.stop();
-      })
-    }
+    this.stopCamera();
+    
     let constraints = {
       video: {
         deviceId: {exact: videoStreamId }
@@ -127,18 +124,19 @@ export class CameraPage {
   }
 
   async savePicture() {
-    let cloudinaryData;
-    let loading = this.loadingCtrl.create()
-    loading.setContent("Uploading...")
-    loading.present();
-    let cloudinaryResponse = await this.cloudinary.uploadPicture(this.imageData).toPromise()
-    let postImageToServerResponse = await this.hackSrvc.savePicture(cloudinaryResponse['secure_url']).toPromise();
-    this.hackSrvc.currentHackathon = postImageToServerResponse;
-    this.hackSrvc.updateCurrentPhase();
-    console.log(cloudinaryResponse, "We have duly waited for the response");
-    loading.dismiss();
+    // let cloudinaryData;
+    // let loading = this.loadingCtrl.create()
+    // loading.setContent("Uploading...")
+    // loading.present();
+    // let cloudinaryResponse = await this.cloudinary.uploadPicture(this.imageData).toPromise()
+    // let postImageToServerResponse = await this.hackSrvc.savePicture(cloudinaryResponse['secure_url']).toPromise();
+    // this.hackSrvc.currentHackathon = postImageToServerResponse;
+    // this.hackSrvc.updateCurrentPhase();
+    // console.log(cloudinaryResponse, "We have duly waited for the response");
+    // loading.dismiss();
     //test line below - uncomment all above for page to work as intended
-    // this.hackSrvc.currentPhase++
+    this.hackSrvc.currentPhase++
+    this.stopCamera();
     this.goToWellHackedPage();
   }
 
@@ -157,6 +155,14 @@ export class CameraPage {
 
   goToWellHackedPage(){
     this.navCtrl.push(WellHackedPage);
+  }
+
+  stopCamera(){
+    if (this.window.stream) {
+      this.window.stream.getTracks().forEach((track)=> {
+        track.stop();
+      })
+    }
   }
 
 }
