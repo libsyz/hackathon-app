@@ -1,12 +1,8 @@
 import { AuthProvider } from './../auth/auth';
-import { hackersList } from './../../services/hackers-list.service';
-import { HackathonMocksProvider } from './../hackathon-mocks/hackathon-mocks';
-import { ToolsProblemStatementPage } from './../../pages/tools-problem-statement/tools-problem-statement';
+  import { hackersList } from './../../services/hackers-list.service';
 import { Hackathon } from './../../models/hackathon.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
-import { getNonHydratedSegmentIfLinkAndUrlMatch } from 'ionic-angular/navigation/url-serializer';
 
 
 
@@ -17,7 +13,6 @@ export class HackathonService {
   currentPhase: number;
 
   constructor(private http: HttpClient,
-              private mockSrvc: HackathonMocksProvider,
               private authSrvc: AuthProvider) {
   }
 
@@ -126,7 +121,6 @@ export class HackathonService {
   }
 
   setEndOfHackathon() {
-    
     this.currentPhase = 6;
   }
 
