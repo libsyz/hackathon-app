@@ -6,7 +6,7 @@ import { GalleryPage } from './../gallery/gallery';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
 import { ChooseHackersPage } from './../choose-hackers/choose-hackers';
 import { Component } from '@angular/core';
-import { NavController, AlertController, NavParams, ModalController, ToastController } from 'ionic-angular';
+import { NavController, AlertController, ModalController, ToastController } from 'ionic-angular';
 
 
 
@@ -18,7 +18,7 @@ import { NavController, AlertController, NavParams, ModalController, ToastContro
 export class HomePage {
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
+              // public navParams: NavParams,
               public alertCtrl: AlertController,
               public toastCtrl: ToastController,
               public hackSrvc: HackathonService,
@@ -28,9 +28,9 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-    console.log(this.navParams);
-    this.welcomeUser(this.navParams.get("firstName"));
-    this.timerSrvc.loadConfig();
+    // console.log(this.navParams);
+    // this.welcomeUser(this.navParams.get("firstName"));
+    // this.timerSrvc.loadConfig();
   }
 
   welcomeUser(firstName){
