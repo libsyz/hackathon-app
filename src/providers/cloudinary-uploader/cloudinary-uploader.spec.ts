@@ -8,9 +8,7 @@ describe("Cloudinary Uploader", () => {
     let httpMock: { post: jasmine.Spy }
 
     beforeEach(() => {
-
     httpMock = jasmine.createSpyObj('HttpClient', ['post']);
-
         TestBed.configureTestingModule(
             { providers: [ 
                 CloudinaryUploaderProvider, { provide: HttpClient, useValue: httpMock }

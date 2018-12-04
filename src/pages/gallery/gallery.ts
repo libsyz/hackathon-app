@@ -1,6 +1,5 @@
 import { HackathonShowPage } from './../hackathon-show/hackathon-show';
 import { HackathonService } from './../../providers/hackathon-service/hackathon-service';
-import { HackathonMocksProvider } from './../../providers/hackathon-mocks/hackathon-mocks';
 import { Hackathon } from './../../models/hackathon.model';
 import { HelperMethodsProvider } from './../../providers/helper-methods/helper-methods';
 import { Component } from '@angular/core';
