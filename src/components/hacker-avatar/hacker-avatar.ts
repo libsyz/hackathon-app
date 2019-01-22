@@ -46,9 +46,10 @@ export class HackerAvatarComponent {
   updateHackerStatus(hacker) {
     if (hacker.data != "clear") {
       this.hackerSelected = true;
-      this.hackerId = hacker.hacker.id;
-      this.hackerName = hacker.hacker.firstName;
-      this.hackerImageReference = hacker.hacker.avatarPic;
+      const { hacker: dHacker } = hacker;
+      this.hackerId = dHacker.id;
+      this.hackerName = dHacker.firstName;
+      this.hackerImageReference = dHacker.avatarPic;
       this.emitData();
     }
     else {

@@ -16,7 +16,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'sign-in-or-up.html',
 })
 export class SignInOrUpPage {
-
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

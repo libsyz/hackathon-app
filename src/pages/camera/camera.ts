@@ -60,7 +60,6 @@ export class CameraPage {
     then((stream) => {
       this.window.stream = stream;
       this.videoSource = stream});
-
   }
 
   showMediaDevices(){ 

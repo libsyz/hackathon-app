@@ -54,7 +54,7 @@ export class SignInPage {
         errorNotification.setSubTitle("either your email or your password is wrong")
         errorNotification.addButton("ok");
         errorNotification.present();
-        console.log(error);
+
       });
     }
       
