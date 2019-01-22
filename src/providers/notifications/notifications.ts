@@ -16,7 +16,6 @@ export class NotificationsProvider {
   constructor(public http: HttpClient,
               public authSrvc: AuthProvider,
               public hackSrvc: HackathonService) {
-    console.log('Hello NotificationsProvider Provider');
   }
 
   notifications: any[] = [];

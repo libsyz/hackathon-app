@@ -19,7 +19,6 @@ export class ToolsPrototypePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ToolsPrototypePage');
   }
 
 }

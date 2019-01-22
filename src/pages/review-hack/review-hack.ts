@@ -126,14 +126,14 @@ showSavePrompt() {
         {
           text: 'Cancel',
           handler: data => {
-            console.log('Cancel clicked');
+            // Maybe I do not need a handler at all over here ?
           }
         },
         {
           text: 'Save',
           handler: data => {
             // data format => {title: "string"}
-            this.hackSrvc.addTitleToHackathon(data).toPromise().then(data => { console.log(data) });
+            this.hackSrvc.addTitleToHackathon(data).toPromise().then(data => { return data });
             this.navCtrl.push(FinalWellHackedPage)
           }
         }

@@ -18,10 +18,8 @@ export class hackersList {
             data => {
                 const usersFromApi = data as {}[];
                 this.users = usersFromApi;
-                console.log(this.users);
             },
             error => {
-                console.log(error);
             }
         )
     }

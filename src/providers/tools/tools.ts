@@ -16,7 +16,6 @@ export class ToolsProvider {
 
 
   constructor() {
-    console.log('Hello ToolsProvider Provider');
   }
 
   getTools(currentPhase){

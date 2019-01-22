@@ -74,9 +74,9 @@ export class TimerPage {
   sendCallForHelp(){
   this.notificationSrvc.addNotification().toPromise()
   .then(res => {
-        console.log(res);
+      // handle response if needed
       },err => { 
-        console.log(err)
+      // handle response if error 
       })
   }
 }

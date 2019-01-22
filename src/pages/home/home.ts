@@ -28,7 +28,6 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-    // console.log(this.navParams);
     // this.welcomeUser(this.navParams.get("firstName"));
     // this.timerSrvc.loadConfig();
   }
@@ -47,7 +46,6 @@ export class HomePage {
     const newHack = this.hackSrvc.createHackathon();
     newHack.subscribe(
       response => {
-        console.log(response);
         this.hackSrvc.currentHackathon = response;
         this.hackSrvc.currentHackId = response['hackathon_id'];
         this.hackSrvc.updateCurrentPhase();
@@ -55,8 +53,7 @@ export class HomePage {
         this.navCtrl.push(ChooseHackersPage);
     },
       error => {
-        console.log("something went wrong");
-        console.log(error);
+        // The error needs to be handled !
       })
   }
 

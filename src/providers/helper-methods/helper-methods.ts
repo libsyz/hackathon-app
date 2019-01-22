@@ -13,7 +13,6 @@ export class HelperMethodsProvider {
 
   constructor(public http: HttpClient,
               public alertCtrl: AlertController) {
-    console.log('Hello HelperMethodsProvider Provider');
   }
 
   buildingAmazing(){

@@ -15,7 +15,6 @@ export class AuthProvider {
   url = "https://hackathon-app.herokuapp.com/api/users/sign_in"
 
   constructor(public http: HttpClient) {
-    console.log('Hello AuthProvider Provider');
   }
 
   setCurrentUser(apiData: User) {
@@ -36,15 +35,15 @@ export class AuthProvider {
 
   getAuthenticatedHeaders(){
     if (this.userData.token) {   
-    console.log(this.userData.token)
       let headers = new HttpHeaders({
         Authentication: this.userData.token,
       });
       return headers;
     }
     else {
-      console.log( "Sorry, something went wrong with the token", 
-                   {token: this.userData.token})
+      // handle token error properly
+      // console.log( "Sorry, something went wrong with the token", 
+      //              {token: this.userData.token})
     }
   }
 

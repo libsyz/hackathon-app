@@ -12,7 +12,6 @@ import { cloudinaryPreset, cloudinaryUrl } from './../../models/cloudinary-prese
 export class CloudinaryUploaderProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello CloudinaryUploaderProvider Provider');
   }
 
   uploadPicture(imageData) {

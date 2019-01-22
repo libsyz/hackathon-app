@@ -41,11 +41,9 @@ export class SignUpPage {
 
 
   ionViewDidLoad() {
-    console.log(this.signUpForm);
   }
 
   showForm() {
-    console.log(this.signUpForm);
   }
 
   signUp() {
@@ -69,12 +67,11 @@ export class SignUpPage {
           errorNotification.setSubTitle("Something did not work out, sorry!");
           errorNotification.addButton("ok");
           errorNotification.present();
-          console.log(error);
         })
     }
 
     else {
-      console.log("sorry bro");
+      // Handle Unexpected case
     }
   }
  

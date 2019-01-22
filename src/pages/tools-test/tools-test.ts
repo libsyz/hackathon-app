@@ -19,7 +19,6 @@ export class ToolsTestPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ToolsTestPage');
   }
 
 }

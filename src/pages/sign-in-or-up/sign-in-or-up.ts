@@ -21,7 +21,6 @@ export class SignInOrUpPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignInOrUpPage');
   }
 
   signIn() {

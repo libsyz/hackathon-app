@@ -14,7 +14,6 @@ import { Injectable } from '@angular/core';
 export class PageNavigationProvider {
 
   constructor() {
-    console.log('Hello PageNavigationProvider Provider');
   }
 
   getPage(currentPhase){
@@ -30,7 +29,6 @@ export class PageNavigationProvider {
       case 5: 
       return DefineTestProtocolPage;
       default:
-      console.log("Not quite there yet - ");
       break
     }
   }

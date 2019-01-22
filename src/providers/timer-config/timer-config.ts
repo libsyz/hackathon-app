@@ -12,7 +12,6 @@ import { Injectable } from '@angular/core';
 export class TimerConfigProvider {
 
   constructor() {
-    console.log('Hello TimerConfigProvider Provider');
   }
 
   activeConfig: {}[];

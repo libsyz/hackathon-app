@@ -50,7 +50,6 @@ export class CameraPage {
   currentStream: MediaStream;
 
   ionViewDidLoad() {
-    console.log(this.navParams);
     this.enableCamera();
     this.hackId = this.navParams.get("hackathonId");
     this.currentPhase = this.hackSrvc.currentPhase;
@@ -66,7 +65,6 @@ export class CameraPage {
 
   showMediaDevices(){ 
     navigator.mediaDevices.enumerateDevices().then((devices)=> {
-      console.log(devices);
       let deviceAlert = this.alertCtrl.create();
       deviceAlert.setTitle("Choose a camera");
       devices.forEach((device)=> {
@@ -132,7 +130,7 @@ export class CameraPage {
     let postImageToServerResponse = await this.hackSrvc.savePicture(cloudinaryResponse['secure_url']).toPromise();
     this.hackSrvc.currentHackathon = postImageToServerResponse;
     this.hackSrvc.updateCurrentPhase();
-    console.log(cloudinaryResponse, "We have duly waited for the response");
+    
     loading.dismiss();
     //test line below - uncomment all above for page to work as intended
     // this.hackSrvc.currentPhase++
