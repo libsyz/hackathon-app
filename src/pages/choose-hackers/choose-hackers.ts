@@ -40,7 +40,7 @@ export class ChooseHackersPage {
   updateHackersChosen(eventEmitterObj) {
     const numberOfHackers = this.hackSrvc.getNumberOfHackers();
     numberOfHackers.subscribe(response => {
-        console.log(response);
+    
         const hackersEnlisted = response['hackathon']['hackers_enlisted'];
         this.checkForEnoughHackers(hackersEnlisted);
     } )

@@ -56,7 +56,6 @@ export class DefineProblemPage {
     }
     else {
       this.hackSrvc.saveProblemStatement(this.problemInput).subscribe(response => {
-        console.log(response);
         this.hackSrvc.currentHackathon = response;
         this.hackSrvc.updateCurrentPhase();
         this.navCtrl.push(WellHackedPage);
@@ -69,7 +68,6 @@ export class DefineProblemPage {
 
   checkForProblemMinLength() {
     this.chars > this.problemMinLength ? this.problemIsLongEnough = true : this.problemIsLongEnough = false;
-    console.log(this.chars, this.problemIsLongEnough);
   }
   checkForProblemMaxLength() {
     if (this.chars > this.problemMaxLength) {

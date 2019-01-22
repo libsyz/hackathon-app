@@ -19,7 +19,7 @@ export class ToolsEmpathisePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ToolsEmpathisePage');
+
   }
 
 }

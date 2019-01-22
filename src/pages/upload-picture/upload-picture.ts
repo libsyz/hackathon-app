@@ -22,7 +22,6 @@ export class UploadPicturePage {
   }
 
   ionViewDidLoad() {
-    console.log(this.navParams);
     this.hackId = this.navParams.get("hackathonId");
   }
 

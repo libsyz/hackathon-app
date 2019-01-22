@@ -21,7 +21,6 @@ export class GalleryPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public helperCtrl: HelperMethodsProvider,
-              public mockSrvc: HackathonMocksProvider,
               public hackSrvc: HackathonService,
               public loadingCtrl: LoadingController) {
   }
@@ -29,7 +28,6 @@ export class GalleryPage {
   hacksToDisplay: any[];
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GalleryPage');
     let loading = this.loadingCtrl.create();
     loading.setContent("loading hackathons...")
     loading.present();

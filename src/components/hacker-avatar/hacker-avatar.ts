@@ -44,7 +44,6 @@ export class HackerAvatarComponent {
   }
 
   updateHackerStatus(hacker) {
-    console.log(hacker);
     if (hacker.data != "clear") {
       this.hackerSelected = true;
       this.hackerId = hacker.hacker.id;

@@ -19,7 +19,6 @@ export class ToolsIdeatePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ToolsIdeatePage');
   }
 
 }

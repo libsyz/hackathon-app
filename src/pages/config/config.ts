@@ -27,7 +27,6 @@ export class ConfigPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ConfigPage');
     this.hackathonPhases = this.configSrvc.activeConfig;
   }
 

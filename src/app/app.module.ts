@@ -59,7 +59,6 @@ import { ToolsProvider } from '../providers/tools/tools';
 import { PageNavigationProvider } from '../providers/page-navigation/page-navigation';
 import { TimerConfigProvider } from '../providers/timer-config/timer-config';
 import { WindowProvider } from '../providers/window/window';
-import { HackathonMocksProvider } from '../providers/hackathon-mocks/hackathon-mocks';
 import { NotificationsProvider } from '../providers/notifications/notifications';
 import { AuthProvider } from '../providers/auth/auth';
 import { CloudinaryUploaderProvider } from '../providers/cloudinary-uploader/cloudinary-uploader';
@@ -145,7 +144,6 @@ import { CloudinaryUploaderProvider } from '../providers/cloudinary-uploader/clo
     PageNavigationProvider,
     TimerConfigProvider,
     WindowProvider,
-    HackathonMocksProvider,
     NotificationsProvider,
     AuthProvider,
     CloudinaryUploaderProvider,

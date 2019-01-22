@@ -23,7 +23,6 @@ export class FinalWellHackedPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FinalWellHackedPage');
   }
 
   sendBackHome(){
